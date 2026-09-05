@@ -5519,6 +5519,7 @@
      ====================================================== -->
   <script>
     var curFilter = 'all', selId = null, seenFlagIds = {}, sosSeenIds = {}, pollTimer = null;
+    var rxDrafts = {}; // FIX: holds in-progress prescription text per patient so the 3s auto-refresh never wipes what the doctor is typing
 
     function setFilter(f, btn) {
       curFilter = f;
@@ -5529,7 +5530,18 @@
     function startPolling() { window.addEventListener('storage', renderAll); pollTimer = setInterval(renderAll, 3000); }
     function stopPolling() { window.removeEventListener('storage', renderAll); if (pollTimer) clearInterval(pollTimer); }
 
-    function renderAll() { checkNewFlags(); checkSOS(); renderStats(); renderQueue(); if (selId) renderDetail(selId); }
+    function renderAll() {
+      checkNewFlags(); checkSOS(); renderStats(); renderQueue();
+      if (selId) {
+        // FIX: don't blow away the detail panel (and the prescription form inside it)
+        // while the doctor currently has a field there focused / mid-keystroke.
+        var panel = document.getElementById('detail-panel');
+        var active = document.activeElement;
+        var isTypingInDetail = panel && active && panel.contains(active) &&
+          (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA');
+        if (!isTypingInDetail) renderDetail(selId);
+      }
+    }
 
     function renderStats() {
       var q = mkLoad(MK_QUEUE_KEY).filter(function (p) { return p.status !== 'completed' && p.status !== 'expired'; });
@@ -5678,17 +5690,18 @@
         html += '<div class="prescription-sent"><p>&#9989; Prescription sent to patient on ' + new Date(rxs[p.id].issuedAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }) + '</p>';
         html += '<button class="btn-s" style="margin-top:10px;font-size:.8rem" onclick="toggleRxEditor(\'' + p.id + '\')">&#128221; Edit &amp; Resend</button></div>';
       }
+      // FIX: restore any in-progress draft for this patient instead of always starting blank
+      var draft = rxDrafts[p.id] || { diag: '', notes: '', meds: [['', '', '', ''], ['', '', '', '']] };
       html += '<div id="rx-editor-' + p.id + '" style="' + (rxSent ? 'display:none' : 'display:block') + '">';
       html += '<h4>&#128138; Write Prescription</h4>';
-      html += '<div class="rx-field"><label>Diagnosis / Clinical Impression</label><textarea id="rx-diag-' + p.id + '" rows="2" placeholder="e.g. Viral fever with myalgia, Hypertensive urgency..."></textarea></div>';
+      html += '<div class="rx-field"><label>Diagnosis / Clinical Impression</label><textarea id="rx-diag-' + p.id + '" rows="2" placeholder="e.g. Viral fever with myalgia, Hypertensive urgency...">' + esc(draft.diag) + '</textarea></div>';
       html += '<div class="rx-field"><label>Medicines (one per line: Medicine Name | Dose | Frequency | Duration | Instructions)</label>';
       html += '<div id="rx-meds-' + p.id + '">';
-      html += rxMedRow('', '', '', '', '');
-      html += rxMedRow('', '', '', '', '');
+      draft.meds.forEach(function (m) { html += rxMedRow(m[0], m[1], m[2], m[3]); });
       html += '</div>';
       html += '<button class="btn-s" style="margin-top:6px;font-size:.8rem;padding:6px 14px" onclick="addMedRow(\'' + p.id + '\')">+ Add Medicine</button>';
       html += '</div>';
-      html += '<div class="rx-field"><label>Doctor\'s Notes / Follow-up Instructions</label><textarea id="rx-notes-' + p.id + '" rows="2" placeholder="e.g. Review after 5 days. Avoid spicy food. Rest advised..."></textarea></div>';
+      html += '<div class="rx-field"><label>Doctor\'s Notes / Follow-up Instructions</label><textarea id="rx-notes-' + p.id + '" rows="2" placeholder="e.g. Review after 5 days. Avoid spicy food. Rest advised...">' + esc(draft.notes) + '</textarea></div>';
       html += '<button class="rx-submit-btn" onclick="submitPrescription(\'' + p.id + '\')">&#128203; Submit Prescription to Patient</button>';
       html += '</div>';
       html += '</div>';
@@ -5725,6 +5738,28 @@
           updatePatient(p.id, function (pat) { pat.summary = pat.summary || {}; pat.summary[field] = inp.value; });
         });
       });
+
+      // FIX: save every keystroke in the prescription form into rxDrafts so nothing
+      // typed is ever lost, even if a re-render slips through.
+      function ensureDraft() {
+        if (!rxDrafts[p.id]) rxDrafts[p.id] = { diag: '', notes: '', meds: [['', '', '', ''], ['', '', '', '']] };
+        return rxDrafts[p.id];
+      }
+      var diagEl = document.getElementById('rx-diag-' + p.id);
+      if (diagEl) diagEl.addEventListener('input', function () { ensureDraft().diag = diagEl.value; });
+      var notesEl = document.getElementById('rx-notes-' + p.id);
+      if (notesEl) notesEl.addEventListener('input', function () { ensureDraft().notes = notesEl.value; });
+      var medsContainer = document.getElementById('rx-meds-' + p.id);
+      if (medsContainer) {
+        medsContainer.addEventListener('input', function () {
+          var d = ensureDraft();
+          d.meds = [];
+          medsContainer.querySelectorAll('.rx-med-row').forEach(function (row) {
+            var inputs = row.querySelectorAll('input');
+            d.meds.push([inputs[0] ? inputs[0].value : '', inputs[1] ? inputs[1].value : '', inputs[2] ? inputs[2].value : '', inputs[3] ? inputs[3].value : '']);
+          });
+        });
+      }
     }
 
     function toggleRxEditor(id) {
@@ -5732,17 +5767,23 @@
       if (ed) ed.style.display = ed.style.display === 'none' ? 'block' : 'none';
     }
 
-    function rxMedRow(name, dose, freq, dur, instr) {
+    function rxMedRow(name, dose, freq, dur) {
       return '<div class="rx-med-row">' +
-        '<input type="text" placeholder="Medicine name" value="' + esc(name) + '"/>' +
-        '<input type="text" placeholder="Dose (mg)" value="' + esc(dose) + '"/>' +
-        '<input type="text" placeholder="Frequency" value="' + esc(freq) + '"/>' +
-        '<input type="text" placeholder="Duration" value="' + esc(dur) + '"/>' +
+        '<input type="text" placeholder="Medicine name" value="' + esc(name || '') + '"/>' +
+        '<input type="text" placeholder="Dose (mg)" value="' + esc(dose || '') + '"/>' +
+        '<input type="text" placeholder="Frequency" value="' + esc(freq || '') + '"/>' +
+        '<input type="text" placeholder="Duration" value="' + esc(dur || '') + '"/>' +
         '</div>';
     }
     function addMedRow(pid) {
       var c = document.getElementById('rx-meds-' + pid);
-      if (c) { var d = document.createElement('div'); d.innerHTML = rxMedRow('', '', '', '', ''); c.appendChild(d.firstChild); }
+      if (c) {
+        var d = document.createElement('div');
+        d.innerHTML = rxMedRow('', '', '', '');
+        c.appendChild(d.firstChild);
+        // FIX: keep the draft array in sync so the new empty row survives a refresh too
+        if (rxDrafts[pid]) rxDrafts[pid].meds.push(['', '', '', '']);
+      }
     }
 
     function submitPrescription(pid) {
@@ -5782,6 +5823,7 @@
       var rxs = mkLoadObj(MK_RX_KEY);
       rxs[pid] = rxData;
       mkSaveObj(MK_RX_KEY, rxs);
+      delete rxDrafts[pid]; // FIX: clear the draft once it's actually submitted
 
       toast('Prescription sent to patient ' + pid + '!');
       var ed = document.getElementById('rx-editor-' + pid);
