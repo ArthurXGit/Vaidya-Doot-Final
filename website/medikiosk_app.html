@@ -183,6 +183,20 @@
       background: #c0392b
     }
 
+    .patient-back-btn {
+      background: #fff;
+      color: var(--navy);
+      border: none;
+      border-radius: 6px;
+      padding: 6px 13px;
+      font-size: .78rem;
+      font-weight: 700
+    }
+
+    .patient-back-btn:hover {
+      background: #e8eef8
+    }
+
     /* ============================================================
    LANDING PAGE
    ============================================================ */
@@ -3509,6 +3523,7 @@
       </div>
       <div id="hdr-patient-info" class="hdr-right hidden">
         <div class="pat-badge"><strong id="pat-name">Patient</strong><span id="pat-abha">ABHA: ---</span></div>
+        <button class="patient-back-btn hidden" id="patient-back-btn" onclick="patientGoBack()" aria-label="Go back to the previous diagnosis stage">&#8592; Back</button>
         <button class="logout-btn" onclick="patLogout()">&#128275; Logout</button>
       </div>
       <div id="hdr-doctor-info" class="hdr-right hidden">
@@ -4783,6 +4798,8 @@
         var el = document.getElementById('scr-' + s); if (el) el.classList.add('hidden');
       });
       var el = document.getElementById('scr-' + name); if (el) el.classList.remove('hidden');
+      var backBtn = document.getElementById('patient-back-btn');
+      if (backBtn) backBtn.classList.toggle('hidden', ['consent', 'token', 'prescription'].indexOf(name) >= 0);
       // Update breadcrumb
       var bcMap = { consent: 1, documents: 2, symptoms: 3, summary: 4, token: 5, prescription: 6 };
       var idx = bcMap[name] || 0;
@@ -4794,6 +4811,17 @@
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
       speakScreen();
+    }
+
+    // Stage-level navigation preserves the patient's in-progress intake data.
+    function patientGoBack() {
+      var visibleScreen = '';
+      SCRS.forEach(function (s) {
+        var el = document.getElementById('scr-' + s);
+        if (el && !el.classList.contains('hidden')) visibleScreen = s;
+      });
+      var previousStage = { documents: 'consent', symptoms: 'documents', summary: 'symptoms' };
+      if (previousStage[visibleScreen]) showScr(previousStage[visibleScreen]);
     }
 
     // CONSENT
@@ -4920,7 +4948,11 @@
     ];
     var RF = { 'chest pain': 'Possible cardiac event. Staff alerted. Please stay calm and seated.', 'spreading to left arm': 'Possible cardiac event. Do not move. Staff alerted immediately.', 'crushing': 'Possible cardiac emergency. Staff alerted. Stay calm.', 'breathless': 'Respiratory distress detected. Please stay seated. Help on the way.', 'sudden weakness': 'Possible stroke. Do not move. Staff alerted.', 'blood in sputum': 'Serious symptom. Staff notified.', 'blackout': 'Loss of consciousness episode. Staff alerted.' };
 
-    function buildQueueAndStart() { adaptiveQ = [CC_Q]; ans = {}; qIdx = 0; chiefComplaint = ''; showScr('symptoms'); showDocContext(); loadQ(); }
+    function buildQueueAndStart() {
+      // If the patient returned to documents, resume their prior answers instead of restarting.
+      if (adaptiveQ.length > 1) { showScr('symptoms'); showDocContext(); loadQ(); return; }
+      adaptiveQ = [CC_Q]; ans = {}; qIdx = 0; chiefComplaint = ''; showScr('symptoms'); showDocContext(); loadQ();
+    }
     function insertDocAndComplaintQs(complaint) {
       chiefComplaint = complaint;
       var ct = document.getElementById('complaint-tag-el');
