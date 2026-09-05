@@ -1233,7 +1233,7 @@
       color: #880e4f
     }
 
-    .complaint-tag {
+    /* .complaint-tag {
       display: inline-block;
       background: var(--navy);
       color: #fff;
@@ -1241,7 +1241,7 @@
       padding: 3px 12px;
       font-size: .76rem;
       margin-bottom: 10px
-    }
+    } */
 
     .q-num {
       display: inline-block;
@@ -2647,11 +2647,7 @@
       background: #962d22
     }
 
-    .dact-btn.gh {
-      background: #fff;
-      color: var(--navy);
-      border: 2px solid var(--navy)
-    }
+    
 
     .rf-banner {
       margin: 16px 22px 0;
@@ -3493,6 +3489,324 @@
         grid-template-columns: 1fr 1fr
       }
     }
+
+    /* ============================================================
+   VOICE ASSISTANT WIDGET
+   ============================================================ */
+    .va-fab {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--navy-dk));
+      color: #fff;
+      border: none;
+      box-shadow: var(--shadow-lg);
+      font-size: 1.55rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9000;
+      transition: transform .2s
+    }
+
+    .va-fab:hover {
+      transform: scale(1.06)
+    }
+
+    .va-fab.listening {
+      background: linear-gradient(135deg, #c0392b, #e74c3c);
+      animation: vaPulseRed 1.2s infinite
+    }
+
+    .va-fab.speaking {
+      background: linear-gradient(135deg, var(--green), var(--green-dk));
+      animation: vaPulseGreen 1.6s infinite
+    }
+
+    @keyframes vaPulseRed {
+      0% {
+        box-shadow: 0 0 0 0 rgba(192, 57, 43, .5)
+      }
+
+      70% {
+        box-shadow: 0 0 0 16px rgba(192, 57, 43, 0)
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(192, 57, 43, 0)
+      }
+    }
+
+    @keyframes vaPulseGreen {
+      0% {
+        box-shadow: 0 0 0 0 rgba(19, 136, 8, .45)
+      }
+
+      70% {
+        box-shadow: 0 0 0 14px rgba(19, 136, 8, 0)
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(19, 136, 8, 0)
+      }
+    }
+
+    .va-badge-dot {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--saffron);
+      border: 2px solid #fff
+    }
+
+    .va-panel {
+      position: fixed;
+      right: 22px;
+      bottom: 96px;
+      width: 340px;
+      max-width: 88vw;
+      max-height: 68vh;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9000;
+      opacity: 0;
+      transform: translateY(16px) scale(.97);
+      pointer-events: none;
+      transition: all .22s
+    }
+
+    .va-panel.open {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto
+    }
+
+    .va-panel-hdr {
+      background: linear-gradient(135deg, var(--navy), var(--navy-dk));
+      color: #fff;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex-shrink: 0
+    }
+
+    .va-panel-hdr .vph-ico {
+      font-size: 1.3rem
+    }
+
+    .va-panel-hdr .vph-txt {
+      flex: 1;
+      min-width: 0
+    }
+
+    .va-panel-hdr .vph-txt strong {
+      display: block;
+      font-size: .87rem
+    }
+
+    .va-panel-hdr .vph-txt span {
+      font-size: .68rem;
+      opacity: .85
+    }
+
+    .va-panel-close {
+      background: rgba(255, 255, 255, .18);
+      border: none;
+      color: #fff;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: .78rem;
+      flex-shrink: 0
+    }
+
+    .va-guide-toggle {
+      background: rgba(255, 255, 255, .18);
+      border: 1px solid rgba(255, 255, 255, .35);
+      color: #fff;
+      border-radius: 12px;
+      padding: 3px 9px;
+      font-size: .64rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      white-space: nowrap
+    }
+
+    .va-guide-toggle.off {
+      background: rgba(255, 255, 255, .05);
+      opacity: .75
+    }
+
+    .va-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      background: #f4f7fb;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 120px
+    }
+
+    .va-msg {
+      max-width: 86%;
+      padding: 8px 11px;
+      border-radius: 12px;
+      font-size: .81rem;
+      line-height: 1.35
+    }
+
+    .va-msg.bot {
+      align-self: flex-start;
+      background: #e8eef8;
+      color: var(--text);
+      border-bottom-left-radius: 3px
+    }
+
+    .va-msg.usr {
+      align-self: flex-end;
+      background: var(--navy);
+      color: #fff;
+      border-bottom-right-radius: 3px
+    }
+
+    .va-caption {
+      padding: 6px 12px;
+      font-size: .74rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      min-height: 16px;
+      font-style: italic;
+      flex-shrink: 0
+    }
+
+    .va-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 0 12px 8px;
+      flex-shrink: 0
+    }
+
+    .va-chip {
+      background: var(--navy-lt);
+      color: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 4px 10px;
+      font-size: .71rem;
+      font-weight: 600;
+      cursor: pointer
+    }
+
+    .va-ctrl {
+      display: flex;
+      gap: 8px;
+      padding: 10px 12px;
+      border-top: 1px solid var(--border);
+      background: #fff;
+      flex-shrink: 0
+    }
+
+    .va-mic-btn {
+      flex: 1;
+      border: none;
+      border-radius: 9px;
+      padding: 9px;
+      font-weight: 700;
+      font-size: .82rem;
+      background: var(--navy);
+      color: #fff
+    }
+
+    .va-mic-btn.on {
+      background: #c0392b
+    }
+
+    .va-type-row {
+      display: flex;
+      gap: 8px;
+      padding: 0 12px 10px;
+      flex-shrink: 0
+    }
+
+    .va-type-inp {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 8px 11px;
+      font-size: .82rem;
+      color: var(--text)
+    }
+
+    .va-type-inp:focus {
+      outline: none;
+      border-color: var(--navy)
+    }
+
+    .va-send-btn {
+      background: var(--saffron);
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      padding: 0 15px;
+      font-weight: 700;
+      font-size: .95rem
+    }
+
+    .va-hf-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 12px 0 4px
+    }
+
+    .va-hf-btn {
+      background: #fff;
+      border: 2px solid var(--navy);
+      color: var(--navy);
+      border-radius: 20px;
+      padding: 8px 18px;
+      font-weight: 700;
+      font-size: .8rem
+    }
+
+    .va-hf-btn.on {
+      background: var(--navy);
+      color: #fff
+    }
+
+    .va-hf-status {
+      font-size: .74rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 4px
+    }
+
+    @media (max-width:480px) {
+      .va-panel {
+        right: 10px;
+        left: 10px;
+        width: auto;
+        bottom: 88px
+      }
+
+      .va-fab {
+        right: 16px;
+        bottom: 16px
+      }
+    }
   </style>
 </head>
 
@@ -3502,7 +3816,7 @@
      SHARED TOPBAR & HEADER (always visible)
      ====================================================== -->
   <div class="gov-topbar">
-    <span>Government of India | भारत सरकार | Ministry of Health &amp; Family Welfare | National Health Authority</span>
+    <span>SIH 2026 | MediKiosk by VaidyaDoot</span>
     <span id="dt-bar"></span>
   </div>
   <header class="gov-header" id="main-header">
@@ -3513,7 +3827,6 @@
         <div class="ht">
           <h1 id="header-title">MediKiosk | स्वास्थ्य कियोस्क</h1>
           <p id="header-sub">AI-Powered Unified Health Platform | ABDM | AYUSH | DPDP 2023</p>
-          <p class="sub" id="header-sub2">Smart India Hackathon 2024 | National Health Authority</p>
         </div>
       </div>
       <div id="hdr-landing-badges" class="hdr-right">
@@ -3591,7 +3904,7 @@
           <button class="land-btn outline" onclick="showPatientRegister()">&#10133; New Patient? Register</button>
           <button class="land-btn outline" onclick="patientGuestAccess()" style="margin-top:4px">&#128694; Continue as
             Guest</button>
-          <div class="land-note">Demo: Use any Aadhaar format + password "1234" &nbsp;|&nbsp; Or continue as Guest</div>
+          
         </div>
         <!-- REGISTER FORM -->
         <div class="lcard-body hidden" id="land-patient-register">
@@ -3650,12 +3963,8 @@
             <input type="text" id="land-doc-room" placeholder="Room 4" />
           </div>
           <button class="land-btn green" onclick="doctorLogin()">&#10004; Start Shift &amp; Enter Portal</button>
-          <div class="land-divider">OR</div>
-          <button class="land-btn outline" onclick="doctorDemoLogin()">&#9889; Continue as Demo Doctor</button>
-          <div class="demo-creds">
-            <strong>&#128203; Demo Credentials:</strong>
-            Doctor ID: <code>DEMO-DOC-001</code> &nbsp;|&nbsp; Any name accepted
-          </div>
+          
+                    
         </div>
       </div>
     </div>
@@ -3701,6 +4010,7 @@
         <button class="lang-btn" onclick="setLang('te',this)">&#3108;&#3142;&#3122;&#3137;&#3095;&#3137;</button>
         <button class="lang-btn" onclick="setLang('bn',this)">&#2476;&#2494;&#2434;&#2482;&#2494;</button>
         <button class="lang-btn" onclick="setLang('mr',this)">&#2350;&#2352;&#2366;&#2336;&#2368;</button>
+        <button class="lang-btn" onclick="setLang('or',this)">ଓଡ଼ିଆ</button>
       </div>
       <div class="vbar">
         <button class="vbtn" id="global-mic" onclick="toggleGlobalMic()">&#127908; Speak</button>
@@ -3843,7 +4153,7 @@
           <div class="atm-layout">
             <div class="card card-t" id="q-card">
               <div id="phase-badge-el" class="phase-badge phase-allo">&#127973; Allopathic SOCRATES</div>
-              <div id="complaint-tag-el" class="complaint-tag hidden"></div>
+              <!-- <div id="complaint-tag-el" class="complaint-tag hidden"></div> -->
               <div class="q-num" id="qnum">1</div>
               <div class="q-txt" id="qtxt">Loading question...</div>
               <div class="q-sub" id="qsub">Speak or tap an answer below</div>
@@ -3851,6 +4161,12 @@
                 <span class="vtxt" id="vtxt">Your spoken answer will appear here...</span>
                 <button class="mic-big" id="main-mic" onclick="toggleMic()">&#127908;</button>
               </div>
+              <div class="va-hf-row">
+                <button class="va-hf-btn" id="hf-toggle-btn" onclick="toggleHandsFree()">&#127911; Hands-free Voice
+                  Assistant: OFF</button>
+              </div>
+              <div class="va-hf-status hidden" id="hf-status">The assistant will ask each question out loud and
+                listen for your spoken answer automatically — say "next", "back", "skip" or "repeat" anytime.</div>
               <div class="mcq-grid" id="mcq-grid"></div>
               <div class="nav-btns">
                 <button class="btn-s" id="prev-btn" onclick="prevQ()" disabled style="padding:11px 16px">&#8592;
@@ -3872,7 +4188,7 @@
                   <div class="ph-dot" style="background:var(--saffron)"></div><span>Document context questions</span>
                 </div>
                 <div class="phase-row" id="ph-row-cc">
-                  <div class="ph-dot" style="background:var(--navy)"></div><span>Chief complaint</span>
+                  <div class="ph-dot" style="background:var(--navy)"></div><span></span>
                 </div>
                 <div class="phase-row" id="ph-row-allo">
                   <div class="ph-dot" style="background:var(--navy)"></div><span>Allopathic SOCRATES</span>
@@ -3911,8 +4227,8 @@
               <div class="sum-dual">
                 <div class="sum-allo">
                   <h4>&#127973; Allopathic — SOCRATES History</h4>
-                  <div class="sf"><span class="fl">Chief Complaint:</span><input class="edit" id="s-cc" value="" />
-                  </div>
+                  <!-- <div class="sf"><span class="fl">Chief Complaint:</span><input class="edit" id="s-cc" value="" />
+                  </div> -->
                   <div class="sf"><span class="fl">Site:</span><input class="edit" id="s-site" value="" /></div>
                   <div class="sf"><span class="fl">Onset:</span><input class="edit" id="s-onset" value="" /></div>
                   <div class="sf"><span class="fl">Character:</span><input class="edit" id="s-char" value="" /></div>
@@ -3969,9 +4285,9 @@
                   &#9888; Emergency flag is ON — Priority token will be issued</div>
               </div>
               <div class="ac">
-                <h4>&#128241; ABDM / FHIR Export</h4>
-                <button class="abtn bl" onclick="genFHIR()">&#128230; Generate FHIR Bundle</button>
-                <div class="fhir-ok" id="fhir-ok">&#10003; FHIR R4 Bundle Ready</div>
+                <h4>&#128241; ABDM Export</h4>
+                <button class="abtn bl" onclick="genFHIR()"></button>
+                <div class="fhir-ok" id="fhir-ok"></div>
               </div>
               <div class="ac">
                 <h4>&#128196; Documents Uploaded</h4>
@@ -4055,6 +4371,38 @@
 
       </div><!-- .main -->
     </div><!-- #pat-dash -->
+
+    <!-- ======================================================
+       AI VOICE ASSISTANT — floating widget (talks + listens)
+       ====================================================== -->
+    <button class="va-fab" id="va-fab" onclick="vaToggleWidget()" title="AI Voice Assistant">
+      &#127908;<span class="va-badge-dot hidden" id="va-badge"></span>
+    </button>
+    <div class="va-panel" id="va-panel">
+      <div class="va-panel-hdr">
+        <div class="vph-ico">&#129302;</div>
+        <div class="vph-txt"><strong>MediKiosk Voice Assistant</strong><span>Actively guiding you, step by step</span>
+        </div>
+        <button class="va-guide-toggle" id="va-guide-toggle" onclick="vaToggleGuideMode()"
+          title="Turn step-by-step voice guidance on or off">Guide: ON</button>
+        <button class="va-panel-close" onclick="vaToggleWidget()">&#10005;</button>
+      </div>
+      <div class="va-body" id="va-body"></div>
+      <div class="va-caption" id="va-caption">Tap the mic button below to talk to me.</div>
+      <div class="va-chip-row">
+        <span class="va-chip" onclick="vaSendQuickPhrase('Repeat that')">&#128264; Repeat</span>
+        <span class="va-chip" onclick="vaSendQuickPhrase('Help')">&#10067; Help</span>
+        <span class="va-chip" onclick="vaSendQuickPhrase('I need help now')">&#128680; Emergency</span>
+      </div>
+      <div class="va-type-row">
+        <input type="text" class="va-type-inp" id="va-type-inp" placeholder="Or type your message here..."
+          onkeydown="if(event.key==='Enter')vaSendTyped()" />
+        <button class="va-send-btn" onclick="vaSendTyped()">&#10148;</button>
+      </div>
+      <div class="va-ctrl">
+        <button class="va-mic-btn" id="va-mic-btn" onclick="vaOrbTalk()">&#127908; Tap to Speak</button>
+      </div>
+    </div>
   </div><!-- #portal-patient -->
 
   <!-- ======================================================
@@ -4172,7 +4520,7 @@
             <button class="biz-tab" onclick="showBizTab('revenue',this)">&#128176; Revenue Streams</button>
             <button class="biz-tab" onclick="showBizTab('analytics',this)">&#128201; Analytics</button>
             <button class="biz-tab" onclick="showBizTab('subscription',this)">&#127775; Subscription Plans</button>
-            <button class="biz-tab" onclick="showBizTab('abdm',this)">&#128203; ABDM &amp; Compliance</button>
+            
           </div>
 
           <!-- OVERVIEW TAB -->
@@ -4433,9 +4781,9 @@
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px">
               <div class="sub-plan">
                 <div class="sub-plan-name">&#127776; Basic</div>
-                <div class="sub-plan-price">Free <small>/month</small></div>
+                <div class="sub-plan-price">₹2,999 <small>/month</small></div>
                 <ul>
-                  <li>Up to 30 patients/month</li>
+                  <li>Up to 100 patients/month</li>
                   <li>AI History Intake</li>
                   <li>Basic Queue Management</li>
                   <li>ABDM Compliant</li>
@@ -4448,9 +4796,9 @@
                   style="background:var(--saffron);color:#000;font-size:.7rem;font-weight:700;border-radius:4px;padding:2px 8px;display:inline-block;margin-bottom:6px">
                   MOST POPULAR</div>
                 <div class="sub-plan-name">&#127775; Pro</div>
-                <div class="sub-plan-price">₹4,999 <small>/month</small></div>
+                <div class="sub-plan-price">₹9,999 <small>/month</small></div>
                 <ul>
-                  <li>Unlimited patients</li>
+                  <li>Up to 500 patients</li>
                   <li>AI Pharmacy integration</li>
                   <li>Advanced Analytics Dashboard</li>
                   <li>FHIR R4 API export</li>
@@ -4466,31 +4814,27 @@
                 <div class="sub-plan-name">&#127973; Enterprise / PHC</div>
                 <div class="sub-plan-price">Custom <small>pricing</small></div>
                 <ul>
-                  <li>Government / NHA licensing</li>
+                  
                   <li>Multi-facility deployment</li>
                   <li>Custom AI model training</li>
                   <li>On-premise option available</li>
                   <li>SLA-backed uptime (99.9%)</li>
                   <li>Dedicated integration team</li>
                   <li>AYUSH certification included</li>
-                  <li>Unlimited doctors &amp; staff</li>
+                  <li>Custom Patient support &amp; staff</li>
                 </ul>
                 <button class="sub-plan-btn upgrade" onclick="toast('Contact sales: enterprise@medikiosk.in')">&#128222;
                   Contact Sales</button>
               </div>
             </div>
             <div
-              style="margin-top:20px;background:#e8f5e9;border-radius:10px;padding:14px;font-size:.82rem;color:#1b5e20">
-              <strong>&#128203; Government Procurement:</strong> MediKiosk is registered under GeM (Government
-              e-Marketplace) and eligible for PMJAY / Ayushman Bharat integration subsidies. Contact: <a
-                href="mailto:govt@medikiosk.in" style="color:var(--green)">govt@medikiosk.in</a>
+              
             </div>
           </div>
 
           <!-- ABDM TAB -->
           <div id="biz-abdm" class="biz-content">
-            <p style="font-size:.85rem;color:var(--muted);margin-bottom:18px">MediKiosk is fully integrated with the
-              Ayushman Bharat Digital Mission (ABDM) ecosystem and compliant with all applicable regulations.</p>
+            
             <div class="abdm-status">
               <div>
                 <div class="abdm-item-name">&#128100; ABHA ID Verification</div>
@@ -4559,7 +4903,7 @@
      SHARED FOOTER, TOAST, MODAL
      ====================================================== -->
   <footer class="gov-footer">
-    <p>&#169; 2026 Ministry of Health &amp; Family Welfare, Government of India &nbsp;|&nbsp;
+    <p>&#169; MediKiosk by VaidyaDoot |&nbsp;
       <a href="#">Privacy Policy</a> &nbsp;|&nbsp;<a href="#">Grievance</a> &nbsp;|&nbsp;
       ABDM Compliant &nbsp;|&nbsp; DPDP Act 2023 &nbsp;|&nbsp; HL7 FHIR R4 &nbsp;|&nbsp; Session Auto-Delete on
       Confirmation
@@ -4762,13 +5106,733 @@
     var docContext = { hasDoc: false, conditions: [], meds: [], abnormals: [] };
     var timelineItems = [], adaptiveQ = [], qIdx = 0, ans = {}, chiefComplaint = '';
     var SCRS = ['consent', 'documents', 'symptoms', 'summary', 'token', 'prescription'];
-    var LVM = { en: 'en-IN', hi: 'hi-IN', ta: 'ta-IN', te: 'te-IN', bn: 'bn-IN', mr: 'mr-IN' };
+    var LVM = { en: 'en-IN', hi: 'hi-IN', ta: 'ta-IN', te: 'te-IN', bn: 'bn-IN', mr: 'mr-IN', or: 'or-IN' };
+
+    // ============ FULL TRANSLATION DICTIONARY ============
+    var TRANSLATIONS = {
+      en: {
+        langLabel:'🌐 Language:',speak:'🎤 Speak',repeat:'🔊 Repeat',
+        bc_login:'✔ 1. Login',bc_consent:'2. Consent',bc_docs:'3. Upload Docs',bc_questions:'4. Smart Questions',bc_summary:'5. Summary',bc_token:'6. Token',
+        consent_title:'Consent & Privacy Agreement',consent_sub:'Please read and agree before we collect your health information',
+        consent_listen:'🔊 Listen to Consent Text',consent_h4:'Patient Consent for Health Data Collection',
+        consent_check:'I have read and I agree to share my health data as described above',
+        consent_deny:'✗ I Do Not Agree',consent_agree:'I Agree & Proceed →',
+        docs_title:'Upload Your Medical Documents',docs_sub:'AI reads your documents first to ask you personalized questions',
+        docs_skip_title:'No Documents Today?',docs_skip_sub:'That is completely fine. Our AI will ask adaptive questions based on what you describe.',
+        docs_skip_btn:'▶ Skip & Start Questions',docs_proceed:'🧠 AI is Ready — Start Personalised Questions →',
+        sym_title:'Your Health Assessment',sym_sub:'Questions adapt to your documents and symptoms in real time',
+        sym_speak:'Your spoken answer will appear here...',
+        sym_hf_off:'🎧 Hands-free Voice Assistant: OFF',sym_hf_on:'🎧 Hands-free Voice Assistant: ON',
+        sym_hf_desc:'The assistant will ask each question out loud and listen for your spoken answer automatically.',
+        btn_prev:'← Prev',btn_skip:'Skip',btn_next:'Next →',btn_finish:'Finish',
+        btn_send_doc:'✔ Send Dual Summary to Doctor',btn_read_aloud:'🔊 Read Aloud',btn_print:'🖨 Print Summary',
+        btn_emergency:'🚨 Mark as Emergency',btn_fhir:'📦',btn_delete:'🗑 Delete My Data Now',
+        btn_call_help:'🚨 CALL FOR HELP NOW',btn_check_rx:'📋 Check for Prescription',
+        sum_title:'Integrated Medical History Summary',sum_sub:'AI-generated draft (Allopathic + Ayurvedic) — Doctor reviews before use',
+        tok_label:'Your Queue Token',tok_waiting:'⚫ Waiting to be Called',tok_remaining:'remaining',
+        tok_issued:'Issued At',tok_expires:'Expires At',tok_priority:'Priority',tok_dept:'Department',tok_normal:'Normal',
+        tok_note:'Please remain seated in the waiting area. You will be called when it is your turn.\nDo not leave the facility — your token will expire in 30 minutes.',
+        prog_answered:'answered',prog_of:'of',
+        phase_cc:'🏥 Chief Complaint',phase_allo:'🏥 Allopathic SOCRATES',phase_ayush:'🌿 Ayurvedic Assessment',phase_doc:'📄 Document Context',phase_hist:'📜 Medical History',
+        fl_cc:'Chief Complaint:',fl_site:'Site:',fl_onset:'Onset:',fl_char:'Character:',fl_rad:'Radiation:',fl_assoc:'Associated:',fl_exac:'Exacerbating:',fl_sev:'Severity:',
+        fl_pmh:'Past History:',fl_meds:'Medications:',fl_allergy:'Allergies:',fl_fam:'Family Hx:',
+        fl_prakriti:'Prakriti:',fl_vikriti:'Vikriti:',fl_agni:'Agni:',fl_dosha:'Dosha Type:',fl_koshtha:'Koshtha:',fl_ahara:'Ahara-Vihara:',fl_nidana:'Nidana:',fl_samprapti:'Samprapti:',
+        speak_consent:'Please read the consent form and tick the checkbox to proceed.',
+        speak_documents:'Please upload your prescription or lab reports. You can also skip if you have no documents today.',
+        speak_symptoms:'Please answer the health question. You can speak or tap one of the options.',
+        speak_summary:'Your integrated medical history summary is ready. Please review and send to the doctor.',
+        speak_token:'Your token has been generated. Please wait in the seating area.',
+        speak_prescription:'Your doctor has sent you a prescription. Please review it carefully.',
+        va_greeting:'Hello! I am your MediKiosk AI voice assistant. I can guide you through each step, answer your questions, and help fill in your health details. How can I help you?',
+        va_help_consent:'Say "I agree" to accept, or "I do not agree" to decline.',
+        va_help_docs:'You can upload a prescription, lab report or discharge summary. Say "skip" to continue without documents.',
+        va_help_symptoms:'Say your answer out loud, or tap a button. Say "next", "back", or "skip" anytime.',
+        va_help_summary:'Your AI summary is ready. Say "read it" to hear it, or "send to doctor" to submit.',
+        va_help_token:'Your token has been issued. Please stay seated and wait to be called.',
+        va_help_prescription:'Say "read my prescription" and I will read your medicines aloud.',
+        va_emergency_response:'Emergency! I have alerted the staff immediately. Please stay calm and remain seated. Help is on the way.',
+        chip_repeat:'🔈 Repeat',chip_help:'❓ Help',chip_emergency:'🚨 Emergency',
+        toast_agree_consent:'Please tick the consent checkbox to continue.',toast_please_answer:'Please answer or press Skip.',
+        q_cc:'What is your main health problem today?',q_cc_sub:'Patient',
+        opts_cc:['Headache','Chest Pain','Stomach Pain','Fever','Cough','Joint Pain','Dizziness','Weakness or Fatigue','Skin Problem','Others'],
+        q_headache_site:'Where exactly is the headache?',q_headache_site_sub:'Site (SOCRATES)',
+        opts_headache_site:['Forehead or frontal','Sides or temporal','Back of head','One side only (migraine type)','Whole head'],
+        q_headache_char:'What type of pain is it?',q_headache_char_sub:'Character (SOCRATES)',
+        opts_headache_char:['Throbbing or pulsating','Pressing tight band','Stabbing or shooting','Burning sensation','Dull ache'],
+        q_headache_assoc:'What comes with the headache?',q_headache_assoc_sub:'Associated symptoms',
+        opts_headache_assoc:['Nausea or vomiting','Visual disturbance or aura','Sensitivity to light','Sensitivity to sound','Nasal congestion','None'],
+        q_headache_ayush:'Ayurvedic Shirashoola — which best describes your headache?',q_headache_ayush_sub:'Dosha assessment',
+        opts_headache_ayush:['Throbbing with anxiety (Vata type)','Burning with irritability (Pitta type)','Heavy dull with nausea (Kapha type)','Mixed features'],
+        q_chest_site:'Where exactly is the chest pain?',q_chest_site_sub:'Site — CRITICAL',
+        opts_chest_site:['Centre of chest','Left side','Right side','Spreading across full chest','Upper abdomen'],
+        q_chest_char:'What does the pain feel like?',q_chest_char_sub:'Character',
+        opts_chest_char:['Crushing or squeezing (cardiac)','Sharp or stabbing','Burning (acid reflux)','Tightness or pressure','Dull ache'],
+        q_chest_rad:'Does the pain spread anywhere?',q_chest_rad_sub:'Radiation — CRITICAL for cardiac',
+        opts_chest_rad:['No radiation','Left arm or hand','Jaw or neck','Back between shoulders','Right shoulder'],
+        q_chest_ayush:'Ayurvedic Hridroga assessment:',q_chest_ayush_sub:'Cardiac Dosha',
+        opts_chest_ayush:['Palpitations with anxiety (Vata Hridroga)','Burning chest with acidity (Pitta Hridroga)','Heavy chest with breathlessness (Kapha Hridroga)','Sharp pain with coldness (Vata dominant)'],
+        q_fever_pattern:'What pattern does the fever follow?',q_fever_pattern_sub:'Fever pattern (SOCRATES)',
+        opts_fever_pattern:['Continuous — always high','Intermittent — comes and goes','Remittent — fluctuates but present','Evening spike','Morning spike'],
+        q_fever_assoc:'Other symptoms with fever?',q_fever_assoc_sub:'Associated symptoms',
+        opts_fever_assoc:['Chills or rigors','Severe body ache','Headache with fever','Skin rash','Cough and runny nose','Nausea or vomiting'],
+        q_fever_ayush:'Ayurvedic Jwara assessment:',q_fever_ayush_sub:'Dosha in fever',
+        opts_fever_ayush:['Dry skin anxiety insomnia (Vata Jwara)','Burning sweating irritability (Pitta Jwara)','Heavy body mucus low appetite (Kapha Jwara)','Alternating chills and heat (mixed)'],
+        q_cough_type:'What type of cough?',q_cough_type_sub:'Character',
+        opts_cough_type:['Dry non-productive','Wet with mucus','Blood in sputum','Paroxysmal whooping','Barking cough'],
+        q_cough_timing:'When is cough worst?',q_cough_timing_sub:'Timing',
+        opts_cough_timing:['At night','Early morning','After eating or lying down','In cold or dusty weather','Throughout the day'],
+        q_cough_ayush:'Ayurvedic Kasa assessment:',q_cough_ayush_sub:'Cough Dosha',
+        opts_cough_ayush:['Dry cough hoarseness (Vata Kasa)','Yellow green sputum with fever (Pitta Kasa)','White thick mucus heaviness (Kapha Kasa)','Cough with blood (Raktaja Kasa — urgent)'],
+        q_joint_site:'Which joints are affected?',q_joint_site_sub:'Site',
+        opts_joint_site:['Knee joints','Hip joints','Small joints of fingers or toes','Spine or lower back','Shoulder joints','Multiple joints together'],
+        q_joint_timing:'When is joint pain worst?',q_joint_timing_sub:'Timing',
+        opts_joint_timing:['Early morning stiffness over 1 hour (Rheumatoid)','After prolonged activity (Osteoarthritis)','At night at rest','In cold or damp weather','Sudden onset (Gout)'],
+        q_joint_ayush:'Ayurvedic Amavata or Sandhivata assessment:',q_joint_ayush_sub:'Joint Dosha',
+        opts_joint_ayush:['Migratory pain cracking sounds (Vata Sandhivata)','Hot red swollen joints fever (Pitta Amavata)','Swollen stiff heavy morning (Kapha dominant)','Associated with poor digestion (Ama dominant)'],
+        q_stomach_site:'Where in the abdomen is the pain?',q_stomach_site_sub:'Site (SOCRATES)',
+        opts_stomach_site:['Upper abdomen or epigastric','Around the navel','Lower abdomen','Right side','Left side','Whole abdomen'],
+        q_stomach_food:'Is pain related to food?',q_stomach_food_sub:'Timing',
+        opts_stomach_food:['Worse before meals','Worse after eating','No relation to food','Related to bowel movements','Related to menstrual cycle'],
+        q_stomach_ayush:'Ayurvedic Agni (digestive fire) assessment:',q_stomach_ayush_sub:'Digestive system',
+        opts_stomach_ayush:['Gas bloating irregular appetite (Vata Agni)','Burning hyperacidity loose stools (Pitta Agni)','Sluggish heavy low appetite (Kapha Agni)','Variable digestion (mixed)'],
+        q_pmh:'Any long-term or chronic health conditions?',q_pmh_sub:'Past medical history',
+        opts_pmh:['Diabetes','Hypertension','Heart disease','Asthma','Kidney disease','Thyroid disease','None'],
+        q_meds:'Are you taking any medicines regularly?',q_meds_sub:'Current medications',
+        opts_meds:['Yes daily medicines','Occasional medicines','No medicines','Do not know'],
+        q_allergy:'Any known allergies to medicines or food?',q_allergy_sub:'Allergy history',
+        opts_allergy:['No known allergies','Allergy to antibiotics (Penicillin)','Allergy to Aspirin or painkillers','Food allergy','Other allergy'],
+        q_fam:'Has anyone in your family had similar illness?',q_fam_sub:'Family history',
+        opts_fam:['Yes father or mother','Yes sibling','Family history of diabetes or heart disease','No family history','Not sure'],
+        q_onset:'When did this problem start?',q_onset_sub:'Onset',
+        opts_onset:['Today','2 to 3 days ago','1 week ago','1 month ago','3 or more months ago'],
+        q_severity:'How severe is it (1 to 10)?',q_severity_sub:'Severity',
+        opts_severity:['1 to 3 Mild','4 to 6 Moderate','7 to 8 Severe','9 to 10 Unbearable'],
+        q_gen_dosha:'Ayurvedic Dosha for your symptom:',q_gen_dosha_sub:'General Dosha',
+        opts_gen_dosha:['Dryness anxiety restlessness (Vata)','Heat burning irritability (Pitta)','Heaviness mucus fatigue (Kapha)','Mixed'],
+        rf_cardiac:'Possible cardiac event. Staff alerted. Please stay calm and seated.',
+        rf_cardiac_arm:'Possible cardiac event. Do not move. Staff alerted immediately.',
+        rf_crushing:'Possible cardiac emergency. Staff alerted. Stay calm.',
+        rf_breathless:'Respiratory distress detected. Please stay seated. Help on the way.',
+        rf_stroke:'Possible stroke. Do not move. Staff alerted.',rf_blood:'Serious symptom. Staff notified.',rf_blackout:'Loss of consciousness episode. Staff alerted.',
+        your_progress:'Your Progress',answered_n_of_m:function(d,t){return d+' of '+t+' answered';},
+        draft_note:'⚠ AI-generated DRAFT for physician review only. Not a diagnosis.',
+        send_doctor_h:'🏥 Send to Doctor',emergency_priority_h:'🚨 Emergency Priority',
+        emergency_note:'Mark as emergency to get priority token and alert the doctor immediately.',
+        emergency_on:'⚠ Emergency flag is ON — Priority token will be issued',
+        docs_uploaded_h:'📄 Documents Uploaded',none_uploaded:'None uploaded',
+        session_security_h:'🔒 Session Security',session_security_note:'AES-256 encrypted. Auto-deleted after doctor confirms. DPDP 2023.',
+        emergency_cta:'🆘 Emergency',abdm_h:'📱 ABDM / FHIR Export'
+      },
+      hi: {
+        langLabel:'🌐 भाषा:',speak:'🎤 बोलें',repeat:'🔊 दोहराएं',
+        bc_login:'✔ 1. लॉगिन',bc_consent:'2. सहमति',bc_docs:'3. दस्तावेज़',bc_questions:'4. प्रश्न',bc_summary:'5. सारांश',bc_token:'6. टोकन',
+        consent_title:'सहमति और गोपनीयता समझौता',consent_sub:'आगे बढ़ने से पहले कृपया पढ़ें और सहमत हों',
+        consent_listen:'🔊 सहमति पाठ सुनें',consent_h4:'स्वास्थ्य डेटा संग्रह के लिए रोगी की सहमति',
+        consent_check:'मैंने पढ़ा है और मैं अपना स्वास्थ्य डेटा साझा करने से सहमत हूं',
+        consent_deny:'✗ मैं सहमत नहीं हूं',consent_agree:'मैं सहमत हूं और आगे बढ़ें →',
+        docs_title:'अपने चिकित्सा दस्तावेज़ अपलोड करें',docs_sub:'AI पहले आपके दस्तावेज़ पढ़ता है ताकि व्यक्तिगत प्रश्न पूछ सके',
+        docs_skip_title:'आज कोई दस्तावेज़ नहीं?',docs_skip_sub:'यह बिल्कुल ठीक है। हमारा AI आपके विवरण के आधार पर प्रश्न पूछेगा।',
+        docs_skip_btn:'▶ छोड़ें और प्रश्न शुरू करें',docs_proceed:'🧠 AI तैयार है — व्यक्तिगत प्रश्न शुरू करें →',
+        sym_title:'आपका स्वास्थ्य मूल्यांकन',sym_sub:'प्रश्न आपके दस्तावेज़ और लक्षणों के अनुसार बदलते हैं',
+        sym_speak:'आपका बोला हुआ उत्तर यहाँ दिखेगा...',
+        sym_hf_off:'🎧 हैंड्स-फ़्री असिस्टेंट: बंद',sym_hf_on:'🎧 हैंड्स-फ़्री असिस्टेंट: चालू',
+        sym_hf_desc:'असिस्टेंट हर प्रश्न जोर से पूछेगा और आपका उत्तर स्वचालित रूप से सुनेगा।',
+        btn_prev:'← पिछला',btn_skip:'छोड़ें',btn_next:'अगला →',btn_finish:'समाप्त करें',
+        btn_send_doc:'✔ डॉक्टर को सारांश भेजें',btn_read_aloud:'🔊 जोर से पढ़ें',btn_print:'🖨 सारांश प्रिंट करें',
+        btn_emergency:'🚨 आपातकाल चिह्नित करें',btn_fhir:'📦 FHIR बंडल बनाएं',btn_delete:'🗑 मेरा डेटा अभी हटाएं',
+        btn_call_help:'🚨 अभी मदद बुलाएं',btn_check_rx:'📋 नुस्खा जांचें',
+        sum_title:'एकीकृत चिकित्सा इतिहास सारांश',sum_sub:'AI द्वारा तैयार मसौदा (एलोपैथिक + आयुर्वेदिक) — डॉक्टर उपयोग से पहले जांचेंगे',
+        tok_label:'आपका कतार टोकन',tok_waiting:'⚫ बुलाए जाने की प्रतीक्षा',tok_remaining:'शेष',
+        tok_issued:'जारी किया गया',tok_expires:'समाप्त होगा',tok_priority:'प्राथमिकता',tok_dept:'विभाग',tok_normal:'सामान्य',
+        tok_note:'कृपया प्रतीक्षा क्षेत्र में बैठे रहें। आपकी बारी आने पर बुलाया जाएगा।\nसुविधा न छोड़ें — आपका टोकन 30 मिनट में समाप्त हो जाएगा।',
+        prog_answered:'उत्तर दिए',prog_of:'में से',
+        phase_cc:'🏥 मुख्य शिकायत',phase_allo:'🏥 एलोपैथिक SOCRATES',phase_ayush:'🌿 आयुर्वेदिक मूल्यांकन',phase_doc:'📄 दस्तावेज़ संदर्भ',phase_hist:'📜 चिकित्सा इतिहास',
+        fl_cc:'मुख्य शिकायत:',fl_site:'स्थान:',fl_onset:'शुरुआत:',fl_char:'प्रकृति:',fl_rad:'विकिरण:',fl_assoc:'संबंधित:',fl_exac:'बढ़ाने वाले:',fl_sev:'गंभीरता:',
+        fl_pmh:'पिछला इतिहास:',fl_meds:'दवाएं:',fl_allergy:'एलर्जी:',fl_fam:'पारिवारिक इतिहास:',
+        fl_prakriti:'प्रकृति:',fl_vikriti:'विकृति:',fl_agni:'अग्नि:',fl_dosha:'दोष प्रकार:',fl_koshtha:'कोष्ठ:',fl_ahara:'आहार-विहार:',fl_nidana:'निदान:',fl_samprapti:'संप्राप्ति:',
+        speak_consent:'कृपया सहमति पत्र पढ़ें और आगे बढ़ने के लिए चेकबॉक्स पर टिक करें।',
+        speak_documents:'कृपया अपना नुस्खा या लैब रिपोर्ट अपलोड करें। आज दस्तावेज़ न हों तो छोड़ सकते हैं।',
+        speak_symptoms:'कृपया स्वास्थ्य प्रश्न का उत्तर दें। आप बोल सकते हैं या विकल्प पर टैप कर सकते हैं।',
+        speak_summary:'आपका एकीकृत चिकित्सा इतिहास सारांश तैयार है। कृपया समीक्षा करें और डॉक्टर को भेजें।',
+        speak_token:'आपका टोकन जारी हो गया है। कृपया बैठने की जगह पर प्रतीक्षा करें।',
+        speak_prescription:'आपके डॉक्टर ने आपको एक नुस्खा भेजा है। कृपया ध्यान से समीक्षा करें।',
+        va_greeting:'नमस्ते! मैं आपका MediKiosk AI वॉइस असिस्टेंट हूं। मैं हर कदम में आपकी मदद कर सकता हूं। आप क्या जानना चाहते हैं?',
+        va_help_consent:'सहमति देने के लिए "मैं सहमत हूं" कहें, या अस्वीकार करने के लिए "मैं सहमत नहीं हूं" कहें।',
+        va_help_docs:'आप नुस्खा, लैब रिपोर्ट या डिस्चार्ज सारांश अपलोड कर सकते हैं। बिना दस्तावेज़ के जारी रखने के लिए "छोड़ें" कहें।',
+        va_help_symptoms:'अपना उत्तर जोर से बोलें, या बटन दबाएं। आगे के लिए "अगला", पीछे के लिए "पिछला", छोड़ने के लिए "छोड़ें" कहें।',
+        va_help_summary:'आपका AI सारांश तैयार है। सुनने के लिए "पढ़ें", भेजने के लिए "डॉक्टर को भेजें" कहें।',
+        va_help_token:'आपका टोकन जारी हो गया। कृपया बैठे रहें और बुलाए जाने की प्रतीक्षा करें।',
+        va_help_prescription:'"मेरा नुस्खा पढ़ें" कहें और मैं आपकी दवाएं जोर से पढ़ूंगा।',
+        va_emergency_response:'आपातकाल! मैंने तुरंत कर्मचारियों को सतर्क किया है। शांत रहें और बैठे रहें। मदद आ रही है।',
+        chip_repeat:'🔈 दोहराएं',chip_help:'❓ मदद',chip_emergency:'🚨 आपातकाल',
+        toast_agree_consent:'आगे बढ़ने के लिए सहमति चेकबॉक्स पर टिक करें।',toast_please_answer:'कृपया उत्तर दें या छोड़ें दबाएं।',
+        q_cc:'आज आपकी मुख्य स्वास्थ्य समस्या क्या है?',q_cc_sub:'आपकी मुख्य शिकायत',
+        opts_cc:['सिरदर्द','सीने में दर्द','पेट दर्द','बुखार','खांसी','जोड़ों का दर्द','चक्कर आना','कमज़ोरी या थकान','त्वचा की समस्या','अन्य'],
+        q_headache_site:'सिरदर्द ठीक कहाँ है?',q_headache_site_sub:'स्थान (SOCRATES)',
+        opts_headache_site:['माथे पर','किनारों पर','सिर के पीछे','एक तरफ (माइग्रेन प्रकार)','पूरे सिर में'],
+        q_headache_char:'दर्द किस प्रकार का है?',q_headache_char_sub:'प्रकृति',
+        opts_headache_char:['धड़कन के साथ','दबाने वाला','तेज चुभन','जलन','हल्का दर्द'],
+        q_headache_assoc:'सिरदर्द के साथ क्या होता है?',q_headache_assoc_sub:'संबंधित लक्षण',
+        opts_headache_assoc:['मितली या उल्टी','दृष्टि में गड़बड़ी','प्रकाश से असुविधा','आवाज़ से असुविधा','नाक बंद','कुछ नहीं'],
+        q_headache_ayush:'आयुर्वेदिक शिरःशूल — आपका सिरदर्द कैसा है?',q_headache_ayush_sub:'दोष मूल्यांकन',
+        opts_headache_ayush:['धड़कन के साथ चिंता (वात)','जलन के साथ चिड़चिड़ापन (पित्त)','भारीपन मतली के साथ (कफ)','मिश्रित'],
+        q_chest_site:'सीने का दर्द ठीक कहाँ है?',q_chest_site_sub:'स्थान — महत्वपूर्ण',
+        opts_chest_site:['बीच में','बायीं तरफ','दायीं तरफ','पूरे सीने में','ऊपरी पेट में'],
+        q_chest_char:'दर्द कैसा लगता है?',q_chest_char_sub:'प्रकृति',
+        opts_chest_char:['दबाने वाला (हृदय संबंधी)','तेज चुभन','जलन (एसिड)','कसाव','हल्का दर्द'],
+        q_chest_rad:'क्या दर्द कहीं फैलता है?',q_chest_rad_sub:'विकिरण — हृदय के लिए महत्वपूर्ण',
+        opts_chest_rad:['कहीं नहीं फैलता','बायाँ हाथ या हथेली','जबड़ा या गर्दन','कंधों के बीच पीठ','दायाँ कंधा'],
+        q_chest_ayush:'आयुर्वेदिक हृद्रोग मूल्यांकन:',q_chest_ayush_sub:'हृदय दोष',
+        opts_chest_ayush:['धड़कन के साथ चिंता (वात)','जलन एसिडिटी (पित्त)','भारी सीना सांस फूलना (कफ)','तेज दर्द ठंडक (वात)'],
+        q_fever_pattern:'बुखार का पैटर्न क्या है?',q_fever_pattern_sub:'बुखार का पैटर्न',
+        opts_fever_pattern:['लगातार — हमेशा तेज','रुक-रुककर','उतार-चढ़ाव वाला','शाम को बढ़ता है','सुबह बढ़ता है'],
+        q_fever_assoc:'बुखार के साथ और क्या है?',q_fever_assoc_sub:'संबंधित लक्षण',
+        opts_fever_assoc:['ठंड लगना','तेज बदन दर्द','सिरदर्द के साथ बुखार','त्वचा पर चकत्ते','खांसी और बहती नाक','मितली या उल्टी'],
+        q_fever_ayush:'आयुर्वेदिक ज्वर मूल्यांकन:',q_fever_ayush_sub:'बुखार में दोष',
+        opts_fever_ayush:['रूखी त्वचा चिंता अनिद्रा (वात)','जलन पसीना चिड़चिड़ापन (पित्त)','भारी बलगम भूख न लगना (कफ)','बारी-बारी ठंड और गर्मी (मिश्रित)'],
+        q_cough_type:'खांसी कैसी है?',q_cough_type_sub:'प्रकृति',
+        opts_cough_type:['सूखी खांसी','बलगम के साथ','खून के साथ','काली खांसी','भौंकने जैसी'],
+        q_cough_timing:'खांसी कब सबसे ज़्यादा होती है?',q_cough_timing_sub:'समय',
+        opts_cough_timing:['रात में','सुबह जल्दी','खाने के बाद या लेटने पर','ठंड या धूल में','पूरे दिन'],
+        q_cough_ayush:'आयुर्वेदिक कास मूल्यांकन:',q_cough_ayush_sub:'खांसी दोष',
+        opts_cough_ayush:['सूखी खांसी आवाज़ बैठना (वात)','पीला हरा बलगम बुखार (पित्त)','सफेद गाढ़ा बलगम भारीपन (कफ)','खून के साथ खांसी (रक्तज — तत्काल)'],
+        q_joint_site:'कौन से जोड़ प्रभावित हैं?',q_joint_site_sub:'स्थान',
+        opts_joint_site:['घुटने','कूल्हे','उंगलियों के छोटे जोड़','रीढ़ या पीठ','कंधे','कई जोड़ एक साथ'],
+        q_joint_timing:'जोड़ों का दर्द कब सबसे ज़्यादा?',q_joint_timing_sub:'समय',
+        opts_joint_timing:['सुबह 1 घंटे से अधिक जकड़न (रूमेटॉइड)','लंबी गतिविधि के बाद (ऑस्टियोआर्थ.)','रात में आराम के दौरान','ठंड या नमी में','अचानक (गाउट)'],
+        q_joint_ayush:'आयुर्वेदिक आमवात/संधिवात मूल्यांकन:',q_joint_ayush_sub:'जोड़ दोष',
+        opts_joint_ayush:['इधर-उधर दर्द कड़कड़ाहट (वात)','गर्म लाल सूजे जोड़ (पित्त)','सूजे जकड़े सुबह (कफ)','खराब पाचन के साथ (आम)'],
+        q_stomach_site:'पेट में दर्द कहाँ है?',q_stomach_site_sub:'स्थान',
+        opts_stomach_site:['ऊपरी पेट','नाभि के आसपास','निचले पेट में','दायीं तरफ','बायीं तरफ','पूरे पेट में'],
+        q_stomach_food:'क्या दर्द खाने से संबंधित है?',q_stomach_food_sub:'समय',
+        opts_stomach_food:['खाने से पहले बढ़ता है','खाने के बाद बढ़ता है','खाने से कोई संबंध नहीं','मल त्याग से संबंधित','मासिक धर्म से संबंधित'],
+        q_stomach_ayush:'आयुर्वेदिक अग्नि मूल्यांकन:',q_stomach_ayush_sub:'पाचन तंत्र',
+        opts_stomach_ayush:['गैस, अफारा, अनियमित भूख (वात)','जलन, एसिडिटी (पित्त)','सुस्त, भारीपन, भूख न लगना (कफ)','अनिश्चित पाचन (मिश्रित)'],
+        q_pmh:'कोई दीर्घकालिक या पुरानी बीमारी है?',q_pmh_sub:'पिछला चिकित्सा इतिहास',
+        opts_pmh:['मधुमेह','उच्च रक्तचाप','हृदय रोग','अस्थमा','गुर्दे की बीमारी','थायराइड रोग','कुछ नहीं'],
+        q_meds:'क्या आप नियमित रूप से कोई दवाएं लेते हैं?',q_meds_sub:'वर्तमान दवाएं',
+        opts_meds:['हां, रोज़ दवाएं','कभी-कभी दवाएं','कोई दवा नहीं','पता नहीं'],
+        q_allergy:'क्या दवाओं या खाने से कोई ज्ञात एलर्जी है?',q_allergy_sub:'एलर्जी इतिहास',
+        opts_allergy:['कोई ज्ञात एलर्जी नहीं','एंटीबायोटिक से एलर्जी (पेनिसिलिन)','एस्पिरिन या दर्द निवारक से एलर्जी','भोजन से एलर्जी','अन्य एलर्जी'],
+        q_fam:'क्या आपके परिवार में किसी को ऐसी बीमारी हुई है?',q_fam_sub:'पारिवारिक इतिहास',
+        opts_fam:['हां, पिता या माता','हां, भाई-बहन','परिवार में मधुमेह या हृदय रोग','कोई पारिवारिक इतिहास नहीं','पता नहीं'],
+        q_onset:'यह समस्या कब शुरू हुई?',q_onset_sub:'शुरुआत',
+        opts_onset:['आज','2-3 दिन पहले','1 हफ्ते पहले','1 महीने पहले','3 या उससे अधिक महीने पहले'],
+        q_severity:'कितना गंभीर है (1 से 10)?',q_severity_sub:'गंभीरता',
+        opts_severity:['1-3 हल्का','4-6 मध्यम','7-8 गंभीर','9-10 असहनीय'],
+        q_gen_dosha:'आपके लक्षण के लिए आयुर्वेदिक दोष:',q_gen_dosha_sub:'सामान्य दोष',
+        opts_gen_dosha:['रूखापन चिंता बेचैनी (वात)','गर्मी जलन चिड़चिड़ापन (पित्त)','भारीपन बलगम थकान (कफ)','मिश्रित'],
+        rf_cardiac:'संभावित हृदय घटना। कर्मचारी सतर्क। शांत रहें।',
+        rf_cardiac_arm:'संभावित हृदय घटना। न हिलें। कर्मचारी तुरंत सतर्क।',
+        rf_crushing:'संभावित हृदय आपातकाल। कर्मचारी सतर्क। शांत रहें।',
+        rf_breathless:'श्वसन संकट। बैठे रहें। मदद आ रही है।',
+        rf_stroke:'संभावित स्ट्रोक। न हिलें। कर्मचारी सतर्क।',rf_blood:'गंभीर लक्षण। कर्मचारी को सूचित किया।',rf_blackout:'बेहोशी का एपिसोड। कर्मचारी सतर्क।',
+        your_progress:'आपकी प्रगति',answered_n_of_m:function(d,t){return d+' में से '+t+' उत्तर दिए';},
+        draft_note:'⚠ केवल चिकित्सक समीक्षा के लिए AI-जनित मसौदा। निदान नहीं।',
+        send_doctor_h:'🏥 डॉक्टर को भेजें',emergency_priority_h:'🚨 आपातकालीन प्राथमिकता',
+        emergency_note:'प्राथमिकता टोकन पाने और डॉक्टर को तुरंत सतर्क करने के लिए आपातकाल चिह्नित करें।',
+        emergency_on:'⚠ आपातकाल चिह्न चालू है — प्राथमिकता टोकन जारी होगा',
+        docs_uploaded_h:'📄 अपलोड किए गए दस्तावेज़',none_uploaded:'कुछ अपलोड नहीं',
+        session_security_h:'🔒 सत्र सुरक्षा',session_security_note:'AES-256 एन्क्रिप्टेड। DPDP 2023।',
+        emergency_cta:'🆘 आपातकाल',abdm_h:'📱 ABDM / FHIR निर्यात'
+      },
+      or: {
+        langLabel:'🌐 ଭାଷା:',speak:'🎤 କୁହନ୍ତୁ',repeat:'🔊 ପୁନରାବୃତ୍ତି କରନ୍ତୁ',
+        bc_login:'✔ 1. ଲଗଇନ୍',bc_consent:'2. ସମ୍ମତି',bc_docs:'3. ଦସ୍ତାବେଜ',bc_questions:'4. ପ୍ରଶ୍ନ',bc_summary:'5. ସାରାଂଶ',bc_token:'6. ଟୋକେନ୍',
+        consent_title:'ସମ୍ମତି ଏବଂ ଗୋପନୀୟତା ଚୁକ୍ତି',consent_sub:'ଆଗକୁ ବଢ଼ିବା ପୂର୍ବରୁ ଦୟାକରି ପଢ଼ନ୍ତୁ ଏବଂ ସହମତ ହୁଅନ୍ତୁ',
+        consent_listen:'🔊 ସମ୍ମତି ପାଠ ଶୁଣନ୍ତୁ',consent_h4:'ସ୍ୱାସ୍ଥ୍ୟ ତଥ୍ୟ ସଂଗ୍ରହ ପାଇଁ ରୋଗୀଙ୍କ ସମ୍ମତି',
+        consent_check:'ମୁଁ ପଢ଼ିଛି ଏବଂ ମୋର ସ୍ୱାସ୍ଥ୍ୟ ତଥ୍ୟ ଅଂଶୀଦାର କରିବାକୁ ସହମତ',
+        consent_deny:'✗ ମୁଁ ସହମତ ନୁହେଁ',consent_agree:'ମୁଁ ସହମତ ଏବଂ ଆଗକୁ ବଢ଼ନ୍ତୁ →',
+        docs_title:'ଆପଣଙ୍କ ଚିକିତ୍ସା ଦସ୍ତାବେଜ ଅପଲୋଡ୍ କରନ୍ତୁ',docs_sub:'ବ୍ୟକ୍ତିଗତ ପ୍ରଶ୍ନ ପଚାରିବା ପାଇଁ AI ପ୍ରଥମେ ଆପଣଙ୍କ ଦସ୍ତାବେଜ ପଢ଼େ',
+        docs_skip_title:'ଆଜି କୌଣସି ଦସ୍ତାବେଜ ନାହିଁ?',docs_skip_sub:'ଏହା ସମ୍ପୂର୍ଣ୍ଣ ଠିକ୍ ଅଛି। ଆମର AI ଆପଣଙ୍କ ବିବରଣୀ ଆଧାରରେ ପ୍ରଶ୍ନ ପଚାରିବ।',
+        docs_skip_btn:'▶ ଛାଡ଼ନ୍ତୁ ଏବଂ ପ୍ରଶ୍ନ ଆରମ୍ଭ କରନ୍ତୁ',docs_proceed:'🧠 AI ପ୍ରସ୍ତୁତ — ବ୍ୟକ୍ତିଗତ ପ୍ରଶ୍ନ ଆରମ୍ଭ କରନ୍ତୁ →',
+        sym_title:'ଆପଣଙ୍କ ସ୍ୱାସ୍ଥ୍ୟ ମୂଲ୍ୟାଙ୍କନ',sym_sub:'ଆପଣଙ୍କ ଦସ୍ତାବେଜ ଏବଂ ଲକ୍ଷଣ ଅନୁଯାୟୀ ପ୍ରଶ୍ନ ବଦଳେ',
+        sym_speak:'ଆପଣଙ୍କ କୁହାଯାଇଥିବା ଉତ୍ତର ଏଠାରେ ଦେଖାଯିବ...',
+        sym_hf_off:'🎧 ହ୍ୟାଣ୍ଡସ୍-ଫ୍ରି ସହାୟକ: ବନ୍ଦ',sym_hf_on:'🎧 ହ୍ୟାଣ୍ଡସ୍-ଫ୍ରି ସହାୟକ: ଚାଲୁ',
+        sym_hf_desc:'ସହାୟକ ପ୍ରତ୍ୟେକ ପ୍ରଶ୍ନ ଉଚ୍ଚ ସ୍ୱରରେ ପଚାରିବେ ଏବଂ ଆପଣଙ୍କ ଉତ୍ତର ସ୍ୱୟଂଚାଳିତ ଭାବେ ଶୁଣିବେ।',
+        btn_prev:'← ପୂର୍ବବର୍ତ୍ତୀ',btn_skip:'ଛାଡ଼ନ୍ତୁ',btn_next:'ପରବର୍ତ୍ତୀ →',btn_finish:'ଶେଷ କରନ୍ତୁ',
+        btn_send_doc:'✔ ଡାକ୍ତରଙ୍କୁ ସାରାଂଶ ପଠାନ୍ତୁ',btn_read_aloud:'🔊 ଉଚ୍ଚ ସ୍ୱରରେ ପଢ଼ନ୍ତୁ',btn_print:'🖨 ସାରାଂଶ ପ୍ରିଣ୍ଟ କରନ୍ତୁ',
+        btn_emergency:'🚨 ଜରୁରୀକାଳୀନ ଚିହ୍ନିତ କରନ୍ତୁ',btn_fhir:'📦 FHIR ବଣ୍ଡଲ୍ ତିଆରି କରନ୍ତୁ',btn_delete:'🗑 ମୋର ତଥ୍ୟ ଏବେ ହଟାନ୍ତୁ',
+        btn_call_help:'🚨 ଏବେ ସହାୟତା ଡାକନ୍ତୁ',btn_check_rx:'📋 ପ୍ରେସକ୍ରିପସନ୍ ଯାଞ୍ଚ କରନ୍ତୁ',
+        sum_title:'ସମନ୍ୱିତ ଚିକିତ୍ସା ଇତିହାସ ସାରାଂଶ',sum_sub:'AI ଦ୍ୱାରା ପ୍ରସ୍ତୁତ ଖସଡ଼ା (ଏଲୋପାଥିକ୍ + ଆୟୁର୍ବେଦିକ) — ଡାକ୍ତର ବ୍ୟବହାର ପୂର୍ବରୁ ଯାଞ୍ଚ କରିବେ',
+        tok_label:'ଆପଣଙ୍କ କ୍ୟୁ ଟୋକେନ୍',tok_waiting:'⚫ ଡକାଯିବାକୁ ଅପେକ୍ଷା',tok_remaining:'ବାକି',
+        tok_issued:'ଜାରି କରାଯାଇଛି',tok_expires:'ସମାପ୍ତ ହେବ',tok_priority:'ପ୍ରାଥମିକତା',tok_dept:'ବିଭାଗ',tok_normal:'ସାଧାରଣ',
+        tok_note:'ଦୟାକରି ଅପେକ୍ଷା କ୍ଷେତ୍ରରେ ବସି ରୁହନ୍ତୁ। ଆପଣଙ୍କ ପାଳି ଆସିଲେ ଡକାଯିବ।\nସୁବିଧା କେନ୍ଦ୍ର ଛାଡ଼ନ୍ତୁ ନାହିଁ — ଆପଣଙ୍କ ଟୋକେନ୍ 30 ମିନିଟରେ ସମାପ୍ତ ହୋଇଯିବ।',
+        prog_answered:'ଉତ୍ତର ଦିଆଯାଇଛି',prog_of:'ମଧ୍ୟରୁ',
+        phase_cc:'🏥 ମୁଖ୍ୟ ଅଭିଯୋଗ',phase_allo:'🏥 ଏଲୋପାଥିକ୍ SOCRATES',phase_ayush:'🌿 ଆୟୁର୍ବେଦିକ ମୂଲ୍ୟାଙ୍କନ',phase_doc:'📄 ଦସ୍ତାବେଜ ସନ୍ଦର୍ଭ',phase_hist:'📜 ଚିକିତ୍ସା ଇତିହାସ',
+        fl_cc:'ମୁଖ୍ୟ ଅଭିଯୋଗ:',fl_site:'ସ୍ଥାନ:',fl_onset:'ଆରମ୍ଭ:',fl_char:'ପ୍ରକୃତି:',fl_rad:'ବିକିରଣ:',fl_assoc:'ସମ୍ବନ୍ଧିତ:',fl_exac:'ବଢ଼ାଉଥିବା:',fl_sev:'ତୀବ୍ରତା:',
+        fl_pmh:'ପୂର୍ବ ଇତିହାସ:',fl_meds:'ଔଷଧ:',fl_allergy:'ଆଲର୍ଜି:',fl_fam:'ପାରିବାରିକ ଇତିହାସ:',
+        fl_prakriti:'ପ୍ରକୃତି:',fl_vikriti:'ବିକୃତି:',fl_agni:'ଅଗ୍ନି:',fl_dosha:'ଦୋଷ ପ୍ରକାର:',fl_koshtha:'କୋଷ୍ଠ:',fl_ahara:'ଆହାର-ବିହାର:',fl_nidana:'ନିଦାନ:',fl_samprapti:'ସମ୍ପ୍ରାପ୍ତି:',
+        speak_consent:'ଦୟାକରି ସମ୍ମତି ପତ୍ର ପଢ଼ନ୍ତୁ ଏବଂ ଆଗକୁ ବଢ଼ିବା ପାଇଁ ଚେକବକ୍ସରେ ଟିକ୍ କରନ୍ତୁ।',
+        speak_documents:'ଦୟାକରି ଆପଣଙ୍କ ପ୍ରେସକ୍ରିପସନ୍ କିମ୍ବା ଲ୍ୟାବ୍ ରିପୋର୍ଟ ଅପଲୋଡ୍ କରନ୍ତୁ। ଆଜି ଦସ୍ତାବେଜ ନଥିଲେ ଛାଡ଼ିପାରିବେ।',
+        speak_symptoms:'ଦୟାକରି ସ୍ୱାସ୍ଥ୍ୟ ପ୍ରଶ୍ନର ଉତ୍ତର ଦିଅନ୍ତୁ। ଆପଣ କହିପାରିବେ କିମ୍ବା ବିକଳ୍ପରେ ଟ୍ୟାପ୍ କରିପାରିବେ।',
+        speak_summary:'ଆପଣଙ୍କ ସମନ୍ୱିତ ଚିକିତ୍ସା ଇତିହାସ ସାରାଂଶ ପ୍ରସ୍ତୁତ ଅଛି। ଦୟାକରି ସମୀକ୍ଷା କରନ୍ତୁ ଏବଂ ଡାକ୍ତରଙ୍କୁ ପଠାନ୍ତୁ।',
+        speak_token:'ଆପଣଙ୍କ ଟୋକେନ୍ ଜାରି ହୋଇଗଲା। ଦୟାକରି ବସିବା ସ୍ଥାନରେ ଅପେକ୍ଷା କରନ୍ତୁ।',
+        speak_prescription:'ଆପଣଙ୍କ ଡାକ୍ତର ଆପଣଙ୍କୁ ଏକ ପ୍ରେସକ୍ରିପସନ୍ ପଠାଇଛନ୍ତି। ଦୟାକରି ଧ୍ୟାନର ସହିତ ସମୀକ୍ଷା କରନ୍ତୁ।',
+        va_greeting:'ନମସ୍କାର! ମୁଁ ଆପଣଙ୍କ MediKiosk AI ଭଏସ୍ ଆସିଷ୍ଟାଣ୍ଟ। ମୁଁ ପ୍ରତ୍ୟେକ ପଦକ୍ଷେପରେ ଆପଣଙ୍କୁ ସାହାଯ୍ୟ କରିପାରିବି। ଆପଣ କ’ଣ ଜାଣିବାକୁ ଚାହାଁନ୍ତି?',
+        va_help_consent:'ସମ୍ମତି ଦେବା ପାଇଁ "ମୁଁ ସହମତ" କୁହନ୍ତୁ, କିମ୍ବା ଅସ୍ୱୀକାର କରିବା ପାଇଁ "ମୁଁ ସହମତ ନୁହେଁ" କୁହନ୍ତୁ।',
+        va_help_docs:'ଆପଣ ପ୍ରେସକ୍ରିପସନ୍, ଲ୍ୟାବ୍ ରିପୋର୍ଟ କିମ୍ବା ଡିସଚାର୍ଜ ସାରାଂଶ ଅପଲୋଡ୍ କରିପାରିବେ। ଦସ୍ତାବେଜ ବିନା ଜାରି ରଖିବା ପାଇଁ "ଛାଡ଼ନ୍ତୁ" କୁହନ୍ତୁ।',
+        va_help_symptoms:'ଆପଣଙ୍କ ଉତ୍ତର ଉଚ୍ଚ ସ୍ୱରରେ କୁହନ୍ତୁ, କିମ୍ବା ବଟନ୍ ଦବାନ୍ତୁ। ଆଗକୁ ପାଇଁ "ପରବର୍ତ୍ତୀ", ପଛକୁ ପାଇଁ "ପୂର୍ବବର୍ତ୍ତୀ", ଛାଡ଼ିବା ପାଇଁ "ଛାଡ଼ନ୍ତୁ" କୁହନ୍ତୁ।',
+        va_help_summary:'ଆପଣଙ୍କ AI ସାରାଂଶ ପ୍ରସ୍ତୁତ ଅଛି। ଶୁଣିବା ପାଇଁ "ପଢ଼ନ୍ତୁ", ପଠାଇବା ପାଇଁ "ଡାକ୍ତରଙ୍କୁ ପଠାନ୍ତୁ" କୁହନ୍ତୁ।',
+        va_help_token:'ଆପଣଙ୍କ ଟୋକେନ୍ ଜାରି ହୋଇଗଲା। ଦୟାକରି ବସି ରୁହନ୍ତୁ ଏବଂ ଡକାଯିବାକୁ ଅପେକ୍ଷା କରନ୍ତୁ।',
+        va_help_prescription:'"ମୋର ପ୍ରେସକ୍ରିପସନ୍ ପଢ଼ନ୍ତୁ" କୁହନ୍ତୁ ଏବଂ ମୁଁ ଆପଣଙ୍କ ଔଷଧଗୁଡ଼ିକ ଉଚ୍ଚ ସ୍ୱରରେ ପଢ଼ିବି।',
+        va_emergency_response:'ଜରୁରୀକାଳ! ମୁଁ ତୁରନ୍ତ କର୍ମଚାରୀଙ୍କୁ ସତର୍କ କରିଛି। ଶାନ୍ତ ରୁହନ୍ତୁ ଏବଂ ବସି ରୁହନ୍ତୁ। ସାହାଯ୍ୟ ଆସୁଛି।',
+        chip_repeat:'🔈 ପୁନରାବୃତ୍ତି କରନ୍ତୁ',chip_help:'❓ ସାହାଯ୍ୟ',chip_emergency:'🚨 ଜରୁରୀକାଳ',
+        toast_agree_consent:'ଆଗକୁ ବଢ଼ିବା ପାଇଁ ସମ୍ମତି ଚେକବକ୍ସରେ ଟିକ୍ କରନ୍ତୁ।',toast_please_answer:'ଦୟାକରି ଉତ୍ତର ଦିଅନ୍ତୁ କିମ୍ବା ଛାଡ଼ନ୍ତୁ ଦବାନ୍ତୁ।',
+        q_cc:'ଆଜି ଆପଣଙ୍କ ମୁଖ୍ୟ ସ୍ୱାସ୍ଥ୍ୟ ସମସ୍ୟା କ’ଣ?',q_cc_sub:'ଆପଣଙ୍କ ମୁଖ୍ୟ ଅଭିଯୋଗ',
+        opts_cc:['ମୁଣ୍ଡବିନ୍ଧା','ଛାତି ଯନ୍ତ୍ରଣା','ପେଟ ଯନ୍ତ୍ରଣା','ଜ୍ୱର','କାଶ','ଗଣ୍ଠି ଯନ୍ତ୍ରଣା','ମୁଣ୍ଡ ଘୁରିବା','ଦୁର୍ବଳତା କିମ୍ବା କ୍ଳାନ୍ତି','ତ୍ୱଚା ସମସ୍ୟା','ଅନ୍ୟ'],
+        q_headache_site:'ମୁଣ୍ଡବିନ୍ଧା ଠିକ୍ କେଉଁଠି?',q_headache_site_sub:'ସ୍ଥାନ (SOCRATES)',
+        opts_headache_site:['କପାଳରେ','ପାର୍ଶ୍ୱରେ','ମୁଣ୍ଡର ପଛ ଭାଗରେ','ଗୋଟିଏ ପାର୍ଶ୍ୱରେ (ମାଇଗ୍ରେନ୍ ପ୍ରକାର)','ସମଗ୍ର ମୁଣ୍ଡରେ'],
+        q_headache_char:'ଯନ୍ତ୍ରଣା କେଉଁ ପ୍ରକାରର?',q_headache_char_sub:'ପ୍ରକୃତି',
+        opts_headache_char:['ଧକ୍ଧକ୍ ସହିତ','ଚାପ ଭଳି','ତୀବ୍ର ଚୁବନ','ଜ୍ୱଳନ','ହାଲୁକା ଯନ୍ତ୍ରଣା'],
+        q_headache_assoc:'ମୁଣ୍ଡବିନ୍ଧା ସହିତ କ’ଣ ହୁଏ?',q_headache_assoc_sub:'ସମ୍ବନ୍ଧିତ ଲକ୍ଷଣ',
+        opts_headache_assoc:['ବାନ୍ତି ବା ଓକାର','ଦୃଷ୍ଟିରେ ଅସୁବିଧା','ଆଲୋକରେ ଅସୁବିଧା','ଶବ୍ଦରେ ଅସୁବିଧା','ନାକ ବନ୍ଦ','କିଛି ନାହିଁ'],
+        q_headache_ayush:'ଆୟୁର୍ବେଦିକ ଶିରଃଶୂଳ — ଆପଣଙ୍କ ମୁଣ୍ଡବିନ୍ଧା କିପରି?',q_headache_ayush_sub:'ଦୋଷ ମୂଲ୍ୟାଙ୍କନ',
+        opts_headache_ayush:['ଧକ୍ଧକ୍ ସହିତ ଚିନ୍ତା (ବାତ)','ଜ୍ୱଳନ ସହିତ ଚିଡ଼ଚିଡ଼ାପଣ (ପିତ୍ତ)','ଭାରୀପଣ ବାନ୍ତି ସହିତ (କଫ)','ମିଶ୍ରିତ'],
+        q_chest_site:'ଛାତି ଯନ୍ତ୍ରଣା ଠିକ୍ କେଉଁଠି?',q_chest_site_sub:'ସ୍ଥାନ — ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ',
+        opts_chest_site:['ମଝିରେ','ବାମ ପାର୍ଶ୍ୱରେ','ଡାହାଣ ପାର୍ଶ୍ୱରେ','ସମଗ୍ର ଛାତିରେ','ଉପର ପେଟରେ'],
+        q_chest_char:'ଯନ୍ତ୍ରଣା କିପରି ଲାଗୁଛି?',q_chest_char_sub:'ପ୍ରକୃତି',
+        opts_chest_char:['ଚାପ ଭଳି (ହୃଦୟ ସମ୍ବନ୍ଧୀୟ)','ତୀବ୍ର ଚୁବନ','ଜ୍ୱଳନ (ଏସିଡ୍)','କଷାପଣ','ହାଲୁକା ଯନ୍ତ୍ରଣା'],
+        q_chest_rad:'ଯନ୍ତ୍ରଣା କେଉଁଠିକୁ ପ୍ରସାରିତ ହେଉଛି କି?',q_chest_rad_sub:'ବିକିରଣ — ହୃଦୟ ପାଇଁ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ',
+        opts_chest_rad:['କେଉଁଠିକୁ ପ୍ରସାରିତ ହେଉନାହିଁ','ବାମ ହାତ ବା ତାଳୁ','ଜହ୍ନ ବା ବେକ','କାନ୍ଧ ମଧ୍ୟରେ ପିଠି','ଡାହାଣ କାନ୍ଧ'],
+        q_chest_ayush:'ଆୟୁର୍ବେଦିକ ହୃଦ୍ରୋଗ ମୂଲ୍ୟାଙ୍କନ:',q_chest_ayush_sub:'ହୃଦୟ ଦୋଷ',
+        opts_chest_ayush:['ଧକ୍ଧକ୍ ସହିତ ଚିନ୍ତା (ବାତ)','ଜ୍ୱଳନ ଏସିଡିଟି (ପିତ୍ତ)','ଭାରୀ ଛାତି ଶ୍ୱାସକଷ୍ଟ (କଫ)','ତୀବ୍ର ଯନ୍ତ୍ରଣା ଶୀତଳତା (ବାତ)'],
+        q_fever_pattern:'ଜ୍ୱରର ଧାରା କ’ଣ?',q_fever_pattern_sub:'ଜ୍ୱରର ଧାରା',
+        opts_fever_pattern:['ଲଗାତାର — ସବୁବେଳେ ତୀବ୍ର','ବାରମ୍ବାର ଆସେ ଓ ଯାଏ','ଉତ୍ଥାନ-ପତନ ଭଳି','ସନ୍ଧ୍ୟାରେ ବଢ଼େ','ସକାଳେ ବଢ଼େ'],
+        q_fever_assoc:'ଜ୍ୱର ସହିତ ଆଉ କ’ଣ ଅଛି?',q_fever_assoc_sub:'ସମ୍ବନ୍ଧିତ ଲକ୍ଷଣ',
+        opts_fever_assoc:['ଥଣ୍ଡା ଲାଗିବା','ତୀବ୍ର ଶରୀର ଯନ୍ତ୍ରଣା','ମୁଣ୍ଡବିନ୍ଧା ସହିତ ଜ୍ୱର','ତ୍ୱଚାରେ ଫୁସ୍କୁଡ଼ି','କାଶ ଏବଂ ନାକରୁ ପାଣି','ବାନ୍ତି ବା ଓକାର'],
+        q_fever_ayush:'ଆୟୁର୍ବେଦିକ ଜ୍ୱର ମୂଲ୍ୟାଙ୍କନ:',q_fever_ayush_sub:'ଜ୍ୱରରେ ଦୋଷ',
+        opts_fever_ayush:['ଶୁଷ୍କ ତ୍ୱଚା ଚିନ୍ତା ଅନିଦ୍ରା (ବାତ)','ଜ୍ୱଳନ ଝାଳ ଚିଡ଼ଚିଡ଼ାପଣ (ପିତ୍ତ)','ଭାରୀ କଫ ଭୋକ ନ ଲାଗିବା (କଫ)','ପାଳେପାଳେ ଥଣ୍ଡା ଏବଂ ଗରମ (ମିଶ୍ରିତ)'],
+        q_cough_type:'କାଶ କିପରି?',q_cough_type_sub:'ପ୍ରକୃତି',
+        opts_cough_type:['ଶୁଷ୍କ କାଶ','କଫ ସହିତ','ରକ୍ତ ସହିତ','କାଳି କାଶ','ଭୁକିବା ପରି'],
+        q_cough_timing:'କାଶ କେବେ ସବୁଠାରୁ ଅଧିକ ହୁଏ?',q_cough_timing_sub:'ସମୟ',
+        opts_cough_timing:['ରାତିରେ','ଭୋର ସକାଳେ','ଖାଇବା ପରେ ବା ଶୋଇଲେ','ଥଣ୍ଡା ବା ଧୂଳିରେ','ସାରା ଦିନ'],
+        q_cough_ayush:'ଆୟୁର୍ବେଦିକ କାସ ମୂଲ୍ୟାଙ୍କନ:',q_cough_ayush_sub:'କାଶ ଦୋଷ',
+        opts_cough_ayush:['ଶୁଷ୍କ କାଶ ସ୍ୱର ବସିଯିବା (ବାତ)','ହଳଦିଆ ସବୁଜ କଫ ଜ୍ୱର (ପିତ୍ତ)','ଧଳା ଘନ କଫ ଭାରୀପଣ (କଫ)','ରକ୍ତ ସହିତ କାଶ (ରକ୍ତଜ — ତତ୍କାଳ)'],
+        q_joint_site:'କେଉଁ ଗଣ୍ଠି ପ୍ରଭାବିତ ହୋଇଛି?',q_joint_site_sub:'ସ୍ଥାନ',
+        opts_joint_site:['ଆଣ୍ଠୁ','ନିତମ୍ବ','ଆଙ୍ଗୁଳିର ଛୋଟ ଗଣ୍ଠି','ମେରୁଦଣ୍ଡ ବା ପିଠି','କାନ୍ଧ','ଏକାସାଥିରେ ଅନେକ ଗଣ୍ଠି'],
+        q_joint_timing:'ଗଣ୍ଠି ଯନ୍ତ୍ରଣା କେବେ ସବୁଠାରୁ ଅଧିକ?',q_joint_timing_sub:'ସମୟ',
+        opts_joint_timing:['ସକାଳେ 1 ଘଣ୍ଟାରୁ ଅଧିକ ଜକଡ଼ା (ରୁମାଟଏଡ୍)','ଦୀର୍ଘ କାର୍ଯ୍ୟକଳାପ ପରେ (ଅଷ୍ଟିଓଆର୍ଥ୍ରାଇଟିସ୍)','ରାତିରେ ବିଶ୍ରାମ ସମୟରେ','ଥଣ୍ଡା ବା ଆର୍ଦ୍ରତାରେ','ହଠାତ୍ (ଗାଉଟ୍)'],
+        q_joint_ayush:'ଆୟୁର୍ବେଦିକ ଆମବାତ/ସନ୍ଧିବାତ ମୂଲ୍ୟାଙ୍କନ:',q_joint_ayush_sub:'ଗଣ୍ଠି ଦୋଷ',
+        opts_joint_ayush:['ଏଣେତେଣେ ଯନ୍ତ୍ରଣା କଡ଼ମଡ଼ ଶବ୍ଦ (ବାତ)','ଗରମ ଲାଲ ସୁଜିଥିବା ଗଣ୍ଠି (ପିତ୍ତ)','ସୁଜିଥିବା ଜକଡ଼ା ସକାଳ (କଫ)','ଖରାପ ହଜମ ସହିତ (ଆମ)'],
+        q_stomach_site:'ପେଟରେ ଯନ୍ତ୍ରଣା କେଉଁଠି?',q_stomach_site_sub:'ସ୍ଥାନ',
+        opts_stomach_site:['ଉପର ପେଟ','ନାଭି ଚାରିପାଖରେ','ତଳ ପେଟରେ','ଡାହାଣ ପାର୍ଶ୍ୱରେ','ବାମ ପାର୍ଶ୍ୱରେ','ସମଗ୍ର ପେଟରେ'],
+        q_stomach_food:'ଯନ୍ତ୍ରଣା ଖାଇବା ସହିତ ସମ୍ବନ୍ଧିତ କି?',q_stomach_food_sub:'ସମୟ',
+        opts_stomach_food:['ଖାଇବା ପୂର୍ବରୁ ବଢ଼େ','ଖାଇବା ପରେ ବଢ଼େ','ଖାଇବା ସହିତ କୌଣସି ସମ୍ପର୍କ ନାହିଁ','ମଳତ୍ୟାଗ ସହିତ ସମ୍ବନ୍ଧିତ','ମାସିକ ଧର୍ମ ସହିତ ସମ୍ବନ୍ଧିତ'],
+        q_stomach_ayush:'ଆୟୁର୍ବେଦିକ ଅଗ୍ନି ମୂଲ୍ୟାଙ୍କନ:',q_stomach_ayush_sub:'ପାଚନ ତନ୍ତ୍ର',
+        opts_stomach_ayush:['ଗ୍ୟାସ୍, ପେଟ ଫୁଲିବା, ଅନିୟମିତ ଭୋକ (ବାତ)','ଜ୍ୱଳନ, ଏସିଡିଟି (ପିତ୍ତ)','ଧୀର, ଭାରୀପଣ, ଭୋକ ନ ଲାଗିବା (କଫ)','ଅନିଶ୍ଚିତ ହଜମ (ମିଶ୍ରିତ)'],
+        q_pmh:'କୌଣସି ଦୀର୍ଘକାଳୀନ ବା ପୁରୁଣା ରୋଗ ଅଛି କି?',q_pmh_sub:'ପୂର୍ବ ଚିକିତ୍ସା ଇତିହାସ',
+        opts_pmh:['ମଧୁମେହ','ଉଚ୍ଚ ରକ୍ତଚାପ','ହୃଦରୋଗ','ଆସ୍ଥମା','ବୃକକ୍ ରୋଗ','ଥାଇରଏଡ୍ ରୋଗ','କିଛି ନାହିଁ'],
+        q_meds:'ଆପଣ ନିୟମିତ ଭାବେ କୌଣସି ଔଷଧ ନିଅନ୍ତି କି?',q_meds_sub:'ବର୍ତ୍ତମାନର ଔଷଧ',
+        opts_meds:['ହଁ, ପ୍ରତିଦିନ ଔଷଧ','ବେଳେବେଳେ ଔଷଧ','କୌଣସି ଔଷଧ ନାହିଁ','ଜଣାନାହିଁ'],
+        q_allergy:'ଔଷଧ ବା ଖାଦ୍ୟରୁ କୌଣସି ଜଣାଶୁଣା ଆଲର୍ଜି ଅଛି କି?',q_allergy_sub:'ଆଲର୍ଜି ଇତିହାସ',
+        opts_allergy:['କୌଣସି ଜଣାଶୁଣା ଆଲର୍ଜି ନାହିଁ','ଆଣ୍ଟିବାୟୋଟିକ୍‌ରୁ ଆଲର୍ଜି (ପେନିସିଲିନ୍)','ଆସ୍ପିରିନ୍ ବା ଯନ୍ତ୍ରଣାନିବାରକରୁ ଆଲର୍ଜି','ଖାଦ୍ୟରୁ ଆଲର୍ଜି','ଅନ୍ୟ ଆଲର୍ଜି'],
+        q_fam:'ଆପଣଙ୍କ ପରିବାରରେ କାହାକୁ ଏପରି ରୋଗ ହୋଇଛି କି?',q_fam_sub:'ପାରିବାରିକ ଇତିହାସ',
+        opts_fam:['ହଁ, ବାପା ବା ମାଆ','ହଁ, ଭାଇ-ଭଉଣୀ','ପରିବାରରେ ମଧୁମେହ ବା ହୃଦରୋଗ','କୌଣସି ପାରିବାରିକ ଇତିହାସ ନାହିଁ','ଜଣାନାହିଁ'],
+        q_onset:'ଏହି ସମସ୍ୟା କେବେ ଆରମ୍ଭ ହେଲା?',q_onset_sub:'ଆରମ୍ଭ',
+        opts_onset:['ଆଜି','2-3 ଦିନ ପୂର୍ବରୁ','1 ସପ୍ତାହ ପୂର୍ବରୁ','1 ମାସ ପୂର୍ବରୁ','3 ବା ତାଠାରୁ ଅଧିକ ମାସ ପୂର୍ବରୁ'],
+        q_severity:'କେତେ ତୀବ୍ର (1 ରୁ 10)?',q_severity_sub:'ତୀବ୍ରତା',
+        opts_severity:['1-3 ହାଲୁକା','4-6 ମଧ୍ୟମ','7-8 ଗୁରୁତର','9-10 ଅସହ୍ୟ'],
+        q_gen_dosha:'ଆପଣଙ୍କ ଲକ୍ଷଣ ପାଇଁ ଆୟୁର୍ବେଦିକ ଦୋଷ:',q_gen_dosha_sub:'ସାଧାରଣ ଦୋଷ',
+        opts_gen_dosha:['ଶୁଷ୍କତା ଚିନ୍ତା ଅସ୍ଥିରତା (ବାତ)','ଗରମ ଜ୍ୱଳନ ଚିଡ଼ଚିଡ଼ାପଣ (ପିତ୍ତ)','ଭାରୀପଣ କଫ କ୍ଳାନ୍ତି (କଫ)','ମିଶ୍ରିତ'],
+        rf_cardiac:'ସମ୍ଭାବ୍ୟ ହୃଦୟ ଘଟଣା। କର୍ମଚାରୀ ସତର୍କ। ଶାନ୍ତ ରୁହନ୍ତୁ।',
+        rf_cardiac_arm:'ସମ୍ଭାବ୍ୟ ହୃଦୟ ଘଟଣା। ହଲଚଲ ହୁଅନ୍ତୁ ନାହିଁ। କର୍ମଚାରୀ ତୁରନ୍ତ ସତର୍କ।',
+        rf_crushing:'ସମ୍ଭାବ୍ୟ ହୃଦୟ ଜରୁରୀକାଳ। କର୍ମଚାରୀ ସତର୍କ। ଶାନ୍ତ ରୁହନ୍ତୁ।',
+        rf_breathless:'ଶ୍ୱାସକଷ୍ଟ। ବସି ରୁହନ୍ତୁ। ସାହାଯ୍ୟ ଆସୁଛି।',
+        rf_stroke:'ସମ୍ଭାବ୍ୟ ଷ୍ଟ୍ରୋକ୍। ହଲଚଲ ହୁଅନ୍ତୁ ନାହିଁ। କର୍ମଚାରୀ ସତର୍କ।',rf_blood:'ଗୁରୁତର ଲକ୍ଷଣ। କର୍ମଚାରୀଙ୍କୁ ସୂଚିତ କରାଯାଇଛି।',rf_blackout:'ଚେତାଶୂନ୍ୟ ହେବାର ଘଟଣା। କର୍ମଚାରୀ ସତର୍କ।',
+        your_progress:'ଆପଣଙ୍କ ପ୍ରଗତି',answered_n_of_m:function(d,t){return d+' ମଧ୍ୟରୁ '+t+' ଉତ୍ତର ଦିଆଯାଇଛି';},
+        draft_note:'⚠ କେବଳ ଚିକିତ୍ସକ ସମୀକ୍ଷା ପାଇଁ AI-ସୃଷ୍ଟ ଖସଡ଼ା। ନିଦାନ ନୁହେଁ।',
+        send_doctor_h:'🏥 ଡାକ୍ତରଙ୍କୁ ପଠାନ୍ତୁ',emergency_priority_h:'🚨 ଜରୁରୀକାଳୀନ ପ୍ରାଥମିକତା',
+        emergency_note:'ପ୍ରାଥମିକତା ଟୋକେନ୍ ପାଇବା ଏବଂ ଡାକ୍ତରଙ୍କୁ ତୁରନ୍ତ ସତର୍କ କରିବା ପାଇଁ ଜରୁରୀକାଳ ଚିହ୍ନିତ କରନ୍ତୁ।',
+        emergency_on:'⚠ ଜରୁରୀକାଳ ଚିହ୍ନ ଚାଲୁ ଅଛି — ପ୍ରାଥମିକତା ଟୋକେନ୍ ଜାରି ହେବ',
+        docs_uploaded_h:'📄 ଅପଲୋଡ୍ ହୋଇଥିବା ଦସ୍ତାବେଜ',none_uploaded:'କିଛି ଅପଲୋଡ୍ ହୋଇନାହିଁ',
+        session_security_h:'🔒 ସେସନ୍ ସୁରକ୍ଷା',session_security_note:'AES-256 ଏନକ୍ରିପ୍ଟେଡ୍। DPDP 2023।',
+        emergency_cta:'🆘 ଜରୁରୀକାଳ',abdm_h:'📱 ABDM / FHIR ରପ୍ତାନି'
+
+      },
+      ta: {
+        langLabel:'🌐 மொழி:',speak:'🎤 பேசுங்கள்',repeat:'🔊 மீண்டும்',
+        bc_login:'✔ 1. உள்நுழைவு',bc_consent:'2. ஒப்புதல்',bc_docs:'3. ஆவணங்கள்',bc_questions:'4. கேள்விகள்',bc_summary:'5. சுருக்கம்',bc_token:'6. டோக்கன்',
+        consent_title:'ஒப்புதல் மற்றும் தனியுரிமை ஒப்பந்தம்',consent_sub:'தொடர்வதற்கு முன் படித்து ஒப்புக்கொள்ளுங்கள்',
+        consent_listen:'🔊 ஒப்புதல் உரை கேளுங்கள்',consent_h4:'சுகாதார தரவு சேகரிப்புக்கான நோயாளி ஒப்புதல்',
+        consent_check:'நான் படித்தேன், என் தகவல்களை பகிர ஒப்புக்கொள்கிறேன்',
+        consent_deny:'✗ நான் ஒப்புக்கொள்ளவில்லை',consent_agree:'நான் ஒப்புக்கொள்கிறேன் & தொடரவும் →',
+        docs_title:'உங்கள் மருத்துவ ஆவணங்களை பதிவேற்றவும்',docs_sub:'AI முதலில் ஆவணங்கள் படிக்கும்',
+        docs_skip_title:'இன்று ஆவணங்கள் இல்லையா?',docs_skip_sub:'பரவாயில்லை.',docs_skip_btn:'▶ தவிர்த்து கேள்விகளை தொடங்கவும்',docs_proceed:'🧠 AI தயாராக உள்ளது →',
+        sym_title:'உங்கள் சுகாதார மதிப்பீடு',sym_sub:'கேள்விகள் உங்கள் அறிகுறிகளுக்கு ஏற்ப மாறும்',sym_speak:'உங்கள் பதில் இங்கே தோன்றும்...',
+        sym_hf_off:'🎧 ஹேண்ட்ஸ்-ஃப்ரீ: அணைந்துள்ளது',sym_hf_on:'🎧 ஹேண்ட்ஸ்-ஃப்ரீ: இயங்குகிறது',sym_hf_desc:'உதவியாளர் கேட்டு பதிலை சேகரிக்கும்.',
+        btn_prev:'← முந்தையது',btn_skip:'தவிர்க்கவும்',btn_next:'அடுத்து →',btn_finish:'முடிக்கவும்',
+        btn_send_doc:'✔ மருத்துவரிடம் அனுப்பவும்',btn_read_aloud:'🔊 சத்தமாக படிக்கவும்',btn_print:'🖨 அச்சிடவும்',btn_emergency:'🚨 அவசரநிலை',tok_label:'உங்கள் வரிசை டோக்கன்',tok_waiting:'⚫ அழைக்கப்படுவதற்காக',tok_remaining:'மீதமுள்ளது',tok_issued:'வழங்கப்பட்ட நேரம்',tok_expires:'காலாவதி',tok_priority:'முன்னுரிமை',tok_dept:'துறை',tok_normal:'சாதாரண',tok_note:'காத்திருப்பு பகுதியில் இருங்கள்.',
+        speak_consent:'ஒப்புதல் படிவத்தை படித்து டிக் செய்யுங்கள்.',speak_documents:'மருந்துச்சீட்டு அல்லது ஆய்வக அறிக்கைகளை பதிவேற்றவும்.',speak_symptoms:'சுகாதார கேள்விக்கு பதிலளிக்கவும்.',speak_summary:'சுருக்கம் தயாராகவுள்ளது. மருத்துவரிடம் அனுப்பவும்.',speak_token:'டோக்கன் வழங்கப்பட்டுள்ளது. காத்திருங்கள்.',speak_prescription:'மருத்துவர் மருந்துச்சீட்டு அனுப்பியுள்ளார்.',
+        va_greeting:'வணக்கம்! நான் MediKiosk AI குரல் உதவியாளர். எப்படி உதவட்டுமா?',va_emergency_response:'அவசரநிலை! உடனடியாக பணியாளர்களை எச்சரித்துள்ளோம்.',
+        chip_repeat:'🔈 மீண்டும்',chip_help:'❓ உதவி',chip_emergency:'🚨 அவசரநிலை',
+        your_progress:'உங்கள் முன்னேற்றம்',answered_n_of_m:function(d,t){return t+' இல் '+d+' பதிலளிக்கப்பட்டது';},
+        draft_note:'⚠ AI வரைவு மட்டுமே. மருத்துவர் சரிபார்ப்பார்.',send_doctor_h:'🏥 மருத்துவரிடம் அனுப்பவும்',emergency_priority_h:'🚨 அவசர முன்னுரிமை',emergency_note:'முன்னுரிமை டோக்கன் பெற குறிக்கவும்.',none_uploaded:'ஏதும் பதிவேற்றப்படவில்லை',
+        q_cc:'இன்று உங்கள் முக்கிய சுகாதார பிரச்சனை என்ன?',q_cc_sub:'உங்கள் முக்கிய புகார்',
+        opts_cc:['தலைவலி','மார்பு வலி','வயிற்று வலி','காய்ச்சல்','இருமல்','மூட்டு வலி','தலைச்சுற்றல்','பலவீனம் அல்லது சோர்வு','தோல் பிரச்சனை','மற்றவை'],
+        q_pmh:'நீண்டகால நோய்கள் உள்ளதா?',q_pmh_sub:'கடந்தகால வரலாறு',
+        opts_pmh:['நீரிழிவு','உயர் இரத்த அழுத்தம்','இதய நோய்','ஆஸ்துமா','சிறுநீரக நோய்','தைராய்டு நோய்','எதுவும் இல்லை'],
+        q_meds:'தினமும் மருந்து சாப்பிடுகிறீர்களா?',q_meds_sub:'தற்போதைய மருந்துகள்',
+        opts_meds:['ஆம், தினமும்','சில நேரங்களில்','மருந்து இல்லை','தெரியவில்லை'],
+        q_allergy:'ஒவ்வாமை உள்ளதா?',q_allergy_sub:'ஒவ்வாமை வரலாறு',
+        opts_allergy:['ஒவ்வாமை இல்லை','நுண்ணுயிர் மருந்து ஒவ்வாமை','ஆஸ்பிரின் ஒவ்வாமை','உணவு ஒவ்வாமை','மற்ற ஒவ்வாமை'],
+        q_fam:'குடும்பத்தில் யாரேனும்?',q_fam_sub:'குடும்ப வரலாறு',
+        opts_fam:['ஆம், தந்தை அல்லது தாய்','ஆம், சகோதரர்','குடும்பத்தில் நீரிழிவு/இதய நோய்','குடும்ப வரலாறு இல்லை','தெரியவில்லை'],
+        q_onset:'எப்போது தொடங்கியது?',q_onset_sub:'தொடக்கம்',
+        opts_onset:['இன்று','2-3 நாட்களுக்கு முன்','1 வாரத்திற்கு முன்','1 மாதத்திற்கு முன்','3+ மாதங்களுக்கு முன்'],
+        q_severity:'எவ்வளவு கடுமை (1-10)?',q_severity_sub:'தீவிரம்',
+        opts_severity:['1-3 மிதமான','4-6 நடுத்தரம்','7-8 கடுமையான','9-10 தாங்கமுடியாத'],
+        phase_cc:'🏥 முக்கிய புகார்',phase_allo:'🏥 SOCRATES',phase_ayush:'🌿 ஆயுர்வேதம்',phase_doc:'📄 ஆவண சூழல்',phase_hist:'📜 வரலாறு',
+        fl_cc:'முக்கிய புகார்:',fl_site:'இடம்:',fl_onset:'தொடக்கம்:',fl_char:'தன்மை:',fl_rad:'பரவல்:',fl_assoc:'தொடர்பு:',fl_exac:'மோசமாக்குவது:',fl_sev:'தீவிரம்:',fl_pmh:'கடந்த கால:',fl_meds:'மருந்துகள்:',fl_allergy:'ஒவ்வாமை:',fl_fam:'குடும்பம்:',
+        sum_title:'ஒருங்கிணைந்த மருத்துவ வரலாறு சுருக்கம்',sum_sub:'AI வரைவு — மருத்துவர் சரிபார்ப்பார்',
+        rf_cardiac:'இதய நிகழ்வு சாத்தியம். அமைதியாக இருங்கள்.',rf_cardiac_arm:'இதய நிகழ்வு. நகராதீர்.',rf_crushing:'இதய அவசரநிலை.',rf_breathless:'சுவாச நெருக்கடி.',rf_stroke:'பக்கவாதம் சாத்தியம். நகராதீர்.',rf_blood:'தீவிர அறிகுறி.',rf_blackout:'நனவிழந்த நிகழ்வு.',
+        toast_please_answer:'பதிலளிக்கவும் அல்லது தவிர்க்கவும்.',prog_answered:'பதிலளிக்கப்பட்டது',prog_of:'இல்',btn_check_rx:'📋 மருந்துச்சீட்டு',
+        q_headache_site:'தலைவலி எங்கே?',q_headache_site_sub:'இடம்',opts_headache_site:['நெற்றி','பக்கங்கள்','பின்தலை','ஒரு பக்கம்','முழு தலை'],
+        q_headache_char:'வலி எப்படி?',q_headache_char_sub:'தன்மை',opts_headache_char:['துடித்தல்','அழுத்தம்','குத்தல்','எரிவு','மந்தமான'],
+        q_headache_assoc:'என்ன சேர்ந்து வருகிறது?',q_headache_assoc_sub:'அறிகுறிகள்',opts_headache_assoc:['குமட்டல்','பார்வை பிரச்சனை','வெளிச்சம் கஷ்டம்','சத்தம் கஷ்டம்','மூக்கடைப்பு','எதுவும் இல்லை'],
+        q_headache_ayush:'ஆயுர்வேத தலைவலி:',q_headache_ayush_sub:'தோஷம்',opts_headache_ayush:['துடித்தல் கவலை (வாதம்)','எரிவு எரிச்சல் (பித்தம்)','கனம் குமட்டல் (கபம்)','கலவை'],
+        q_chest_site:'மார்பு வலி எங்கே?',q_chest_site_sub:'இடம்',opts_chest_site:['மையம்','இடது','வலது','முழு மார்பு','மேல் வயிறு'],
+        q_chest_char:'வலி எப்படி?',q_chest_char_sub:'தன்மை',opts_chest_char:['அழுத்தம் (இதயம்)','குத்தல்','எரிவு','இறுக்கம்','மந்தம்'],
+        q_chest_rad:'வலி எங்காவது பரவுகிறதா?',q_chest_rad_sub:'பரவல்',opts_chest_rad:['பரவல் இல்லை','இடது கை','தாடை/கழுத்து','முதுகு','வலது தோள்'],
+        q_chest_ayush:'ஆயுர்வேத மார்பு:',q_chest_ayush_sub:'இதய தோஷம்',opts_chest_ayush:['படபடப்பு (வாதம்)','எரிவு அமிலம் (பித்தம்)','கனம் மூச்சு (கபம்)','குத்தல் குளிர் (வாதம்)'],
+        q_fever_pattern:'காய்ச்சல் எப்படி?',q_fever_pattern_sub:'வடிவம்',opts_fever_pattern:['தொடர்ச்சியாக','இடைவிடாமல்','ஏற்ற இறக்கம்','மாலை','காலை'],
+        q_fever_assoc:'காய்ச்சலுடன் வேறு என்ன?',q_fever_assoc_sub:'அறிகுறிகள்',opts_fever_assoc:['நடுக்கம்','உடல்வலி','தலைவலி','தோல் படர்','இருமல்','குமட்டல்'],
+        q_fever_ayush:'ஆயுர்வேத காய்ச்சல்:',q_fever_ayush_sub:'தோஷம்',opts_fever_ayush:['வறட்சி கவலை (வாதம்)','எரிவு வியர்வை (பித்தம்)','கனம் சளி (கபம்)','மாறி மாறி (கலவை)'],
+        q_cough_type:'இருமல் எப்படி?',q_cough_type_sub:'தன்மை',opts_cough_type:['வறண்ட','சளியுடன்','ரத்தம்','குப்புரித்தல்','குரைத்தல்'],
+        q_cough_timing:'எப்போது அதிகம்?',q_cough_timing_sub:'நேரம்',opts_cough_timing:['இரவு','காலை','சாப்பிட்டபின்','குளிர்/தூசு','நாள் முழுவதும்'],
+        q_cough_ayush:'ஆயுர்வேத இருமல்:',q_cough_ayush_sub:'தோஷம்',opts_cough_ayush:['வறட்டு (வாதம்)','மஞ்சள் சளி (பித்தம்)','வெள்ளை சளி (கபம்)','ரத்தம் (அவசரம்)'],
+        q_joint_site:'எந்த மூட்டு?',q_joint_site_sub:'இடம்',opts_joint_site:['முழங்கால்','இடுப்பு','சிறிய மூட்டுகள்','முதுகுத்தண்டு','தோள்','பல மூட்டுகள்'],
+        q_joint_timing:'மூட்டு வலி எப்போது?',q_joint_timing_sub:'நேரம்',opts_joint_timing:['காலை விறைப்பு (ரூமட்.)','நீண்ட செயல்பாட்டிற்கு பின்','இரவு','குளிர்/ஈரம்','திடீரென (கீழ்வாதம்)'],
+        q_joint_ayush:'ஆயுர்வேத மூட்டு:',q_joint_ayush_sub:'தோஷம்',opts_joint_ayush:['நடமாடும் வலி (வாதம்)','சூடான சிவப்பு (பித்தம்)','வீக்கம் விறைப்பு (கபம்)','செரிமானக் கோளாறு (ஆமம்)'],
+        q_stomach_site:'வயிற்று வலி எங்கே?',q_stomach_site_sub:'இடம்',opts_stomach_site:['மேல் வயிறு','தொப்புள் பகுதி','கீழ் வயிறு','வலது','இடது','முழு வயிறு'],
+        q_stomach_food:'உணவுடன் தொடர்பா?',q_stomach_food_sub:'நேரம்',opts_stomach_food:['சாப்பிடுவதற்கு முன்','சாப்பிட்டபின்','தொடர்பு இல்லை','மலம் கழிக்க','மாதவிடாய்'],
+        q_stomach_ayush:'ஆயுர்வேத செரிமானம்:',q_stomach_ayush_sub:'செரிமான தந்திரம்',opts_stomach_ayush:['வாயு வீக்கம் (வாதம்)','அமிலம் (பித்தம்)','மந்தம் (கபம்)','மாறும் செரிமானம் (கலவை)'],
+        q_gen_dosha:'ஆயுர்வேத தோஷம்:',q_gen_dosha_sub:'பொது தோஷம்',opts_gen_dosha:['வறட்சி கவலை (வாதம்)','வெப்பம் எரிவு (பித்தம்)','கனம் சளி (கபம்)','கலவை'],
+        emergency_cta:'🆘 அவசரநிலை',abdm_h:'📱 ABDM/FHIR',session_security_h:'🔒 பாதுகாப்பு',session_security_note:'AES-256. DPDP 2023.',docs_uploaded_h:'📄 ஆவணங்கள்',
+        btn_fhir:'📦 FHIR',btn_delete:'🗑 தரவை நீக்கவும்',btn_call_help:'🚨 உதவி அழைக்கவும்',
+        fl_prakriti:'ப்ரகிருதி:',fl_vikriti:'விக்ரிதி:',fl_agni:'அக்னி:',fl_dosha:'தோஷம்:',fl_koshtha:'கோஷ்டம்:',fl_ahara:'ஆஹார:',fl_nidana:'நிதான:',fl_samprapti:'சம்ப்ராப்தி:',
+        tok_note:'காத்திருப்பு பகுதியில் அமர்ந்திருங்கள்.',your_progress:'உங்கள் முன்னேற்றம்',
+        prog_of:'இல்',toast_agree_consent:'ஒப்புதல் டிக் செய்யவும்.',
+        va_help_consent:'"ஒப்புக்கொள்கிறேன்" சொல்லுங்கள்.',va_help_docs:'"தவிர்" சொல்லுங்கள்.',va_help_symptoms:'"அடுத்து", "முந்தையது", "தவிர்" சொல்லுங்கள்.',va_help_summary:'"மருத்துவரிடம் அனுப்பவும்" சொல்லுங்கள்.',va_help_token:'காத்திருங்கள்.',va_help_prescription:'"மருந்துச்சீட்டை படிக்கவும்" சொல்லுங்கள்.',
+        emergency_note:'முன்னுரிமை பெற குறிக்கவும்.',emergency_on:'⚠ அவசரநிலை — முன்னுரிமை டோக்கன்.'
+      },
+      te: {
+        langLabel:'🌐 భాష:',speak:'🎤 మాట్లాడండి',repeat:'🔊 మళ్ళీ',
+        bc_login:'✔ 1. లాగిన్',bc_consent:'2. అంగీకారం',bc_docs:'3. పత్రాలు',bc_questions:'4. ప్రశ్నలు',bc_summary:'5. సారాంశం',bc_token:'6. టోకెన్',
+        consent_title:'అంగీకారం మరియు గోప్యత ఒప్పందం',consent_sub:'కొనసాగించే ముందు చదవండి మరియు అంగీకరించండి',
+        consent_listen:'🔊 అంగీకార పాఠం వినండి',consent_h4:'ఆరోగ్య డేటా సేకరణకు రోగి అంగీకారం',
+        consent_check:'నేను చదివాను, నా డేటా పంచుకోవడానికి అంగీకరిస్తున్నాను',
+        consent_deny:'✗ నేను అంగీకరించడం లేదు',consent_agree:'నేను అంగీకరిస్తున్నాను & కొనసాగించండి →',
+        docs_title:'మీ వైద్య పత్రాలను అప్‌లోడ్ చేయండి',docs_sub:'AI ముందు పత్రాలు చదివి వ్యక్తిగత ప్రశ్నలు అడుగుతుంది',
+        docs_skip_title:'ఈ రోజు పత్రాలు లేవా?',docs_skip_sub:'సరిపోతుంది.',docs_skip_btn:'▶ వదిలేసి ప్రశ్నలు మొదలుపెట్టండి',docs_proceed:'🧠 AI సిద్ధం — ప్రశ్నలు మొదలుపెట్టండి →',
+        sym_title:'మీ ఆరోగ్య మూల్యాంకనం',sym_sub:'ప్రశ్నలు మీ లక్షణాలకు అనుగుణంగా మారతాయి',sym_speak:'మీ మాట్లాడిన సమాధానం ఇక్కడ కనిపిస్తుంది...',
+        sym_hf_off:'🎧 హ్యాండ్స్-ఫ్రీ: ఆఫ్',sym_hf_on:'🎧 హ్యాండ్స్-ఫ్రీ: ఆన్',sym_hf_desc:'సహాయకుడు ప్రతి ప్రశ్నను బిగ్గరగా అడిగి సమాధానం వినుతాడు.',
+        btn_prev:'← మునుపటి',btn_skip:'వదిలేయండి',btn_next:'తదుపరి →',btn_finish:'ముగించు',
+        btn_send_doc:'✔ డాక్టర్‌కు పంపండి',btn_read_aloud:'🔊 బిగ్గరగా చదవండి',btn_print:'🖨 ముద్రించండి',btn_emergency:'🚨 అత్యవసరంగా గుర్తించండి',
+        tok_label:'మీ క్యూ టోకెన్',tok_waiting:'⚫ పిలవబడడానికి వేచి ఉంది',tok_remaining:'మిగిలింది',tok_issued:'జారీ సమయం',tok_expires:'గడువు',tok_priority:'ప్రాధాన్యత',tok_dept:'విభాగం',tok_normal:'సాధారణ',tok_note:'వేచి ఉండే ప్రాంతంలో కూర్చోండి.',
+        speak_consent:'అంగీకార ఫారం చదవండి మరియు టిక్ వేయండి.',speak_documents:'మందుల చీటి లేదా ల్యాబ్ నివేదికను అప్‌లోడ్ చేయండి.',speak_symptoms:'ఆరోగ్య ప్రశ్నకు సమాధానమివ్వండి.',speak_summary:'సారాంశం సిద్ధంగా ఉంది. డాక్టర్‌కు పంపండి.',speak_token:'టోకెన్ జారీ చేయబడింది.',speak_prescription:'డాక్టర్ మందుల చీటి పంపారు.',
+        va_greeting:'నమస్కారం! నేను MediKiosk AI వాయిస్ అసిస్టెంట్. ఎలా సహాయం చేయాలి?',va_emergency_response:'అత్యవసరం! సిబ్బందికి వెంటనే అప్రమత్తం చేసాను.',
+        chip_repeat:'🔈 మళ్ళీ',chip_help:'❓ సహాయం',chip_emergency:'🚨 అత్యవసరం',
+        your_progress:'మీ పురోగతి',answered_n_of_m:function(d,t){return t+' లో '+d+' సమాధానం';},
+        draft_note:'⚠ AI ముసాయిదా మాత్రమే. డాక్టర్ ధృవీకరిస్తారు.',send_doctor_h:'🏥 డాక్టర్‌కు పంపండి',emergency_priority_h:'🚨 అత్యవసర ప్రాధాన్యత',emergency_note:'అత్యవసరంగా గుర్తించండి.',none_uploaded:'ఏదీ అప్‌లోడ్ చేయలేదు',
+        q_cc:'ఈ రోజు మీ ముఖ్యమైన ఆరోగ్య సమస్య ఏమిటి?',q_cc_sub:'మీ ముఖ్యమైన ఫిర్యాదు',
+        opts_cc:['తలనొప్పి','ఛాతీ నొప్పి','కడుపు నొప్పి','జ్వరం','దగ్గు','కీళ్ళ నొప్పి','తలతిరగడం','బలహీనత లేదా అలసట','చర్మ సమస్య','ఇతరవి'],
+        rf_cardiac:'హృదయ సంఘటన సాధ్యం. ప్రశాంతంగా ఉండండి.',rf_cardiac_arm:'హృదయ సంఘటన. కదలకండి.',rf_crushing:'హృదయ అత్యవసరం.',rf_breathless:'శ్వాస సమస్య. కూర్చోండి.',rf_stroke:'స్ట్రోక్ సాధ్యం. కదలకండి.',rf_blood:'తీవ్రమైన లక్షణం.',rf_blackout:'స్పృహ కోల్పోవడం.',
+        q_pmh:'దీర్ఘకాలిక వ్యాధులు ఉన్నాయా?',q_pmh_sub:'గతకాల వైద్య చరిత్ర',opts_pmh:['మధుమేహం','అధిక రక్తపోటు','హృదయ వ్యాధి','ఆస్తమా','మూత్రపిండ వ్యాధి','థైరాయిడ్','ఏదీ లేదు'],
+        q_meds:'రోజూ మందులు తీసుకుంటున్నారా?',q_meds_sub:'ప్రస్తుత మందులు',opts_meds:['అవును, రోజూ','అప్పుడప్పుడు','మందులు లేవు','తెలియదు'],
+        q_allergy:'అలర్జీ ఉందా?',q_allergy_sub:'అలర్జీ చరిత్ర',opts_allergy:['అలర్జీ లేదు','యాంటీబయాటిక్ అలర్జీ','ఆస్పిరిన్ అలర్జీ','ఆహార అలర్జీ','ఇతర అలర్జీ'],
+        q_fam:'కుటుంబంలో ఎవరికైనా?',q_fam_sub:'కుటుంబ చరిత్ర',opts_fam:['అవును, తండ్రి/తల్లి','అవును, తోబుట్టువు','కుటుంబంలో మధుమేహం/హృదయ వ్యాధి','కుటుంబ చరిత్ర లేదు','తెలియదు'],
+        q_onset:'ఈ సమస్య ఎప్పుడు మొదలైంది?',q_onset_sub:'ప్రారంభం',opts_onset:['ఈ రోజు','2-3 రోజుల క్రితం','1 వారం క్రితం','1 నెల క్రితం','3+ నెలల క్రితం'],
+        q_severity:'తీవ్రత ఎంత (1-10)?',q_severity_sub:'తీవ్రత',opts_severity:['1-3 తేలికైన','4-6 మధ్యస్థ','7-8 తీవ్రమైన','9-10 భరించలేని'],
+        phase_cc:'🏥 ముఖ్య ఫిర్యాదు',phase_allo:'🏥 SOCRATES',phase_ayush:'🌿 ఆయుర్వేదం',phase_doc:'📄 పత్ర సందర్భం',phase_hist:'📜 చరిత్ర',
+        fl_cc:'ముఖ్య ఫిర్యాదు:',fl_site:'ప్రదేశం:',fl_onset:'ప్రారంభం:',fl_char:'స్వభావం:',fl_rad:'వ్యాప్తి:',fl_assoc:'అనుబంధ:',fl_exac:'తీవ్రం:',fl_sev:'తీవ్రత:',fl_pmh:'గత చరిత్ర:',fl_meds:'మందులు:',fl_allergy:'అలర్జీ:',fl_fam:'కుటుంబం:',
+        fl_prakriti:'ప్రకృతి:',fl_vikriti:'వికృతి:',fl_agni:'అగ్ని:',fl_dosha:'దోష:',fl_koshtha:'కోష్ఠ:',fl_ahara:'ఆహార:',fl_nidana:'నిదాన:',fl_samprapti:'సంప్రాప్తి:',
+        sum_title:'ఏకీకృత వైద్య చరిత్ర సారాంశం',sum_sub:'AI ముసాయిదా — డాక్టర్ ధృవీకరిస్తారు',
+        q_headache_site:'తలనొప్పి ఎక్కడ?',q_headache_site_sub:'స్థలం',opts_headache_site:['నుదుటి','పక్కలు','వెనుక','ఒక వైపు','మొత్తం తల'],
+        q_headache_char:'నొప్పి ఎలా?',q_headache_char_sub:'స్వభావం',opts_headache_char:['లయబద్ధంగా','అదిమినట్లు','పొడవడం','మంటలు','మందమైన'],
+        q_headache_assoc:'ఏమి కలిసి వస్తుంది?',q_headache_assoc_sub:'లక్షణాలు',opts_headache_assoc:['వికారం','దృష్టి సమస్య','వెలుతురు ఇబ్బంది','శబ్దం ఇబ్బంది','ముక్కు మూసుకోవడం','ఏమీ లేదు'],
+        q_headache_ayush:'ఆయుర్వేద తలనొప్పి:',q_headache_ayush_sub:'దోష',opts_headache_ayush:['లయతో ఆందోళన (వాత)','మంటలు చిరాకు (పిత్త)','బరువు వికారం (కఫ)','మిశ్రమం'],
+        q_chest_site:'ఛాతీ నొప్పి ఎక్కడ?',q_chest_site_sub:'స్థలం',opts_chest_site:['మధ్యలో','ఎడమ వైపు','కుడి వైపు','మొత్తం ఛాతీ','పై పేగు'],
+        q_chest_char:'నొప్పి ఎలా?',q_chest_char_sub:'స్వభావం',opts_chest_char:['అదిమినట్లు (హృదయం)','పొడవడం','మంటలు','బిగుసుకున్నట్లు','మందమైన'],
+        q_chest_rad:'నొప్పి వ్యాపిస్తుందా?',q_chest_rad_sub:'వ్యాప్తి',opts_chest_rad:['లేదు','ఎడమ చేయి','దవడ/మెడ','వీపు','కుడి భుజం'],
+        q_chest_ayush:'ఆయుర్వేద హృదయం:',q_chest_ayush_sub:'హృదయ దోష',opts_chest_ayush:['గుండె కొట్టుకోవడం (వాత)','మంటలు ఆమ్లత్వం (పిత్త)','బరువు శ్వాస (కఫ)','పొడవడం చలి (వాత)'],
+        q_fever_pattern:'జ్వరం ఎలా ఉంటుంది?',q_fever_pattern_sub:'నమూనా',opts_fever_pattern:['నిరంతరం','వస్తూ పోతూ','హెచ్చుతగ్గులు','సాయంత్రం','ఉదయం'],
+        q_fever_assoc:'జ్వరంతో ఇంకా ఏమి?',q_fever_assoc_sub:'లక్షణాలు',opts_fever_assoc:['చలి','శరీరం నొప్పి','తలనొప్పి','చర్మంపై దద్దుర్లు','దగ్గు','వికారం'],
+        q_fever_ayush:'ఆయుర్వేద జ్వరం:',q_fever_ayush_sub:'దోష',opts_fever_ayush:['చర్మం ఆందోళన (వాత)','మంటలు చెమట (పిత్త)','బరువు శ్లేష్మం (కఫ)','చలి వేడి (మిశ్రమం)'],
+        q_cough_type:'దగ్గు ఎలా?',q_cough_type_sub:'స్వభావం',opts_cough_type:['పొడి','శ్లేష్మంతో','రక్తంతో','పరోక్షంగా','నక్క వలె'],
+        q_cough_timing:'దగ్గు ఎప్పుడు ఎక్కువ?',q_cough_timing_sub:'సమయం',opts_cough_timing:['రాత్రి','ఉదయం','తిన్నాక','చలి/దూళి','రోజంతా'],
+        q_cough_ayush:'ఆయుర్వేద దగ్గు:',q_cough_ayush_sub:'దోష',opts_cough_ayush:['పొడి (వాత)','పసుపు శ్లేష్మం (పిత్త)','తెల్ల శ్లేష్మం (కఫ)','రక్తం (అత్యవసరం)'],
+        q_joint_site:'ఏ కీళ్ళు?',q_joint_site_sub:'స్థలం',opts_joint_site:['మోకాళ్ళు','తొడ','వేళ్ళ కీళ్ళు','వెన్నెముక','భుజాలు','అనేక కీళ్ళు'],
+        q_joint_timing:'కీళ్ళ నొప్పి ఎప్పుడు?',q_joint_timing_sub:'సమయం',opts_joint_timing:['ఉదయం వాపు (రూమ.)','దీర్ఘ కార్యకలాపం తర్వాత','రాత్రి విశ్రాంతి','చలి/తేమ','హఠాత్తుగా (గౌట్)'],
+        q_joint_ayush:'ఆయుర్వేద కీళ్ళు:',q_joint_ayush_sub:'దోష',opts_joint_ayush:['తిరుగుతున్న నొప్పి (వాత)','వేడి ఎర్రన (పిత్త)','వాపు వాయు (కఫ)','జీర్ణ సమస్య (ఆమ)'],
+        q_stomach_site:'కడుపు నొప్పి ఎక్కడ?',q_stomach_site_sub:'స్థలం',opts_stomach_site:['పై పేగు','నాభి','కింది పేగు','కుడి','ఎడమ','మొత్తం'],
+        q_stomach_food:'ఆహారంతో సంబంధం?',q_stomach_food_sub:'సమయం',opts_stomach_food:['తినే ముందు','తిన్నాక','ఆహారంతో సంబంధం లేదు','మలవిసర్జన','రుతుక్రమం'],
+        q_stomach_ayush:'ఆయుర్వేద జీర్ణం:',q_stomach_ayush_sub:'జీర్ణ వ్యవస్థ',opts_stomach_ayush:['వాయువు (వాత)','మంటలు ఆమ్లత్వం (పిత్త)','నిదానంగా (కఫ)','మారుతూ (మిశ్రమం)'],
+        q_gen_dosha:'ఆయుర్వేద దోష:',q_gen_dosha_sub:'సాధారణ దోష',opts_gen_dosha:['పొడి ఆందోళన (వాత)','వేడి మంటలు (పిత్త)','బరువు శ్లేష్మం (కఫ)','మిశ్రమం'],
+        emergency_cta:'🆘 అత్యవసరం',abdm_h:'📱 ABDM/FHIR',session_security_h:'🔒 భద్రత',session_security_note:'AES-256. DPDP 2023.',docs_uploaded_h:'📄 పత్రాలు',
+        btn_fhir:'📦 FHIR',btn_delete:'🗑 డేటా తొలగించు',btn_call_help:'🚨 సహాయం',btn_check_rx:'📋 మందుల చీటి',
+        toast_please_answer:'సమాధానమివ్వండి లేదా వదిలేయండి.',prog_answered:'సమాధానం',prog_of:'లో',toast_agree_consent:'అంగీకార టిక్ చేయండి.',
+        va_help_consent:'"అంగీకరిస్తున్నాను" చెప్పండి.',va_help_docs:'"వదిలేయండి" చెప్పండి.',va_help_symptoms:'"తదుపరి", "మునుపటి", "వదిలేయండి" చెప్పండి.',va_help_summary:'"డాక్టర్‌కు పంపండి" చెప్పండి.',va_help_token:'వేచి ఉండండి.',va_help_prescription:'"మందుల చీటి చదవండి" చెప్పండి.',
+        emergency_note:'ప్రాధాన్యత టోకెన్ పొందండి.',emergency_on:'⚠ అత్యవసరం — ప్రాధాన్యత టోకెన్.'
+      },
+      bn: {
+        langLabel:'🌐 ভাষা:',speak:'🎤 বলুন',repeat:'🔊 পুনরাবৃত্তি',
+        bc_login:'✔ ১. লগইন',bc_consent:'২. সম্মতি',bc_docs:'৩. কাগজপত্র',bc_questions:'৪. প্রশ্ন',bc_summary:'৫. সারসংক্ষেপ',bc_token:'৬. টোকেন',
+        consent_title:'সম্মতি ও গোপনীয়তা চুক্তি',consent_sub:'এগিয়ে যাওয়ার আগে পড়ুন এবং সম্মত হন',
+        consent_listen:'🔊 সম্মতি পাঠ শুনুন',consent_h4:'স্বাস্থ্য তথ্য সংগ্রহে রোগীর সম্মতি',
+        consent_check:'আমি পড়েছি এবং আমার স্বাস্থ্য তথ্য ভাগ করতে সম্মত আছি',
+        consent_deny:'✗ আমি সম্মত নই',consent_agree:'আমি সম্মত ও এগিয়ে যান →',
+        docs_title:'আপনার চিকিৎসা নথি আপলোড করুন',docs_sub:'AI প্রথমে নথি পড়ে ব্যক্তিগত প্রশ্ন করবে',
+        docs_skip_title:'আজ কোনো নথি নেই?',docs_skip_sub:'কোনো সমস্যা নেই।',docs_skip_btn:'▶ বাদ দিন ও প্রশ্ন শুরু করুন',docs_proceed:'🧠 AI প্রস্তুত — প্রশ্ন শুরু করুন →',
+        sym_title:'আপনার স্বাস্থ্য মূল্যায়ন',sym_sub:'প্রশ্ন লক্ষণ অনুযায়ী পরিবর্তন হয়',sym_speak:'আপনার কথ্য উত্তর এখানে দেখাবে...',
+        sym_hf_off:'🎧 হ্যান্ডস-ফ্রি: বন্ধ',sym_hf_on:'🎧 হ্যান্ডস-ফ্রি: চালু',sym_hf_desc:'সহকারী প্রতিটি প্রশ্ন জোরে জিজ্ঞেস করবে।',
+        btn_prev:'← আগের',btn_skip:'বাদ দিন',btn_next:'পরবর্তী →',btn_finish:'শেষ করুন',
+        btn_send_doc:'✔ ডাক্তারকে পাঠান',btn_read_aloud:'🔊 জোরে পড়ুন',btn_print:'🖨 মুদ্রণ',btn_emergency:'🚨 জরুরি',
+        tok_label:'আপনার সারির টোকেন',tok_waiting:'⚫ ডাকার অপেক্ষায়',tok_remaining:'বাকি',tok_issued:'জারির সময়',tok_expires:'মেয়াদ শেষ',tok_priority:'অগ্রাধিকার',tok_dept:'বিভাগ',tok_normal:'সাধারণ',tok_note:'অপেক্ষা এলাকায় বসুন।',
+        speak_consent:'সম্মতি ফর্ম পড়ুন এবং টিক করুন।',speak_documents:'প্রেসক্রিপশন বা ল্যাব রিপোর্ট আপলোড করুন।',speak_symptoms:'স্বাস্থ্য প্রশ্নের উত্তর দিন।',speak_summary:'সারসংক্ষেপ প্রস্তুত। ডাক্তারকে পাঠান।',speak_token:'টোকেন জারি হয়েছে। অপেক্ষা করুন।',speak_prescription:'ডাক্তার প্রেসক্রিপশন পাঠিয়েছেন।',
+        va_greeting:'নমস্কার! আমি MediKiosk AI ভয়েস সহকারী। কীভাবে সাহায্য করতে পারি?',va_emergency_response:'জরুরি! কর্মীদের সতর্ক করেছি। শান্ত থাকুন।',
+        chip_repeat:'🔈 পুনরাবৃত্তি',chip_help:'❓ সাহায্য',chip_emergency:'🚨 জরুরি',
+        your_progress:'আপনার অগ্রগতি',answered_n_of_m:function(d,t){return t+' টির মধ্যে '+d+' উত্তর';},
+        draft_note:'⚠ AI খসড়া মাত্র। ডাক্তার যাচাই করবেন।',send_doctor_h:'🏥 ডাক্তারকে পাঠান',emergency_priority_h:'🚨 জরুরি অগ্রাধিকার',emergency_note:'অগ্রাধিকার টোকেন পেতে চিহ্নিত করুন।',none_uploaded:'কিছু আপলোড হয়নি',
+        q_cc:'আজ আপনার প্রধান স্বাস্থ্য সমস্যা কী?',q_cc_sub:'আপনার প্রধান অভিযোগ',
+        opts_cc:['মাথাব্যথা','বুকে ব্যথা','পেটে ব্যথা','জ্বর','কাশি','জয়েন্টে ব্যথা','মাথা ঘোরা','দুর্বলতা বা ক্লান্তি','ত্বকের সমস্যা','অন্যান্য'],
+        rf_cardiac:'হৃদয় ঘটনা সম্ভব। শান্ত থাকুন।',rf_cardiac_arm:'হৃদয় ঘটনা। নড়বেন না।',rf_crushing:'হৃদয় জরুরি।',rf_breathless:'শ্বাসকষ্ট।',rf_stroke:'স্ট্রোক সম্ভব। নড়বেন না।',rf_blood:'গুরুতর লক্ষণ।',rf_blackout:'চেতনাহানি।',
+        q_pmh:'দীর্ঘমেয়াদি রোগ আছে?',q_pmh_sub:'পূর্ববর্তী ইতিহাস',opts_pmh:['ডায়াবেটিস','উচ্চ রক্তচাপ','হৃদরোগ','অ্যাজমা','কিডনি রোগ','থাইরয়েড','কিছু না'],
+        q_meds:'নিয়মিত ওষুধ খাচ্ছেন?',q_meds_sub:'বর্তমান ওষুধ',opts_meds:['হ্যাঁ, প্রতিদিন','মাঝে মাঝে','ওষুধ নেই','জানি না'],
+        q_allergy:'অ্যালার্জি আছে?',q_allergy_sub:'অ্যালার্জি ইতিহাস',opts_allergy:['অ্যালার্জি নেই','অ্যান্টিবায়োটিক অ্যালার্জি','অ্যাসপিরিন অ্যালার্জি','খাবার অ্যালার্জি','অন্যান্য'],
+        q_fam:'পরিবারে কেউ আক্রান্ত?',q_fam_sub:'পারিবারিক ইতিহাস',opts_fam:['হ্যাঁ, বাবা/মা','হ্যাঁ, ভাই/বোন','পরিবারে ডায়াবেটিস/হৃদরোগ','ইতিহাস নেই','জানি না'],
+        q_onset:'কখন শুরু হয়েছে?',q_onset_sub:'শুরু',opts_onset:['আজ','২-৩ দিন আগে','১ সপ্তাহ আগে','১ মাস আগে','৩+ মাস আগে'],
+        q_severity:'কতটা গুরুতর (১-১০)?',q_severity_sub:'তীব্রতা',opts_severity:['১-৩ হালকা','৪-৬ মাঝারি','৭-৮ গুরুতর','৯-১০ অসহনীয়'],
+        phase_cc:'🏥 প্রধান অভিযোগ',phase_allo:'🏥 SOCRATES',phase_ayush:'🌿 আয়ুর্বেদিক',phase_doc:'📄 নথির প্রসঙ্গ',phase_hist:'📜 ইতিহাস',
+        fl_cc:'প্রধান অভিযোগ:',fl_site:'স্থান:',fl_onset:'শুরু:',fl_char:'প্রকৃতি:',fl_rad:'বিকিরণ:',fl_assoc:'সংযুক্ত:',fl_exac:'বাড়ানো:',fl_sev:'তীব্রতা:',fl_pmh:'পূর্ব ইতিহাস:',fl_meds:'ওষুধ:',fl_allergy:'অ্যালার্জি:',fl_fam:'পরিবার:',
+        fl_prakriti:'প্রকৃতি:',fl_vikriti:'বিকৃতি:',fl_agni:'অগ্নি:',fl_dosha:'দোষ:',fl_koshtha:'কোষ্ঠ:',fl_ahara:'আহার:',fl_nidana:'নিদান:',fl_samprapti:'সম্প্রাপ্তি:',
+        sum_title:'একীভূত চিকিৎসা ইতিহাস সারসংক্ষেপ',sum_sub:'AI খসড়া — ডাক্তার যাচাই করবেন',
+        q_headache_site:'মাথাব্যথা কোথায়?',q_headache_site_sub:'স্থান',opts_headache_site:['কপালে','পাশে','পিছনে','একদিকে','মাথা জুড়ে'],
+        q_headache_char:'ব্যথা কেমন?',q_headache_char_sub:'প্রকৃতি',opts_headache_char:['ধুকধুক করে','চাপ দেওয়া','ছুরিকাঘাত','জ্বালা','মন্থর'],
+        q_headache_assoc:'কী সাথে আসে?',q_headache_assoc_sub:'লক্ষণ',opts_headache_assoc:['বমি ভাব','দৃষ্টি সমস্যা','আলো কষ্টকর','শব্দ কষ্টকর','নাক বন্ধ','কিছু না'],
+        q_headache_ayush:'আয়ুর্বেদিক মাথাব্যথা:',q_headache_ayush_sub:'দোষ',opts_headache_ayush:['ধুকধুক উদ্বেগ (বাত)','জ্বালা বিরক্তি (পিত্ত)','ভারী বমি (কফ)','মিশ্রিত'],
+        q_chest_site:'বুকের ব্যথা কোথায়?',q_chest_site_sub:'স্থান',opts_chest_site:['মাঝখানে','বাম দিক','ডান দিক','পুরো বুক','উপর পেট'],
+        q_chest_char:'ব্যথা কেমন?',q_chest_char_sub:'প্রকৃতি',opts_chest_char:['চাপ দেওয়া (হৃদয়)','ছুরিকাঘাত','জ্বালা','শক্ততা','মন্থর'],
+        q_chest_rad:'ব্যথা ছড়ায়?',q_chest_rad_sub:'বিকিরণ',opts_chest_rad:['না','বাম হাত','চোয়াল/গলা','পিঠ','ডান কাঁধ'],
+        q_chest_ayush:'আয়ুর্বেদিক বুকে:',q_chest_ayush_sub:'হৃদয় দোষ',opts_chest_ayush:['ধড়ফড় উদ্বেগ (বাত)','জ্বালা এসিড (পিত্ত)','ভারী শ্বাস (কফ)','ছুরি ঠান্ডা (বাত)'],
+        q_fever_pattern:'জ্বর কেমন?',q_fever_pattern_sub:'ধরন',opts_fever_pattern:['একটানা','আসছে-যাচ্ছে','ওঠানামা','সন্ধ্যায়','সকালে'],
+        q_fever_assoc:'জ্বরের সাথে কী?',q_fever_assoc_sub:'লক্ষণ',opts_fever_assoc:['কাঁপুনি','শরীর ব্যথা','মাথাব্যথা','ফুসকুড়ি','কাশি','বমি ভাব'],
+        q_fever_ayush:'আয়ুর্বেদিক জ্বর:',q_fever_ayush_sub:'দোষ',opts_fever_ayush:['শুষ্ক উদ্বেগ (বাত)','জ্বালা ঘাম (পিত্ত)','ভারী শ্লেষ্মা (কফ)','কাঁপুনি গরম (মিশ্র)'],
+        q_cough_type:'কাশি কেমন?',q_cough_type_sub:'প্রকৃতি',opts_cough_type:['শুকনো','শ্লেষ্মা সহ','রক্ত সহ','কুকুর কাশি','ঘেউঘেউ'],
+        q_cough_timing:'কাশি কখন বেশি?',q_cough_timing_sub:'সময়',opts_cough_timing:['রাতে','সকালে','খাওয়ার পরে','ঠান্ডা/ধুলোয়','সারাদিন'],
+        q_cough_ayush:'আয়ুর্বেদিক কাশি:',q_cough_ayush_sub:'দোষ',opts_cough_ayush:['শুকনো (বাত)','হলুদ শ্লেষ্মা (পিত্ত)','সাদা শ্লেষ্মা (কফ)','রক্ত (জরুরি)'],
+        q_joint_site:'কোন গাঁটে?',q_joint_site_sub:'স্থান',opts_joint_site:['হাঁটু','কোমর','ছোট গাঁট','মেরুদণ্ড','কাঁধ','একাধিক'],
+        q_joint_timing:'গাঁটে ব্যথা কখন?',q_joint_timing_sub:'সময়',opts_joint_timing:['সকাল জকড়ন (রিউম.)','দীর্ঘ কার্যের পরে','রাতে বিশ্রাম','ঠান্ডা/ভেজা','হঠাৎ (গাউট)'],
+        q_joint_ayush:'আয়ুর্বেদিক গাঁট:',q_joint_ayush_sub:'দোষ',opts_joint_ayush:['ঘুরে বেড়ানো (বাত)','গরম লাল (পিত্ত)','ফোলা জকড়ন (কফ)','হজম সমস্যা (আম)'],
+        q_stomach_site:'পেটের ব্যথা কোথায়?',q_stomach_site_sub:'স্থান',opts_stomach_site:['উপর পেট','নাভি','নিচে','ডান','বাম','পুরো পেট'],
+        q_stomach_food:'খাবারের সাথে সম্পর্ক?',q_stomach_food_sub:'সময়',opts_stomach_food:['খাওয়ার আগে','খাওয়ার পরে','সম্পর্ক নেই','মলত্যাগ সংক্রান্ত','মাসিক সংক্রান্ত'],
+        q_stomach_ayush:'আয়ুর্বেদিক হজম:',q_stomach_ayush_sub:'পাচন তন্ত্র',opts_stomach_ayush:['বায়ু ফুলাফাঁপা (বাত)','জ্বালা এসিড (পিত্ত)','মন্থর (কফ)','পরিবর্তনশীল (মিশ্র)'],
+        q_gen_dosha:'আয়ুর্বেদিক দোষ:',q_gen_dosha_sub:'সাধারণ দোষ',opts_gen_dosha:['শুষ্ক উদ্বেগ (বাত)','গরম জ্বালা (পিত্ত)','ভারী শ্লেষ্মা (কফ)','মিশ্রিত'],
+        emergency_cta:'🆘 জরুরি',abdm_h:'📱 ABDM/FHIR',session_security_h:'🔒 নিরাপত্তা',session_security_note:'AES-256. DPDP 2023.',docs_uploaded_h:'📄 নথি',
+        btn_fhir:'📦 FHIR',btn_delete:'🗑 তথ্য মুছুন',btn_call_help:'🚨 সাহায্য',btn_check_rx:'📋 প্রেসক্রিপশন',
+        toast_please_answer:'উত্তর দিন বা বাদ দিন।',prog_of:'এর মধ্যে',toast_agree_consent:'সম্মতি টিক করুন।',
+        va_help_consent:'"সম্মত" বলুন।',va_help_docs:'"বাদ দিন" বলুন।',va_help_symptoms:'"পরবর্তী", "আগের", "বাদ দিন" বলুন।',va_help_summary:'"ডাক্তারকে পাঠান" বলুন।',va_help_token:'বসে অপেক্ষা করুন।',va_help_prescription:'"প্রেসক্রিপশন পড়ুন" বলুন।',
+        emergency_note:'অগ্রাধিকার টোকেন পেতে চিহ্নিত করুন।',emergency_on:'⚠ জরুরি — অগ্রাধিকার টোকেন।'
+      },
+      mr: {
+        langLabel:'🌐 भाषा:',speak:'🎤 बोला',repeat:'🔊 पुन्हा',
+        bc_login:'✔ 1. लॉगिन',bc_consent:'2. संमती',bc_docs:'3. कागदपत्रे',bc_questions:'4. प्रश्न',bc_summary:'5. सारांश',bc_token:'6. टोकन',
+        consent_title:'संमती आणि गोपनीयता करार',consent_sub:'पुढे जाण्यापूर्वी कृपया वाचा आणि सहमत व्हा',
+        consent_listen:'🔊 संमती मजकूर ऐका',consent_h4:'आरोग्य डेटा संकलनासाठी रुग्णाची संमती',
+        consent_check:'मी वाचले आहे आणि माझे आरोग्य डेटा सामायिक करण्यास सहमत आहे',
+        consent_deny:'✗ मी सहमत नाही',consent_agree:'मी सहमत आहे आणि पुढे जा →',
+        docs_title:'तुमचे वैद्यकीय कागदपत्रे अपलोड करा',docs_sub:'AI प्रथम कागदपत्रे वाचतो आणि वैयक्तिक प्रश्न विचारतो',
+        docs_skip_title:'आज कागदपत्रे नाहीत?',docs_skip_sub:'ठीक आहे.',docs_skip_btn:'▶ वगळा आणि प्रश्न सुरू करा',docs_proceed:'🧠 AI तयार आहे — प्रश्न सुरू करा →',
+        sym_title:'तुमचे आरोग्य मूल्यमापन',sym_sub:'प्रश्न लक्षणांनुसार बदलतात',sym_speak:'तुमचे बोललेले उत्तर येथे दिसेल...',
+        sym_hf_off:'🎧 हँड्स-फ्री: बंद',sym_hf_on:'🎧 हँड्स-फ्री: चालू',sym_hf_desc:'सहाय्यक प्रत्येक प्रश्न मोठ्याने विचारेल.',
+        btn_prev:'← मागील',btn_skip:'वगळा',btn_next:'पुढे →',btn_finish:'समाप्त',
+        btn_send_doc:'✔ डॉक्टरला पाठवा',btn_read_aloud:'🔊 मोठ्याने वाचा',btn_print:'🖨 प्रिंट',btn_emergency:'🚨 आणीबाणी',
+        tok_label:'तुमचा रांगेचा टोकन',tok_waiting:'⚫ बोलावण्याची वाट',tok_remaining:'शिल्लक',tok_issued:'जारी वेळ',tok_expires:'कालबाह्य',tok_priority:'प्राधान्यता',tok_dept:'विभाग',tok_normal:'सामान्य',tok_note:'प्रतीक्षा क्षेत्रात बसा.',
+        speak_consent:'संमती फॉर्म वाचा आणि टिक करा.',speak_documents:'प्रिस्क्रिप्शन किंवा लॅब रिपोर्ट अपलोड करा.',speak_symptoms:'आरोग्य प्रश्नाचे उत्तर द्या.',speak_summary:'सारांश तयार आहे. डॉक्टरला पाठवा.',speak_token:'टोकन जारी झाले आहे.',speak_prescription:'डॉक्टरने प्रिस्क्रिप्शन पाठवली आहे.',
+        va_greeting:'नमस्कार! मी MediKiosk AI व्हॉइस सहाय्यक आहे. कशी मदत करू?',va_emergency_response:'आणीबाणी! कर्मचाऱ्यांना ताबडतोब सतर्क केले आहे.',
+        chip_repeat:'🔈 पुन्हा',chip_help:'❓ मदत',chip_emergency:'🚨 आणीबाणी',
+        your_progress:'तुमची प्रगती',answered_n_of_m:function(d,t){return t+' पैकी '+d+' उत्तरे';},
+        draft_note:'⚠ AI मसुदा मात्र. डॉक्टर तपासतील.',send_doctor_h:'🏥 डॉक्टरला पाठवा',emergency_priority_h:'🚨 आणीबाणी प्राधान्य',emergency_note:'प्राधान्य टोकन मिळवण्यासाठी चिन्हांकित करा.',none_uploaded:'काहीही अपलोड नाही',
+        q_cc:'आज तुमची मुख्य आरोग्य समस्या काय आहे?',q_cc_sub:'तुमची मुख्य तक्रार',
+        opts_cc:['डोकेदुखी','छातीत दुखणे','पोटदुखी','ताप','खोकला','सांधेदुखी','चक्कर येणे','अशक्तपणा किंवा थकवा','त्वचेची समस्या','इतर'],
+        rf_cardiac:'हृदयविकाराची शक्यता. शांत राहा.',rf_cardiac_arm:'हृदयविकार. हलू नका.',rf_crushing:'हृदयविकाराची आणीबाणी.',rf_breathless:'श्वासोच्छवासाचा त्रास.',rf_stroke:'स्ट्रोकची शक्यता. हलू नका.',rf_blood:'गंभीर लक्षण.',rf_blackout:'शुद्ध हरपण्याची घटना.',
+        q_pmh:'दीर्घकालीन आजार आहेत का?',q_pmh_sub:'मागील वैद्यकीय इतिहास',opts_pmh:['मधुमेह','उच्च रक्तदाब','हृदयरोग','दमा','मूत्रपिंड रोग','थायरॉइड','काहीही नाही'],
+        q_meds:'नियमित औषधे घेत आहात का?',q_meds_sub:'सध्याची औषधे',opts_meds:['होय, दररोज','कधीकधी','औषधे नाहीत','माहीत नाही'],
+        q_allergy:'ऍलर्जी आहेत का?',q_allergy_sub:'ऍलर्जी इतिहास',opts_allergy:['कोणतीही ऍलर्जी नाही','प्रतिजैविक ऍलर्जी','ऍस्पिरिन ऍलर्जी','अन्न ऍलर्जी','इतर ऍलर्जी'],
+        q_fam:'कुटुंबात कोणाला असा आजार?',q_fam_sub:'कौटुंबिक इतिहास',opts_fam:['होय, वडील/आई','होय, भाऊ/बहीण','कुटुंबात मधुमेह/हृदयरोग','इतिहास नाही','माहीत नाही'],
+        q_onset:'ही समस्या कधी सुरू झाली?',q_onset_sub:'सुरुवात',opts_onset:['आज','2-3 दिवसांपूर्वी','1 आठवड्यापूर्वी','1 महिन्यापूर्वी','3+ महिन्यांपूर्वी'],
+        q_severity:'किती गंभीर आहे (1-10)?',q_severity_sub:'तीव्रता',opts_severity:['1-3 सौम्य','4-6 मध्यम','7-8 गंभीर','9-10 असह्य'],
+        phase_cc:'🏥 मुख्य तक्रार',phase_allo:'🏥 SOCRATES',phase_ayush:'🌿 आयुर्वेदिक',phase_doc:'📄 दस्तऐवज',phase_hist:'📜 इतिहास',
+        fl_cc:'मुख्य तक्रार:',fl_site:'ठिकाण:',fl_onset:'सुरुवात:',fl_char:'प्रकृती:',fl_rad:'विकिरण:',fl_assoc:'संबंधित:',fl_exac:'वाढवणारे:',fl_sev:'तीव्रता:',fl_pmh:'मागील इतिहास:',fl_meds:'औषधे:',fl_allergy:'ऍलर्जी:',fl_fam:'कुटुंब:',
+        fl_prakriti:'प्रकृती:',fl_vikriti:'विकृती:',fl_agni:'अग्नी:',fl_dosha:'दोष:',fl_koshtha:'कोष्ठ:',fl_ahara:'आहार:',fl_nidana:'निदान:',fl_samprapti:'संप्राप्ती:',
+        sum_title:'एकात्मिक वैद्यकीय इतिहास सारांश',sum_sub:'AI मसुदा — डॉक्टर तपासतील',
+        q_headache_site:'डोकेदुखी कुठे?',q_headache_site_sub:'स्थान',opts_headache_site:['कपाळावर','बाजूला','मागे','एका बाजूला','संपूर्ण डोक्यावर'],
+        q_headache_char:'वेदना कशी?',q_headache_char_sub:'प्रकृती',opts_headache_char:['ठोक ठोक','दाबणारी','टोचणारी','जळजळ','मंद'],
+        q_headache_assoc:'सोबत काय येते?',q_headache_assoc_sub:'लक्षणे',opts_headache_assoc:['मळमळ','दृष्टी समस्या','प्रकाशाचा त्रास','आवाजाचा त्रास','नाक बंद','काहीही नाही'],
+        q_headache_ayush:'आयुर्वेदिक डोकेदुखी:',q_headache_ayush_sub:'दोष',opts_headache_ayush:['ठोक चिंता (वात)','जळजळ चिडचिड (पित्त)','जड मळमळ (कफ)','मिश्रित'],
+        q_chest_site:'छातीत दुखणे कुठे?',q_chest_site_sub:'स्थान',opts_chest_site:['मध्यभागी','डाव्या बाजूला','उजव्या बाजूला','संपूर्ण छाती','वरच्या पोटात'],
+        q_chest_char:'वेदना कशी?',q_chest_char_sub:'प्रकृती',opts_chest_char:['दाबणारी (हृदय)','टोचणारी','जळजळ','घट्टपणा','मंद'],
+        q_chest_rad:'वेदना कुठे पसरते?',q_chest_rad_sub:'विकिरण',opts_chest_rad:['पसरत नाही','डावा हात','जबडा/मान','पाठ','उजवा खांदा'],
+        q_chest_ayush:'आयुर्वेदिक छाती:',q_chest_ayush_sub:'हृदय दोष',opts_chest_ayush:['धडधड चिंता (वात)','जळजळ आम्ल (पित्त)','जड श्वास (कफ)','टोच थंडी (वात)'],
+        q_fever_pattern:'तापाचा नमुना?',q_fever_pattern_sub:'नमुना',opts_fever_pattern:['सतत','येतो जातो','चढउतार','संध्याकाळी','सकाळी'],
+        q_fever_assoc:'तापासोबत काय?',q_fever_assoc_sub:'लक्षणे',opts_fever_assoc:['थंडी','अंगदुखी','डोकेदुखी','त्वचेवर पुरळ','खोकला','मळमळ'],
+        q_fever_ayush:'आयुर्वेदिक ताप:',q_fever_ayush_sub:'दोष',opts_fever_ayush:['कोरडी त्वचा चिंता (वात)','जळजळ घाम (पित्त)','जड कफ (कफ)','थंडी उष्णता (मिश्र)'],
+        q_cough_type:'खोकला कसा?',q_cough_type_sub:'प्रकृती',opts_cough_type:['कोरडा','कफासह','रक्तासह','डांग्या खोकला','भुंकणारा'],
+        q_cough_timing:'खोकला कधी जास्त?',q_cough_timing_sub:'वेळ',opts_cough_timing:['रात्री','सकाळी लवकर','जेवणानंतर','थंड/धुळीत','दिवसभर'],
+        q_cough_ayush:'आयुर्वेदिक खोकला:',q_cough_ayush_sub:'दोष',opts_cough_ayush:['कोरडा (वात)','पिवळा कफ (पित्त)','पांढरा कफ (कफ)','रक्त (तातडी)'],
+        q_joint_site:'कोणते सांधे?',q_joint_site_sub:'स्थान',opts_joint_site:['गुडघे','नितंब','लहान सांधे','मणका','खांदे','अनेक सांधे'],
+        q_joint_timing:'सांधेदुखी कधी?',q_joint_timing_sub:'वेळ',opts_joint_timing:['सकाळी जडपणा (र्यूम.)','दीर्घ क्रियाकलापानंतर','रात्री विश्रांती','थंड/ओला हवा','अचानक (गाऊट)'],
+        q_joint_ayush:'आयुर्वेदिक सांधे:',q_joint_ayush_sub:'दोष',opts_joint_ayush:['फिरती वेदना (वात)','गरम लाल (पित्त)','सूज जडपणा (कफ)','पाचन समस्या (आम)'],
+        q_stomach_site:'पोटदुखी कुठे?',q_stomach_site_sub:'स्थान',opts_stomach_site:['वरच्या पोटात','नाभीजवळ','खालच्या पोटात','उजव्या बाजूला','डाव्या बाजूला','संपूर्ण पोट'],
+        q_stomach_food:'जेवणाशी संबंध?',q_stomach_food_sub:'वेळ',opts_stomach_food:['जेवणापूर्वी','जेवणानंतर','संबंध नाही','मलत्याग संबंधित','मासिक पाळी संबंधित'],
+        q_stomach_ayush:'आयुर्वेदिक पचन:',q_stomach_ayush_sub:'पाचन तंत्र',opts_stomach_ayush:['वायू गोळा (वात)','जळजळ आम्ल (पित्त)','मंद (कफ)','बदलणारे (मिश्र)'],
+        q_gen_dosha:'आयुर्वेदिक दोष:',q_gen_dosha_sub:'सामान्य दोष',opts_gen_dosha:['कोरडेपणा चिंता (वात)','उष्णता जळजळ (पित्त)','जडपणा कफ (कफ)','मिश्रित'],
+        emergency_cta:'🆘 आणीबाणी',abdm_h:'📱 ABDM/FHIR',session_security_h:'🔒 सुरक्षा',session_security_note:'AES-256. DPDP 2023.',docs_uploaded_h:'📄 कागदपत्रे',
+        btn_fhir:'📦 FHIR',btn_delete:'🗑 डेटा मिटवा',btn_call_help:'🚨 मदत',btn_check_rx:'📋 प्रिस्क्रिप्शन',
+        toast_please_answer:'उत्तर द्या किंवा वगळा.',prog_of:'पैकी',toast_agree_consent:'संमती टिक करा.',
+        va_help_consent:'"सहमत आहे" म्हणा.',va_help_docs:'"वगळा" म्हणा.',va_help_symptoms:'"पुढे", "मागील", "वगळा" म्हणा.',va_help_summary:'"डॉक्टरला पाठवा" म्हणा.',va_help_token:'प्रतीक्षा करा.',va_help_prescription:'"प्रिस्क्रिप्शन वाचा" म्हणा.',
+        emergency_note:'प्राधान्य टोकन मिळवण्यासाठी चिन्हांकित करा.',emergency_on:'⚠ आणीबाणी — प्राधान्य टोकन.'
+      }
+    };
+
+    // Translation lookup helper — falls back to English if key missing
+    function t(key) {
+      var T = TRANSLATIONS[lang] || TRANSLATIONS['en'];
+      var val = T[key];
+      if (val === undefined) val = (TRANSLATIONS['en'] || {})[key];
+      return (val !== undefined && val !== null) ? val : key;
+    }
+
+    // Map question tkeys for each complaint + SOCRATES depth
+    var Q_TKEY_MAP = {
+      'Headache': { site:'headache_site', char:'headache_char', assoc:'headache_assoc', ayush:'headache_ayush' },
+      'Chest Pain': { site:'chest_site', char:'chest_char', rad:'chest_rad', ayush:'chest_ayush' },
+      'Fever': { pattern:'fever_pattern', assoc:'fever_assoc', ayush:'fever_ayush' },
+      'Cough': { type:'cough_type', timing:'cough_timing', ayush:'cough_ayush' },
+      'Joint Pain': { site:'joint_site', timing:'joint_timing', ayush:'joint_ayush' },
+      'Stomach Pain': { site:'stomach_site', food:'stomach_food', ayush:'stomach_ayush' }
+    };
+
+    // Apply all translations to the current DOM
+    function applyLang() {
+      var T = TRANSLATIONS[lang] || TRANSLATIONS['en'];
+
+      // --- Breadcrumbs ---
+      ['bc_login','bc_consent','bc_docs','bc_questions','bc_summary','bc_token'].forEach(function(k, i) {
+        var el = document.getElementById('bc' + i); if (el) el.textContent = t(k);
+      });
+
+      // --- Consent screen ---
+      var q1 = document.querySelector('#scr-consent .stitle h2'); if (q1) q1.textContent = t('consent_title');
+      var q2 = document.querySelector('#scr-consent .stitle p'); if (q2) q2.textContent = t('consent_sub');
+      var q3 = document.querySelector('.consent-txt h4'); if (q3) q3.textContent = t('consent_h4');
+      var q4 = document.querySelector('.consent-chk span'); if (q4) q4.textContent = ' ' + t('consent_check');
+      var q5 = document.querySelector('[onclick="speakConsent()"]'); if (q5) q5.innerHTML = t('consent_listen');
+      var q6 = document.querySelector('[onclick="denyConsent()"]'); if (q6) q6.textContent = t('consent_deny');
+      var q7 = document.getElementById('consent-ok'); if (q7) q7.innerHTML = t('consent_agree');
+
+      // --- Documents screen ---
+      var d1 = document.querySelector('#scr-documents .stitle h2'); if (d1) d1.textContent = t('docs_title');
+      var d2 = document.querySelector('#scr-documents .stitle p'); if (d2) d2.textContent = t('docs_sub');
+      var d3 = document.querySelector('[onclick="skipDocsGoSymptoms()"]'); if (d3) d3.innerHTML = t('docs_skip_btn');
+      var d4 = document.getElementById('doc-proceed-btn');
+      if (d4 && d4.style.background !== 'rgb(19, 136, 8)') d4.innerHTML = t('docs_proceed');
+
+      // --- Symptoms screen ---
+      var s1 = document.querySelector('#scr-symptoms .stitle h2'); if (s1) s1.textContent = t('sym_title');
+      var s2 = document.querySelector('#scr-symptoms .stitle p'); if (s2) s2.textContent = t('sym_sub');
+      var s3 = document.getElementById('vtxt');
+      if (s3 && (!s3.textContent || s3.textContent.indexOf('appear here') >= 0 || s3.textContent.indexOf('दिखेगा') >= 0 || s3.textContent.indexOf('ଦେଖ') >= 0 || s3.textContent.indexOf('தோன்') >= 0 || s3.textContent.indexOf('కనిపి') >= 0 || s3.textContent.indexOf('দেখাবে') >= 0 || s3.textContent.indexOf('दिसेल') >= 0)) s3.textContent = t('sym_speak');
+
+      // Hands-free toggle
+      var hfBtn = document.getElementById('hf-toggle-btn');
+      if (hfBtn) hfBtn.innerHTML = '&#127911; ' + (vaState && vaState.autoMode ? t('sym_hf_on') : t('sym_hf_off'));
+      var hfStatus = document.getElementById('hf-status-desc');
+      if (hfStatus) hfStatus.textContent = t('sym_hf_desc');
+
+      // Navigation buttons
+      var pb = document.getElementById('prev-btn'); if (pb) pb.innerHTML = t('btn_prev');
+      var sb = document.querySelector('[onclick="skipQ()"]'); if (sb) sb.textContent = t('btn_skip');
+      var nb = document.getElementById('btn-next-lbl');
+      if (nb) { var isLast = (typeof adaptiveQ !== 'undefined' && typeof qIdx !== 'undefined' && qIdx === adaptiveQ.length - 1); nb.textContent = isLast ? t('btn_finish') : t('btn_next'); }
+
+      // --- Summary screen ---
+      var ss1 = document.querySelector('#scr-summary .stitle h2'); if (ss1) ss1.textContent = t('sum_title');
+      var ss2 = document.querySelector('#scr-summary .stitle p'); if (ss2) ss2.textContent = t('sum_sub');
+      var sendBtn = document.querySelector('[onclick="sendDoctor()"]'); if (sendBtn) sendBtn.innerHTML = t('btn_send_doc');
+      var readBtn = document.querySelector('[onclick="readSummary()"]'); if (readBtn) readBtn.innerHTML = t('btn_read_aloud');
+      var printBtn = document.querySelector('[onclick="window.print()"]'); if (printBtn) printBtn.innerHTML = t('btn_print');
+
+      // Send to Doctor sidebar heading
+      var sdh = document.querySelector('.send-doc-h'); if (sdh) sdh.innerHTML = t('send_doctor_h');
+      var emh = document.querySelector('.emergency-h'); if (emh) emh.innerHTML = t('emergency_priority_h');
+      var emn = document.querySelector('.emergency-note'); if (emn) emn.textContent = t('emergency_note');
+      var efb = document.getElementById('emergency-flag-btn');
+      if (efb && efb.style.background !== 'rgb(139, 0, 0)' && efb.style.background !== '#8b0000') efb.innerHTML = t('btn_emergency');
+      var efs = document.getElementById('emergency-flag-status');
+      if (efs && efs.textContent && efs.textContent.trim() !== '') efs.textContent = t('emergency_on');
+      var fhirBtn = document.querySelector('[onclick="genFHIR()"]'); if (fhirBtn) fhirBtn.innerHTML = t('btn_fhir');
+      var delBtn = document.querySelector('[onclick="deleteMyData()"]'); if (delBtn) delBtn.innerHTML = t('btn_delete');
+
+      // Summary field labels (fl_ keys)
+      var flMap = { 'cc':'fl_cc','site':'fl_site','onset':'fl_onset','char':'fl_char','rad':'fl_rad','assoc':'fl_assoc','exac':'fl_exac','sev':'fl_sev','pmh':'fl_pmh','meds':'fl_meds','allergy':'fl_allergy','fam':'fl_fam','prakriti':'fl_prakriti','vikriti':'fl_vikriti','agni':'fl_agni','dosha':'fl_dosha','koshtha':'fl_koshtha','ahara':'fl_ahara','nidana':'fl_nidana','samprapti':'fl_samprapti' };
+      for (var fk in flMap) {
+        var fl = document.querySelector('.sf-label[data-field="' + fk + '"]'); if (fl) fl.textContent = t(flMap[fk]);
+      }
+      // Also update progress
+      var ppEl = document.getElementById('prog-lbl');
+      if (ppEl && typeof ans !== 'undefined' && typeof adaptiveQ !== 'undefined') {
+        var done = Object.keys(ans).length, tot = adaptiveQ.length;
+        ppEl.textContent = done + ' ' + t('prog_of') + ' ' + tot + ' ' + t('prog_answered');
+      }
+
+      // --- Token screen ---
+      var tl = document.querySelector('.token-section-label'); if (tl) tl.textContent = t('tok_label');
+      var tw = document.getElementById('tok-status-badge');
+      if (tw && (tw.className.indexOf('waiting') >= 0 || tw.innerHTML.indexOf('Waiting') >= 0 || tw.innerHTML.indexOf('प्रतीक्षा') >= 0)) tw.innerHTML = t('tok_waiting');
+      var tcd = document.querySelector('.countdown-label'); if (tcd) tcd.textContent = t('tok_remaining');
+      var chkRxBtn = document.querySelector('[onclick="checkPrescriptionAvailable()"]'); if (chkRxBtn) chkRxBtn.innerHTML = t('btn_check_rx');
+      var helpBtn = document.querySelector('[onclick="triggerEmergency()"]'); if (helpBtn) helpBtn.innerHTML = t('btn_call_help');
+
+      // Token info rows labels
+      var tilEls = document.querySelectorAll('.tok-info-lbl');
+      var tilKeys = ['tok_issued','tok_expires','tok_priority','tok_dept'];
+      tilEls.forEach(function(el, i) { if (tilKeys[i]) el.textContent = t(tilKeys[i]); });
+
+      // --- VA chips ---
+      var chips = document.querySelectorAll('.va-chip');
+      var chipKeysList = ['chip_repeat', 'chip_help', 'chip_emergency'];
+      chips.forEach(function(el, i) { if (chipKeysList[i]) el.innerHTML = t(chipKeysList[i]); });
+
+      // VA mic button text
+      var vaMicBtn = document.getElementById('va-mic-btn');
+      if (vaMicBtn && !vaMicBtn.classList.contains('on')) vaMicBtn.innerHTML = '&#127908; ' + t('speak');
+
+      // Global mic button
+      var gmicBtn = document.getElementById('global-mic');
+      if (gmicBtn && !gmicBtn.classList.contains('listening')) gmicBtn.innerHTML = '&#127908; ' + t('speak');
+
+      // --- Session security sidebar ---
+      var ssh = document.querySelector('.sec-hdr'); if (ssh) ssh.textContent = t('session_security_h');
+      var ssn = document.querySelector('.sec-note'); if (ssn) ssn.textContent = t('session_security_note');
+      var duh = document.querySelector('.docs-uploaded-h'); if (duh) duh.textContent = t('docs_uploaded_h');
+      var abdmH = document.querySelector('.abdm-export-h'); if (abdmH) abdmH.textContent = t('abdm_h');
+
+      // Reload current question in new language if on symptoms screen
+      if (typeof adaptiveQ !== 'undefined' && adaptiveQ.length > 0 && typeof loadQ === 'function') {
+        var scrSym = document.getElementById('scr-symptoms');
+        if (scrSym && !scrSym.classList.contains('hidden')) loadQ();
+      }
+    }
 
     function setLang(l, btn) {
       lang = l;
       document.querySelectorAll('.lang-btn').forEach(function (b) { b.classList.remove('active'); });
       if (btn) btn.classList.add('active');
+      applyLang();
+      speak(t('speak_' + (vaCurrentScreen ? vaCurrentScreen() : 'consent')));
     }
+
 
     function speak(txt) {
       if (!window.speechSynthesis) return;
@@ -4887,7 +5951,7 @@
     function docsToSymptoms() { speak('Documents read. Starting personalized questions.'); buildQueueAndStart(); }
 
     // ADAPTIVE QUESTIONS (full question bank from kiosk_v2)
-    var CC_Q = { q: 'What is your main health problem today?', sub: 'Your chief complaint', opts: ['Headache', 'Chest Pain', 'Stomach Pain', 'Fever', 'Cough', 'Joint Pain', 'Dizziness', 'Weakness or Fatigue', 'Skin Problem', 'Others'], phase: 'cc' };
+    var CC_Q = { q: 'What is your main health problem today?', sub: 'Your chief complaint', opts: ['Headache', 'Chest Pain', 'Stomach Pain', 'Fever', 'Cough', 'Joint Pain', 'Dizziness', 'Weakness or Fatigue', 'Skin Problem', 'Others'], phase: 'cc', tkey: 'q_cc', optsKey: 'opts_cc' };
     var DOC_Q = {
       'Hypertension': { q: 'Your records mention high BP. How is your blood pressure control?', sub: 'From uploaded prescription', opts: ['Well controlled on medication', 'Poorly controlled despite medicines', 'Recently started medication', 'Not on any medication', 'Not sure'], phase: 'doc' },
       'Type 2 Diabetes': { q: 'Records show diabetes. How is your blood sugar control?', sub: 'From uploaded lab report', opts: ['Well controlled (HbA1c below 7)', 'Moderate (HbA1c 7 to 9)', 'Poorly controlled (above 9)', 'Recently diagnosed', 'Monitoring without medicines'], phase: 'doc' },
@@ -4897,56 +5961,61 @@
     var TREES = {
       'Headache': {
         allo: [
-          { q: 'Where exactly is the headache?', sub: 'Site (SOCRATES)', opts: ['Forehead or frontal', 'Sides or temporal', 'Back of head', 'One side only (migraine type)', 'Whole head'], phase: 'allo' },
-          { q: 'What type of pain is it?', sub: 'Character (SOCRATES)', opts: ['Throbbing or pulsating', 'Pressing tight band', 'Stabbing or shooting', 'Burning sensation', 'Dull ache'], phase: 'allo' },
-          { q: 'What comes with the headache?', sub: 'Associated symptoms', opts: ['Nausea or vomiting', 'Visual disturbance or aura', 'Sensitivity to light', 'Sensitivity to sound', 'Nasal congestion', 'None'], phase: 'allo' }
+          { q: 'Where exactly is the headache?', sub: 'Site (SOCRATES)', opts: ['Forehead or frontal', 'Sides or temporal', 'Back of head', 'One side only (migraine type)', 'Whole head'], phase: 'allo', tkey: 'q_headache_site', optsKey: 'opts_headache_site' },
+          { q: 'What type of pain is it?', sub: 'Character (SOCRATES)', opts: ['Throbbing or pulsating', 'Pressing tight band', 'Stabbing or shooting', 'Burning sensation', 'Dull ache'], phase: 'allo', tkey: 'q_headache_char', optsKey: 'opts_headache_char' },
+          { q: 'What comes with the headache?', sub: 'Associated symptoms', opts: ['Nausea or vomiting', 'Visual disturbance or aura', 'Sensitivity to light', 'Sensitivity to sound', 'Nasal congestion', 'None'], phase: 'allo', tkey: 'q_headache_assoc', optsKey: 'opts_headache_assoc' }
         ],
-        ayush: [{ q: 'Ayurvedic Shirashoola — which best describes your headache?', sub: 'Dosha assessment', opts: ['Throbbing with anxiety (Vata type)', 'Burning with irritability (Pitta type)', 'Heavy dull with nausea (Kapha type)', 'Mixed features'], phase: 'ayush', isAyush: true }]
+        ayush: [{ q: 'Ayurvedic Shirashoola — which best describes your headache?', sub: 'Dosha assessment', opts: ['Throbbing with anxiety (Vata type)', 'Burning with irritability (Pitta type)', 'Heavy dull with nausea (Kapha type)', 'Mixed features'], phase: 'ayush', isAyush: true, tkey: 'q_headache_ayush', optsKey: 'opts_headache_ayush' }]
       },
       'Chest Pain': {
         allo: [
-          { q: 'Where exactly is the chest pain?', sub: 'Site — CRITICAL', opts: ['Centre of chest', 'Left side', 'Right side', 'Spreading across full chest', 'Upper abdomen'], phase: 'allo' },
-          { q: 'What does the pain feel like?', sub: 'Character', opts: ['Crushing or squeezing (cardiac)', 'Sharp or stabbing', 'Burning (acid reflux)', 'Tightness or pressure', 'Dull ache'], phase: 'allo' },
-          { q: 'Does the pain spread anywhere?', sub: 'Radiation — CRITICAL for cardiac', opts: ['No radiation', 'Left arm or hand', 'Jaw or neck', 'Back between shoulders', 'Right shoulder'], phase: 'allo' }
+          { q: 'Where exactly is the chest pain?', sub: 'Site — CRITICAL', opts: ['Centre of chest', 'Left side', 'Right side', 'Spreading across full chest', 'Upper abdomen'], phase: 'allo', tkey: 'q_chest_site', optsKey: 'opts_chest_site' },
+          { q: 'What does the pain feel like?', sub: 'Character', opts: ['Crushing or squeezing (cardiac)', 'Sharp or stabbing', 'Burning (acid reflux)', 'Tightness or pressure', 'Dull ache'], phase: 'allo', tkey: 'q_chest_char', optsKey: 'opts_chest_char' },
+          { q: 'Does the pain spread anywhere?', sub: 'Radiation — CRITICAL for cardiac', opts: ['No radiation', 'Left arm or hand', 'Jaw or neck', 'Back between shoulders', 'Right shoulder'], phase: 'allo', tkey: 'q_chest_rad', optsKey: 'opts_chest_rad' }
         ],
-        ayush: [{ q: 'Ayurvedic Hridroga assessment:', sub: 'Cardiac Dosha', opts: ['Palpitations with anxiety (Vata Hridroga)', 'Burning chest with acidity (Pitta Hridroga)', 'Heavy chest with breathlessness (Kapha Hridroga)', 'Sharp pain with coldness (Vata dominant)'], phase: 'ayush', isAyush: true }]
+        ayush: [{ q: 'Ayurvedic Hridroga assessment:', sub: 'Cardiac Dosha', opts: ['Palpitations with anxiety (Vata Hridroga)', 'Burning chest with acidity (Pitta Hridroga)', 'Heavy chest with breathlessness (Kapha Hridroga)', 'Sharp pain with coldness (Vata dominant)'], phase: 'ayush', isAyush: true, tkey: 'q_chest_ayush', optsKey: 'opts_chest_ayush' }]
       },
       'Fever': {
         allo: [
-          { q: 'What pattern does the fever follow?', sub: 'Fever pattern (SOCRATES)', opts: ['Continuous — always high', 'Intermittent — comes and goes', 'Remittent — fluctuates but present', 'Evening spike', 'Morning spike'], phase: 'allo' },
-          { q: 'Other symptoms with fever?', sub: 'Associated symptoms', opts: ['Chills or rigors', 'Severe body ache', 'Headache with fever', 'Skin rash', 'Cough and runny nose', 'Nausea or vomiting'], phase: 'allo' }
+          { q: 'What pattern does the fever follow?', sub: 'Fever pattern (SOCRATES)', opts: ['Continuous — always high', 'Intermittent — comes and goes', 'Remittent — fluctuates but present', 'Evening spike', 'Morning spike'], phase: 'allo', tkey: 'q_fever_pattern', optsKey: 'opts_fever_pattern' },
+          { q: 'Other symptoms with fever?', sub: 'Associated symptoms', opts: ['Chills or rigors', 'Severe body ache', 'Headache with fever', 'Skin rash', 'Cough and runny nose', 'Nausea or vomiting'], phase: 'allo', tkey: 'q_fever_assoc', optsKey: 'opts_fever_assoc' }
         ],
-        ayush: [{ q: 'Ayurvedic Jwara assessment:', sub: 'Dosha in fever', opts: ['Dry skin anxiety insomnia (Vata Jwara)', 'Burning sweating irritability (Pitta Jwara)', 'Heavy body mucus low appetite (Kapha Jwara)', 'Alternating chills and heat (mixed)'], phase: 'ayush', isAyush: true }]
+        ayush: [{ q: 'Ayurvedic Jwara assessment:', sub: 'Dosha in fever', opts: ['Dry skin anxiety insomnia (Vata Jwara)', 'Burning sweating irritability (Pitta Jwara)', 'Heavy body mucus low appetite (Kapha Jwara)', 'Alternating chills and heat (mixed)'], phase: 'ayush', isAyush: true, tkey: 'q_fever_ayush', optsKey: 'opts_fever_ayush' }]
       },
       'Cough': {
         allo: [
-          { q: 'What type of cough?', sub: 'Character', opts: ['Dry non-productive', 'Wet with mucus', 'Blood in sputum', 'Paroxysmal whooping', 'Barking cough'], phase: 'allo' },
-          { q: 'When is cough worst?', sub: 'Timing', opts: ['At night', 'Early morning', 'After eating or lying down', 'In cold or dusty weather', 'Throughout the day'], phase: 'allo' }
+          { q: 'What type of cough?', sub: 'Character', opts: ['Dry non-productive', 'Wet with mucus', 'Blood in sputum', 'Paroxysmal whooping', 'Barking cough'], phase: 'allo', tkey: 'q_cough_type', optsKey: 'opts_cough_type' },
+          { q: 'When is cough worst?', sub: 'Timing', opts: ['At night', 'Early morning', 'After eating or lying down', 'In cold or dusty weather', 'Throughout the day'], phase: 'allo', tkey: 'q_cough_timing', optsKey: 'opts_cough_timing' }
         ],
-        ayush: [{ q: 'Ayurvedic Kasa assessment:', sub: 'Cough Dosha', opts: ['Dry cough hoarseness (Vata Kasa)', 'Yellow green sputum with fever (Pitta Kasa)', 'White thick mucus heaviness (Kapha Kasa)', 'Cough with blood (Raktaja Kasa — urgent)'], phase: 'ayush', isAyush: true }]
+        ayush: [{ q: 'Ayurvedic Kasa assessment:', sub: 'Cough Dosha', opts: ['Dry cough hoarseness (Vata Kasa)', 'Yellow green sputum with fever (Pitta Kasa)', 'White thick mucus heaviness (Kapha Kasa)', 'Cough with blood (Raktaja Kasa — urgent)'], phase: 'ayush', isAyush: true, tkey: 'q_cough_ayush', optsKey: 'opts_cough_ayush' }]
       },
       'Joint Pain': {
         allo: [
-          { q: 'Which joints are affected?', sub: 'Site', opts: ['Knee joints', 'Hip joints', 'Small joints of fingers or toes', 'Spine or lower back', 'Shoulder joints', 'Multiple joints together'], phase: 'allo' },
-          { q: 'When is joint pain worst?', sub: 'Timing', opts: ['Early morning stiffness over 1 hour (Rheumatoid)', 'After prolonged activity (Osteoarthritis)', 'At night at rest', 'In cold or damp weather', 'Sudden onset (Gout)'], phase: 'allo' }
+          { q: 'Which joints are affected?', sub: 'Site', opts: ['Knee joints', 'Hip joints', 'Small joints of fingers or toes', 'Spine or lower back', 'Shoulder joints', 'Multiple joints together'], phase: 'allo', tkey: 'q_joint_site', optsKey: 'opts_joint_site' },
+          { q: 'When is joint pain worst?', sub: 'Timing', opts: ['Early morning stiffness over 1 hour (Rheumatoid)', 'After prolonged activity (Osteoarthritis)', 'At night at rest', 'In cold or damp weather', 'Sudden onset (Gout)'], phase: 'allo', tkey: 'q_joint_timing', optsKey: 'opts_joint_timing' }
         ],
-        ayush: [{ q: 'Ayurvedic Amavata or Sandhivata assessment:', sub: 'Joint Dosha', opts: ['Migratory pain cracking sounds (Vata Sandhivata)', 'Hot red swollen joints fever (Pitta Amavata)', 'Swollen stiff heavy morning (Kapha dominant)', 'Associated with poor digestion (Ama dominant)'], phase: 'ayush', isAyush: true }]
+        ayush: [{ q: 'Ayurvedic Amavata or Sandhivata assessment:', sub: 'Joint Dosha', opts: ['Migratory pain cracking sounds (Vata Sandhivata)', 'Hot red swollen joints fever (Pitta Amavata)', 'Swollen stiff heavy morning (Kapha dominant)', 'Associated with poor digestion (Ama dominant)'], phase: 'ayush', isAyush: true, tkey: 'q_joint_ayush', optsKey: 'opts_joint_ayush' }]
       },
       'Stomach Pain': {
         allo: [
-          { q: 'Where in the abdomen is the pain?', sub: 'Site (SOCRATES)', opts: ['Upper abdomen or epigastric', 'Around the navel', 'Lower abdomen', 'Right side', 'Left side', 'Whole abdomen'], phase: 'allo' },
-          { q: 'Is pain related to food?', sub: 'Timing', opts: ['Worse before meals', 'Worse after eating', 'No relation to food', 'Related to bowel movements', 'Related to menstrual cycle'], phase: 'allo' }
+          { q: 'Where in the abdomen is the pain?', sub: 'Site (SOCRATES)', opts: ['Upper abdomen or epigastric', 'Around the navel', 'Lower abdomen', 'Right side', 'Left side', 'Whole abdomen'], phase: 'allo', tkey: 'q_stomach_site', optsKey: 'opts_stomach_site' },
+          { q: 'Is pain related to food?', sub: 'Timing', opts: ['Worse before meals', 'Worse after eating', 'No relation to food', 'Related to bowel movements', 'Related to menstrual cycle'], phase: 'allo', tkey: 'q_stomach_food', optsKey: 'opts_stomach_food' }
         ],
-        ayush: [{ q: 'Ayurvedic Agni (digestive fire) assessment:', sub: 'Digestive system', opts: ['Gas bloating irregular appetite (Vata Agni)', 'Burning hyperacidity loose stools (Pitta Agni)', 'Sluggish heavy low appetite (Kapha Agni)', 'Variable digestion (mixed)'], phase: 'ayush', isAyush: true }]
+        ayush: [{ q: 'Ayurvedic Agni (digestive fire) assessment:', sub: 'Digestive system', opts: ['Gas bloating irregular appetite (Vata Agni)', 'Burning hyperacidity loose stools (Pitta Agni)', 'Sluggish heavy low appetite (Kapha Agni)', 'Variable digestion (mixed)'], phase: 'ayush', isAyush: true, tkey: 'q_stomach_ayush', optsKey: 'opts_stomach_ayush' }]
       }
     };
     var HIST_QS = [
-      { q: 'Any long-term or chronic health conditions?', sub: 'Past medical history', opts: ['Diabetes', 'Hypertension', 'Heart disease', 'Asthma', 'Kidney disease', 'Thyroid disease', 'None'], phase: 'hist' },
-      { q: 'Are you taking any medicines regularly?', sub: 'Current medications', opts: ['Yes daily medicines', 'Occasional medicines', 'No medicines', 'Do not know'], phase: 'hist' },
-      { q: 'Any known allergies to medicines or food?', sub: 'Allergy history', opts: ['No known allergies', 'Allergy to antibiotics (Penicillin)', 'Allergy to Aspirin or painkillers', 'Food allergy', 'Other allergy'], phase: 'hist' },
-      { q: 'Has anyone in your family had similar illness?', sub: 'Family history', opts: ['Yes father or mother', 'Yes sibling', 'Family history of diabetes or heart disease', 'No family history', 'Not sure'], phase: 'hist' }
+      { q: 'Any long-term or chronic health conditions?', sub: 'Past medical history', opts: ['Diabetes', 'Hypertension', 'Heart disease', 'Asthma', 'Kidney disease', 'Thyroid disease', 'None'], phase: 'hist', tkey: 'q_pmh', optsKey: 'opts_pmh' },
+      { q: 'Are you taking any medicines regularly?', sub: 'Current medications', opts: ['Yes daily medicines', 'Occasional medicines', 'No medicines', 'Do not know'], phase: 'hist', tkey: 'q_meds', optsKey: 'opts_meds' },
+      { q: 'Any known allergies to medicines or food?', sub: 'Allergy history', opts: ['No known allergies', 'Allergy to antibiotics (Penicillin)', 'Allergy to Aspirin or painkillers', 'Food allergy', 'Other allergy'], phase: 'hist', tkey: 'q_allergy', optsKey: 'opts_allergy' },
+      { q: 'Has anyone in your family had similar illness?', sub: 'Family history', opts: ['Yes father or mother', 'Yes sibling', 'Family history of diabetes or heart disease', 'No family history', 'Not sure'], phase: 'hist', tkey: 'q_fam', optsKey: 'opts_fam' }
     ];
-    var RF = { 'chest pain': 'Possible cardiac event. Staff alerted. Please stay calm and seated.', 'spreading to left arm': 'Possible cardiac event. Do not move. Staff alerted immediately.', 'crushing': 'Possible cardiac emergency. Staff alerted. Stay calm.', 'breathless': 'Respiratory distress detected. Please stay seated. Help on the way.', 'sudden weakness': 'Possible stroke. Do not move. Staff alerted.', 'blood in sputum': 'Serious symptom. Staff notified.', 'blackout': 'Loss of consciousness episode. Staff alerted.' };
+    var RF = { 'chest pain': 'rf_cardiac', 'spreading to left arm': 'rf_cardiac_arm', 'crushing': 'rf_crushing', 'breathless': 'rf_breathless', 'sudden weakness': 'rf_stroke', 'blood in sputum': 'rf_blood', 'blackout': 'rf_blackout' };
+    function vaCurrentScreen() {
+      var v = '';
+      SCRS.forEach(function(s) { var e = document.getElementById('scr-' + s); if (e && !e.classList.contains('hidden')) v = s; });
+      return v || 'consent';
+    }
 
     function buildQueueAndStart() {
       // If the patient returned to documents, resume their prior answers instead of restarting.
@@ -4959,8 +6028,8 @@
       if (ct) { ct.textContent = 'Chief Complaint: ' + complaint; ct.classList.remove('hidden'); }
       var docQs = [], tree = TREES[complaint];
       docContext.conditions.forEach(function (c) { if (DOC_Q[c]) docQs.push(DOC_Q[c]); });
-      var alloQs = tree ? tree.allo : [{ q: 'When did this problem start?', sub: 'Onset', opts: ['Today', '2 to 3 days ago', '1 week ago', '1 month ago', '3 or more months ago'], phase: 'allo' }, { q: 'How severe is it (1 to 10)?', sub: 'Severity', opts: ['1 to 3 Mild', '4 to 6 Moderate', '7 to 8 Severe', '9 to 10 Unbearable'], phase: 'allo' }];
-      var ayushQs = tree ? tree.ayush : [{ q: 'Ayurvedic Dosha for your symptom:', sub: 'General Dosha', opts: ['Dryness anxiety restlessness (Vata)', 'Heat burning irritability (Pitta)', 'Heaviness mucus fatigue (Kapha)', 'Mixed'], phase: 'ayush', isAyush: true }];
+      var alloQs = tree ? tree.allo : [{ q: 'When did this problem start?', sub: 'Onset', opts: ['Today', '2 to 3 days ago', '1 week ago', '1 month ago', '3 or more months ago'], phase: 'allo', tkey: 'q_onset', optsKey: 'opts_onset' }, { q: 'How severe is it (1 to 10)?', sub: 'Severity', opts: ['1 to 3 Mild', '4 to 6 Moderate', '7 to 8 Severe', '9 to 10 Unbearable'], phase: 'allo', tkey: 'q_severity', optsKey: 'opts_severity' }];
+      var ayushQs = tree ? tree.ayush : [{ q: 'Ayurvedic Dosha for your symptom:', sub: 'General Dosha', opts: ['Dryness anxiety restlessness (Vata)', 'Heat burning irritability (Pitta)', 'Heaviness mucus fatigue (Kapha)', 'Mixed'], phase: 'ayush', isAyush: true, tkey: 'q_gen_dosha', optsKey: 'opts_gen_dosha' }];
       adaptiveQ = adaptiveQ.slice(0, 1);
       docQs.forEach(function (q) { adaptiveQ.push(q); });
       alloQs.forEach(function (q) { adaptiveQ.push(q); });
@@ -4969,33 +6038,40 @@
     }
     function loadQ() {
       var q = adaptiveQ[qIdx]; if (!q) return;
+      // Translate question text and options if tkey is defined
+      var qText = q.tkey ? t(q.tkey) : q.q;
+      var qSub = q.tkey ? t(q.tkey + '_sub') : q.sub;
+      var qOpts = (q.optsKey && t(q.optsKey) !== q.optsKey) ? t(q.optsKey) : q.opts;
+      if (!Array.isArray(qOpts)) qOpts = q.opts;
       var badge = document.getElementById('phase-badge-el'), card = document.getElementById('q-card'), mic = document.getElementById('main-mic'), varea = document.getElementById('v-area');
-      var phLbl = { doc: '&#128196; Document Context', cc: '&#127973; Chief Complaint', allo: '&#127973; Allopathic SOCRATES', ayush: '&#127807; Ayurvedic Assessment', hist: '&#128220; Medical History' };
+      var phLbl = { doc: '&#128196; ' + t('phase_doc').replace(/^[^\s]+\s/,''), cc: t('phase_cc'), allo: t('phase_allo'), ayush: t('phase_ayush'), hist: t('phase_hist') };
       var phCls = { doc: 'phase-doc', cc: 'phase-allo', allo: 'phase-allo', ayush: 'phase-ayush', hist: 'phase-hist' };
       if (q.isAyush) {
-        if (badge) { badge.className = 'phase-badge phase-ayush'; badge.innerHTML = '&#127807; Ayurvedic Assessment'; }
+        if (badge) { badge.className = 'phase-badge phase-ayush'; badge.innerHTML = t('phase_ayush'); }
         if (card) card.className = 'card card-ayush'; if (mic) mic.className = 'mic-big ayush'; if (varea) varea.className = 'v-area ayush-area';
       } else {
-        if (badge) { badge.className = 'phase-badge ' + (phCls[q.phase] || 'phase-allo'); badge.innerHTML = phLbl[q.phase] || 'Clinical Question'; }
+        if (badge) { badge.className = 'phase-badge ' + (phCls[q.phase] || 'phase-allo'); badge.innerHTML = t('phase_' + q.phase) || 'Clinical Question'; }
         if (card) card.className = 'card card-t'; if (mic) mic.className = 'mic-big'; if (varea) varea.className = 'v-area';
       }
       var phRows = { doc: 'ph-row-doc', cc: 'ph-row-cc', allo: 'ph-row-allo', ayush: 'ph-row-ayush', hist: 'ph-row-hist' };
       for (var k in phRows) { var pr = document.getElementById(phRows[k]); if (pr) pr.classList.remove('active-ph'); }
       var ar = document.getElementById(phRows[q.phase]); if (ar) ar.classList.add('active-ph');
       document.getElementById('qnum').textContent = qIdx + 1;
-      document.getElementById('qtxt').textContent = q.q;
-      document.getElementById('qsub').textContent = q.sub;
-      document.getElementById('vtxt').textContent = ans[qIdx] || 'Your spoken answer will appear here...';
+      document.getElementById('qtxt').textContent = qText;
+      document.getElementById('qsub').textContent = qSub;
+      document.getElementById('vtxt').textContent = ans[qIdx] || t('sym_speak');
       var g = document.getElementById('mcq-grid'); g.innerHTML = '';
-      q.opts.forEach(function (o) {
+      qOpts.forEach(function (o, oi) {
         var b = document.createElement('button');
-        b.className = 'mcq-btn' + (q.isAyush ? ' ayush-opt' : '') + (ans[qIdx] === o ? ' sel' : '');
+        var enOpt = q.opts[oi] || o; // keep English stored as the actual answer value
+        b.className = 'mcq-btn' + (q.isAyush ? ' ayush-opt' : '') + (ans[qIdx] === enOpt ? ' sel' : '');
         b.textContent = o;
-        b.onclick = (function (val, btn, qq) { return function () { pickOpt(val, btn, qq); }; })(o, b, q);
+        b.dataset.enVal = enOpt;
+        b.onclick = (function (displayVal, enVal, btn, qq) { return function () { pickOpt(enVal, btn, qq); }; })(o, enOpt, b, q);
         g.appendChild(b);
       });
-      var pb = document.getElementById('prev-btn'); if (pb) { pb.disabled = (qIdx === 0); }
-      var nb = document.getElementById('btn-next-lbl'); if (nb) nb.textContent = (qIdx === adaptiveQ.length - 1) ? 'Finish' : 'Next';
+      var pb = document.getElementById('prev-btn'); if (pb) { pb.disabled = (qIdx === 0); pb.innerHTML = t('btn_prev'); }
+      var nb = document.getElementById('btn-next-lbl'); if (nb) nb.textContent = (qIdx === adaptiveQ.length - 1) ? t('btn_finish') : t('btn_next').replace(' →','');
       updProg();
     }
     function pickOpt(val, btn, q) {
@@ -5010,9 +6086,10 @@
       for (var kw in RF) {
         if (txt.indexOf(kw) >= 0) {
           var el = document.getElementById('red-flag');
-          document.getElementById('rf-msg').textContent = RF[kw];
+          var rfMsg = t(RF[kw]);
+          document.getElementById('rf-msg').textContent = rfMsg;
           el.classList.add('show');
-          speak('Emergency alert. ' + RF[kw]);
+          speak(rfMsg);
           // Auto-set emergency flag
           isEmergency = true;
           return;
@@ -5022,13 +6099,13 @@
     function updProg() {
       var tot = adaptiveQ.length, done = Object.keys(ans).length, pct = tot > 0 ? Math.round((done / tot) * 100) : 0;
       var pf = document.getElementById('prog-fill'); if (pf) pf.style.width = pct + '%';
-      var pl = document.getElementById('prog-lbl'); if (pl) pl.textContent = done + ' of ' + tot + ' answered';
+      var pl = document.getElementById('prog-lbl'); if (pl) pl.textContent = done + ' ' + t('prog_of') + ' ' + tot + ' ' + t('prog_answered');
       var pp = document.getElementById('prog-pct'); if (pp) pp.textContent = pct + '%';
       var list = document.getElementById('ans-list'); if (!list) return; list.innerHTML = '';
-      for (var i in ans) { var q = adaptiveQ[i]; if (!q) continue; var d = document.createElement('div'); d.className = 'ans-item' + (q.isAyush ? ' ayush-ans' : ''); d.innerHTML = '<div class="ql">Q' + (+i + 1) + ': ' + q.q.substr(0, 38) + '...</div><div class="av">' + ans[i] + '</div>'; list.appendChild(d); }
+      for (var i in ans) { var q = adaptiveQ[i]; if (!q) continue; var d = document.createElement('div'); d.className = 'ans-item' + (q.isAyush ? ' ayush-ans' : ''); var qLabel = q.tkey ? t(q.tkey) : q.q; d.innerHTML = '<div class="ql">Q' + (+i + 1) + ': ' + qLabel.substr(0, 38) + '...</div><div class="av">' + ans[i] + '</div>'; list.appendChild(d); }
     }
     function nextQ() {
-      if (!ans[qIdx]) { toast('Please answer or press Skip.'); return; }
+      if (!ans[qIdx]) { toast(t('toast_please_answer')); return; }
       if (qIdx < adaptiveQ.length - 1) { qIdx++; loadQ(); }
       else { toast('All done! Preparing integrated summary...'); speak('All questions answered. Preparing your integrated summary.'); setTimeout(goSummary, 1200); }
     }
@@ -5041,7 +6118,19 @@
       if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) { toast('Voice not supported in this browser'); return; }
       var SR = window.SpeechRecognition || window.webkitSpeechRecognition; rec = new SR(); rec.lang = LVM[lang] || 'en-IN'; rec.interimResults = true;
       micOn = true; btn.classList.add('listening');
-      rec.onresult = function (e) { var t = Array.from(e.results).map(function (r) { return r[0].transcript; }).join(''); document.getElementById('vtxt').textContent = t; if (e.results[e.results.length - 1].isFinal) { var q = adaptiveQ[qIdx]; ans[qIdx] = t; if (q && q.phase === 'cc' && qIdx === 0) insertDocAndComplaintQs(t); updProg(); chkRF(t.toLowerCase()); } };
+      rec.onresult = function (e) {
+        var t = Array.from(e.results).map(function (r) { return r[0].transcript; }).join('');
+        document.getElementById('vtxt').textContent = t;
+        if (e.results[e.results.length - 1].isFinal) {
+          var q = adaptiveQ[qIdx];
+          var matched = typeof vaMatchOption === 'function' ? vaMatchOption(t, q) : null;
+          var finalVal = matched || t;
+          ans[qIdx] = finalVal;
+          document.querySelectorAll('.mcq-btn').forEach(function (b) { b.classList.toggle('sel', !!matched && b.dataset.enVal === matched); });
+          if (q && q.phase === 'cc' && qIdx === 0) insertDocAndComplaintQs(finalVal);
+          updProg(); chkRF(t.toLowerCase());
+        }
+      };
       rec.onerror = rec.onend = function () { micOn = false; btn.classList.remove('listening'); }; rec.start();
     }
     function toggleGlobalMic() {
@@ -5051,7 +6140,14 @@
       toast('Listening: say Next, Back, Skip, or Logout');
       gmicOn = true; btn.classList.add('listening'); btn.textContent = '&#9209; Stop';
       var SR = window.SpeechRecognition || window.webkitSpeechRecognition; rec = new SR(); rec.lang = LVM[lang] || 'en-IN'; rec.interimResults = false;
-      rec.onresult = function (e) { var t = e.results[0][0].transcript.toLowerCase(); if (t.indexOf('next') >= 0) nextQ(); else if (t.indexOf('back') >= 0) prevQ(); else if (t.indexOf('skip') >= 0) skipQ(); else if (t.indexOf('logout') >= 0) patLogout(); gmicOn = false; btn.textContent = '&#127908; Speak'; btn.classList.remove('listening'); };
+      rec.onresult = function (e) {
+        var t = e.results[0][0].transcript.toLowerCase();
+        if (/\bnext\b|\b(अगला|ପରବର୍ତ୍ତୀ|அடுத்து|తదుపరి|পরবর্তী|पुढे)\b/.test(t)) nextQ();
+        else if (/\bback\b|\bprevious\b|\b(पिछला|ପୂର୍ବ|முந்தையது|మునుపటి|আগের|मागील)\b/.test(t)) prevQ();
+        else if (/\bskip\b|\b(छोड़ें|ଛାଡ଼|தவிர்|వదిలేయండి|বাদ দিন|वगळा)\b/.test(t)) skipQ();
+        else if (/\blogout\b/.test(t)) patLogout();
+        gmicOn = false; btn.textContent = '&#127908; Speak'; btn.classList.remove('listening');
+      };
       rec.onerror = rec.onend = function () { gmicOn = false; btn.textContent = '&#127908; Speak'; btn.classList.remove('listening'); }; rec.start();
     }
 
@@ -5500,6 +6596,116 @@
       return '₹20-200 per strip (estimated)';
     }
 
+    function vaMatchOption(transcript, q) {
+      var opts = q.opts;
+      if (!opts || !opts.length) return null;
+      var t_trans = transcript.toLowerCase();
+
+      var qOpts = (q.optsKey && typeof t === 'function') ? t(q.optsKey) : opts;
+      if (!Array.isArray(qOpts)) qOpts = opts;
+
+      for (var i = 0; i < qOpts.length; i++) {
+        if (t_trans.indexOf(qOpts[i].toLowerCase()) >= 0) return opts[i];
+      }
+      for (var i = 0; i < opts.length; i++) {
+        if (t_trans.indexOf(opts[i].toLowerCase()) >= 0) return opts[i];
+      }
+
+      var numWords = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
+                       'एक':1, 'दो':2, 'तीन':3, 'चार':4, 'पांच':5, 'छह':6, 'सात':7, 'आठ':8, 'नौ':9, 'दस':10,
+                       '୧':1, '୨':2, '୩':3, '୪':4, '୫':5, '୬':6, '୭':7, '୮':8, '୯':9, '୧୦':10 };
+      var num = null;
+      var numMatch = t_trans.match(/\b(10|[0-9])\b/);
+      if (numMatch) num = parseInt(numMatch[1], 10);
+      else { for (var w in numWords) { if (t_trans.indexOf(w) >= 0) { num = numWords[w]; break; } } }
+      if (num !== null) {
+        for (var i = 0; i < opts.length; i++) {
+          var rng = opts[i].match(/(\d+)\s*(?:to|-)\s*(\d+)/);
+          if (rng && num >= parseInt(rng[1], 10) && num <= parseInt(rng[2], 10)) return opts[i];
+          var exact = opts[i].match(/^(\d+)/);
+          if (exact && num === parseInt(exact[1], 10)) return opts[i];
+        }
+      }
+      if (/\byes\b|हाँ|ହଁ|ஆம்|అవును|হ্যাঁ|होय/.test(t_trans)) { for (var i = 0; i < opts.length; i++) { if (/^yes\b/i.test(opts[i])) return opts[i]; } }
+      if (/\bno\b|नहीं|ନା|இல்லை|కాదు|না|नाही/.test(t_trans)) { for (var i = 0; i < opts.length; i++) { if (/^no\b/i.test(opts[i]) || /none|not on any/i.test(opts[i])) return opts[i]; } }
+
+      return null;
+    }
+
+    function vaHandleUserUtterance(raw) {
+      var t = (raw || '').toLowerCase().trim();
+      if (!t) { vaBotSay("Sorry, I didn't catch that. Could you say it again?"); return; }
+
+      if (/\b(emergency|help me now|call.*doctor now|sos|urgent help|dying|can'?t breathe|आपातकाल|मदद|জরুরি|ଜରୁରୀ)\b/.test(t)) {
+        if (typeof triggerEmergency === 'function') triggerEmergency();
+        vaBotSay('I have alerted the medical staff right away. Please stay calm and remain seated.');
+        return;
+      }
+      if (/\b(repeat|say (that )?again|what did you say|pardon|दोहराएं|पୁନରାବୃ)\b/.test(t)) {
+        vaBotSay(vaState.lastBotMsg || vaGreetingForScreen(), false);
+        return;
+      }
+      if (/^help$|^help me$|what can you do/.test(t)) {
+        vaBotSay('You can say things like: repeat, next question, go back, skip, read my summary, send to doctor, hands-free, or emergency.');
+        return;
+      }
+      if (/\b(stop listening|be quiet|cancel that|never mind)\b/.test(t)) {
+        if (window.speechSynthesis) speechSynthesis.cancel();
+        vaState.autoMode = false; updateHfBtn();
+        vaBotSay('Okay, I have stopped.');
+        return;
+      }
+      if (/\blogout\b/.test(t)) { if (typeof patLogout === 'function') patLogout(); return; }
+
+      var scr = vaCurrentScreen();
+      if (scr === 'consent') return vaHandleConsentIntent(t);
+      if (scr === 'documents') return vaHandleDocsIntent(t);
+      if (scr === 'symptoms') return vaHandleSymptomIntent(t);
+      if (scr === 'summary') return vaHandleSummaryIntent(t);
+      if (scr === 'token') return vaHandleTokenIntent(t);
+      if (scr === 'prescription') return vaHandlePrescriptionIntent(t);
+      vaBotSay("I'm here to help. Could you tell me a bit more?");
+    }
+
+    function vaHandleConsentIntent(t) {
+      if (/\b(i agree|agree|yes|accept|okay proceed|sounds good|सहमत|हाँ|ରାଜି|ହଁ|ஆம்|అవును|হ্যাঁ|होय)\b/.test(t)) {
+        var cb = document.getElementById('consent-cb'); if (cb) { cb.checked = true; if (typeof chkConsent === 'function') chkConsent(); }
+        vaBotSay('Thank you. Moving to document upload.');
+        if (typeof goDocs === 'function') goDocs();
+      } else if (/\b(no|deny|don'?t agree|disagree|नहीं|ନା|இல்லை|కాదు|না|नाही)\b/.test(t)) {
+        if (typeof denyConsent === 'function') denyConsent();
+      } else {
+        vaBotSay('Please say "I agree" or check the box to continue.');
+      }
+    }
+
+    function vaHandleDocsIntent(t) {
+      if (/\b(skip|no documents|nothing|next|छोड़ें|ଛାଡ଼|தவிர்|వదిలేయండి|বাদ দিন|वगळा)\b/.test(t)) {
+        if (typeof skipDocsGoSymptoms === 'function') skipDocsGoSymptoms();
+      } else if (/\b(upload|proceed|start|शुरू|ଆରମ୍ଭ)\b/.test(t)) {
+        if (typeof buildQueueAndStart === 'function') buildQueueAndStart();
+      } else {
+        vaBotSay('You can upload documents using the screen, or just say "Skip" to move on.');
+      }
+    }
+
+    function vaHandleSymptomIntent(t) {
+      if (/\bnext question\b|^next$|\b(अगला|ପରବର୍ତ୍ତୀ|அடுத்து|తదుపరి|পরবর্তী|पुढे)\b/.test(t)) { if (typeof nextQ === 'function') nextQ(); vaAnnounceCurrentQuestion(); return; }
+      if (/\bback\b|\bprevious\b|\b(पिछला|ପୂର୍ବ|முந்தையது|మునుపటి|আগের|मागील)\b/.test(t)) { if (typeof prevQ === 'function') prevQ(); vaAnnounceCurrentQuestion(); return; }
+      if (/\bskip\b|\b(छोड़ें|ଛାଡ଼|தவிர்|వదిలేయండి|বাদ দিন|वगळा)\b/.test(t)) { if (typeof skipQ === 'function') skipQ(); vaAnnounceCurrentQuestion(); return; }
+      if (/hands.?free/.test(t)) { toggleHandsFree(); return; }
+      // Otherwise this is treated as the patient's spoken answer to the current question.
+      vaSubmitAnswer(t, true);
+    }
+
+    function vaHandleSummaryIntent(t) {
+      if (/\bread\b|\blisten\b|\b(पढ़ें|ପଢ଼|படிக்க|చదవండి|পড়ুন|वाचा)\b/.test(t)) { if (typeof readSummary === 'function') readSummary(); vaBotSay('Reading your summary aloud now.'); return; }
+      if (/\bsend\b|\bconfirm\b|\bsubmit\b|\b(भेजें|ପଠାନ୍ତୁ|அனுப்பவும்|పంపండి|পাঠান|पाठवा)\b/.test(t)) { if (typeof sendDoctor === 'function') sendDoctor(); vaBotSay('Your summary has been sent to the doctor.'); return; }
+      if (/\bprint\b/.test(t)) { window.print(); return; }
+      if (/\bemergency\b|\bpriority\b/.test(t)) { if (typeof toggleEmergencyFlag === 'function') toggleEmergencyFlag(); vaBotSay('I have flagged this as an emergency case for priority attention.'); return; }
+      vaBotSay('Say "read it" to hear your summary, "send to doctor" to submit it, or "mark as emergency" for priority.');
+    }
+
     function parseTextPrescription(text) {
       var medicines = [];
       // Simple pattern: look for common medicine patterns
@@ -5642,7 +6848,7 @@
       q.forEach(function (p) {
         if ((p.priority || p.redFlag) && p.status !== 'completed' && !seenFlagIds[p.id]) {
           seenFlagIds[p.id] = true;
-          showSOS('&#128680; Emergency: ' + p.id + ' (' + (p.patientLabel || 'Guest') + ')', p.redFlag || 'Patient marked as emergency at kiosk');
+          showSOS('Emergency: ' + p.id + ' (' + (p.patientLabel || 'Guest') + ')', p.redFlag || 'Patient marked as emergency at kiosk');
         }
       });
     }
@@ -5686,7 +6892,7 @@
       html += '<div><h2>' + (p.priority ? '&#128680; ' : '') + p.id + ' &middot; ' + esc(p.patientLabel || 'Guest') + '</h2>';
       html += '<p>' + (isAyush ? 'AYUSH / Dashavidha intake' : 'Allopathic intake') + ' &middot; ' + waitStr(p.createdAt) + ' &middot; Language: ' + (p.lang || 'en').toUpperCase() + '</p></div>';
       html += '<div class="detail-actions">';
-      html += '<button class="dact-btn gh" onclick="genFHIRFor(\'' + p.id + '\')">&#128230; FHIR Bundle</button>';
+      
       html += '<button class="dact-btn or" onclick="window.print()">&#128424; Print</button>';
       html += '<button class="dact-btn bl" onclick="docSendBack(\'' + p.id + '\')">&#8617; Request More Info</button>';
       html += '<button class="dact-btn gr" onclick="docConfirmComplete(\'' + p.id + '\')">&#10004; Confirm &amp; Complete</button>';
@@ -5944,6 +7150,411 @@
     }
   </script>
 
+  <!-- ======================================================
+     JS — AI VOICE ASSISTANT (talks + listens + understands)
+     ====================================================== -->
+  <script>
+    // Uses window.speechSynthesis (talk) + Web Speech SpeechRecognition (listen),
+    // plus lightweight rule-based NLU to understand free-form patient speech and
+    // map it onto the existing consent / documents / symptoms / summary / token /
+    // prescription flow. Relies on globals already defined earlier on the page
+    // (speak, LVM, lang, SCRS, showScr, adaptiveQ, qIdx, ans, chkRF, updProg,
+    // insertDocAndComplaintQs, loadQ, nextQ, prevQ, skipQ, goSummary, readSummary,
+    // sendDoctor, toggleEmergencyFlag, triggerEmergency, chkConsent, goDocs,
+    // denyConsent, speakConsent, skipDocsGoSymptoms, docsToSymptoms, patLogout,
+    // toast) — all of these are hoisted/global by the time a user can interact.
+
+    var vaState = { open: false, listening: false, speaking: false, autoMode: false, guideMode: true, screenNarrated: false, lastBotMsg: '' };
+    var vaRec = null, vaLastScreen = null;
+
+    function vaCurrentScreen() {
+      var found = 'consent';
+      (window.SCRS || ['consent', 'documents', 'symptoms', 'summary', 'token', 'prescription']).forEach(function (s) {
+        var el = document.getElementById('scr-' + s);
+        if (el && !el.classList.contains('hidden')) found = s;
+      });
+      return found;
+    }
+
+    function vaOpenPanel() {
+      var panel = document.getElementById('va-panel'); if (!panel) return;
+      if (!vaState.open) { vaState.open = true; panel.classList.add('open'); }
+      var badge = document.getElementById('va-badge'); if (badge) badge.classList.add('hidden');
+    }
+    function vaClosePanel() {
+      var panel = document.getElementById('va-panel'); if (!panel) return;
+      vaState.open = false; panel.classList.remove('open');
+      vaStopListening();
+      if (window.speechSynthesis) speechSynthesis.cancel();
+      vaState.speaking = false; vaSetFabState();
+    }
+    function vaToggleWidget() {
+      if (vaState.open) { vaClosePanel(); return; }
+      vaOpenPanel();
+      // If proactive guiding is off, the panel needs to greet on manual open —
+      // when guiding is on, the assistant has already spoken up on its own.
+      if (!vaState.guideMode && !vaState.screenNarrated) {
+        vaState.screenNarrated = true;
+        vaBotSay(vaGreetingForScreen());
+      }
+    }
+
+    function vaToggleGuideMode() {
+      vaState.guideMode = !vaState.guideMode;
+      var b = document.getElementById('va-guide-toggle');
+      if (b) { b.textContent = 'Guide: ' + (vaState.guideMode ? 'ON' : 'OFF'); b.classList.toggle('off', !vaState.guideMode); }
+      toast(vaState.guideMode ? 'The assistant will now actively guide you step by step.' : 'Step-by-step guidance turned off — tap the mic when you need me.');
+      if (!vaState.guideMode) {
+        vaState.autoMode = false; updateHfBtn(); vaStopListening();
+        if (window.speechSynthesis) speechSynthesis.cancel(); vaState.speaking = false; vaSetFabState();
+        vaState.screenNarrated = false;
+      } else {
+        vaGuideScreen();
+      }
+    }
+
+    function vaGreetingForScreen() {
+      var scr = vaCurrentScreen();
+      var keyMap = {
+        consent: 'va_help_consent',
+        documents: 'va_help_docs',
+        symptoms: 'va_help_symptoms',
+        summary: 'va_help_summary',
+        token: 'va_help_token',
+        prescription: 'va_help_prescription'
+      };
+      return t(keyMap[scr] || 'va_greeting');
+    }
+
+    // Proactively walks the patient through whichever screen they land on —
+    // speaks the next step out loud, opens the panel so they can see it, and
+    // (where there's something to answer) automatically starts listening, so
+    // the patient is actively guided instead of having to know to ask.
+    function vaGuideScreen() {
+      var scr = vaCurrentScreen();
+      if (!vaState.guideMode) { if (typeof vaOrigSpeakScreen === 'function') vaOrigSpeakScreen(); return; }
+      vaOpenPanel();
+      vaState.screenNarrated = true;
+      if (scr === 'symptoms') {
+        if (!vaState.autoMode) { vaState.autoMode = true; updateHfBtn(); }
+        vaAnnounceCurrentQuestion();
+        return;
+      }
+      if (scr === 'summary') {
+        vaBotSay(vaGreetingForScreen(), false);
+        setTimeout(function () { if (typeof readSummary === 'function') readSummary(); }, 1500);
+        return;
+      }
+      if (scr === 'token') { vaHandleTokenIntent(''); return; }
+      if (scr === 'prescription') { vaBotSay(vaGreetingForScreen(), true); vaHandlePrescriptionIntent('read'); return; }
+      // consent, documents — speak the next action needed, then listen for it.
+      vaBotSay(vaGreetingForScreen(), true);
+    }
+
+    function vaBotSay(text, andListenAfter) {
+      var body = document.getElementById('va-body'); if (!body) return;
+      var d = document.createElement('div'); d.className = 'va-msg bot'; d.textContent = text; body.appendChild(d);
+      body.scrollTop = body.scrollHeight;
+      vaState.lastBotMsg = text;
+      vaSpeak(text, andListenAfter ? vaStartListening : null);
+    }
+    function vaUserSay(text) {
+      var body = document.getElementById('va-body'); if (!body) return;
+      var d = document.createElement('div'); d.className = 'va-msg usr'; d.textContent = text; body.appendChild(d);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function vaSpeak(text, onEnd) {
+      if (!window.speechSynthesis) { if (onEnd) onEnd(); return; }
+      speechSynthesis.cancel();
+      vaState.speaking = true; vaSetFabState();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = (window.LVM && LVM[lang]) || 'en-IN'; u.rate = 0.95;
+      u.onend = u.onerror = function () { vaState.speaking = false; vaSetFabState(); if (onEnd) onEnd(); };
+      speechSynthesis.speak(u);
+    }
+
+    function vaSetFabState() {
+      var fab = document.getElementById('va-fab'); if (!fab) return;
+      fab.classList.remove('listening', 'speaking');
+      if (vaState.listening) fab.classList.add('listening');
+      else if (vaState.speaking) fab.classList.add('speaking');
+      var micBtn = document.getElementById('va-mic-btn');
+      if (micBtn) {
+        micBtn.classList.toggle('on', vaState.listening);
+        micBtn.innerHTML = vaState.listening ? '&#9209; Listening&hellip; tap to stop' : '&#127908; Tap to Speak';
+      }
+    }
+
+    function vaOrbTalk() {
+      if (vaState.speaking && window.speechSynthesis) { speechSynthesis.cancel(); vaState.speaking = false; vaSetFabState(); }
+      if (vaState.listening) { vaStopListening(); return; }
+      if (!vaState.open) vaToggleWidget();
+      vaStartListening();
+    }
+
+    function vaStartListening() {
+      if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) { toast('Voice not supported in this browser'); return; }
+      var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      vaRec = new SR(); vaRec.lang = (window.LVM && LVM[lang]) || 'en-IN'; vaRec.interimResults = true;
+      vaState.listening = true; vaSetFabState();
+      var cap = document.getElementById('va-caption'); if (cap) cap.textContent = 'Listening\u2026';
+      vaRec.onresult = function (e) {
+        var t = Array.from(e.results).map(function (r) { return r[0].transcript; }).join('');
+        if (cap) cap.textContent = t;
+        if (e.results[e.results.length - 1].isFinal) {
+          vaState.listening = false; vaSetFabState();
+          if (cap) cap.textContent = 'Tap the mic button below to talk to me.';
+          vaUserSay(t);
+          vaHandleUserUtterance(t);
+        }
+      };
+      vaRec.onerror = function (e) {
+        vaState.listening = false; vaSetFabState();
+        if (e && e.error === 'not-allowed') toast('Please allow microphone access to use the voice assistant.');
+      };
+      vaRec.onend = function () { if (vaState.listening) { vaState.listening = false; vaSetFabState(); } };
+      try { vaRec.start(); } catch (e) { vaState.listening = false; vaSetFabState(); }
+    }
+    function vaStopListening() { if (vaRec) { try { vaRec.stop(); } catch (e) { } } vaState.listening = false; vaSetFabState(); }
+
+    function vaSendQuickPhrase(text) {
+      if (!vaState.open) vaToggleWidget();
+      vaUserSay(text);
+      vaHandleUserUtterance(text);
+    }
+
+    function vaSendTyped() {
+      var inp = document.getElementById('va-type-inp'); if (!inp) return;
+      var text = inp.value.trim(); if (!text) return;
+      inp.value = '';
+      if (!vaState.open) vaToggleWidget();
+      vaUserSay(text);
+      vaHandleUserUtterance(text);
+    }
+
+    // ---------- Understanding what the patient said ----------
+    function vaHandleUserUtterance(raw) {
+      var t = (raw || '').toLowerCase().trim();
+      if (!t) { vaBotSay("Sorry, I didn't catch that. Could you say it again?"); return; }
+
+      if (/\b(emergency|help me now|call.*doctor now|sos|urgent help|dying|can'?t breathe)\b/.test(t)) {
+        if (typeof triggerEmergency === 'function') triggerEmergency();
+        vaBotSay('I have alerted the medical staff right away. Please stay calm and remain seated.');
+        return;
+      }
+      if (/\b(repeat|say (that )?again|what did you say|pardon)\b/.test(t)) {
+        vaBotSay(vaState.lastBotMsg || vaGreetingForScreen(), false);
+        return;
+      }
+      if (/^help$|^help me$|what can you do/.test(t)) {
+        vaBotSay('You can say things like: repeat, next question, go back, skip, read my summary, send to doctor, hands-free, or emergency.');
+        return;
+      }
+      if (/\b(stop listening|be quiet|cancel that|never mind)\b/.test(t)) {
+        if (window.speechSynthesis) speechSynthesis.cancel();
+        vaState.autoMode = false; updateHfBtn();
+        vaBotSay('Okay, I have stopped.');
+        return;
+      }
+      if (/\blogout\b/.test(t)) { if (typeof patLogout === 'function') patLogout(); return; }
+
+      var scr = vaCurrentScreen();
+      if (scr === 'consent') return vaHandleConsentIntent(t);
+      if (scr === 'documents') return vaHandleDocsIntent(t);
+      if (scr === 'symptoms') return vaHandleSymptomIntent(t);
+      if (scr === 'summary') return vaHandleSummaryIntent(t);
+      if (scr === 'token') return vaHandleTokenIntent(t);
+      if (scr === 'prescription') return vaHandlePrescriptionIntent(t);
+      vaBotSay("I'm here to help. Could you tell me a bit more?");
+    }
+
+    function vaHandleConsentIntent(t) {
+      if (/\b(i agree|agree|yes|accept|okay proceed|sounds good)\b/.test(t)) {
+        var cb = document.getElementById('consent-cb'); if (cb) { cb.checked = true; if (typeof chkConsent === 'function') chkConsent(); }
+        vaBotSay('Thank you. Moving to document upload.');
+        setTimeout(function () { if (typeof goDocs === 'function') goDocs(); }, 900);
+        return;
+      }
+      if (/\b(disagree|do not agree|don'?t agree|no)\b/.test(t)) {
+        if (typeof denyConsent === 'function') denyConsent();
+        vaBotSay('Understood. Please speak with facility staff for assistance.');
+        return;
+      }
+      if (/\bread\b|\bconsent\b|\blisten\b/.test(t)) {
+        if (typeof speakConsent === 'function') speakConsent();
+        vaBotSay('I just read the consent details aloud for you.');
+        return;
+      }
+      vaBotSay('Say "I agree" to proceed, or "read consent" to hear the details again.');
+    }
+
+    function vaHandleDocsIntent(t) {
+      if (/\bskip\b|\bno documents\b|none today/.test(t)) {
+        if (typeof skipDocsGoSymptoms === 'function') skipDocsGoSymptoms();
+        vaBotSay("No problem, let's begin the health questions.");
+        return;
+      }
+      if (/\b(done|continue|next|proceed|ready)\b/.test(t)) {
+        if (typeof docsToSymptoms === 'function') docsToSymptoms();
+        vaBotSay('Great, starting your personalised questions.');
+        return;
+      }
+      vaBotSay('You can upload a document using the buttons on screen, or say "skip" to continue without documents.');
+    }
+
+    function vaHandleSymptomIntent(t) {
+      if (/\bnext question\b|^next$/.test(t)) { if (typeof nextQ === 'function') nextQ(); vaAnnounceCurrentQuestion(); return; }
+      if (/\bback\b|\bprevious\b/.test(t)) { if (typeof prevQ === 'function') prevQ(); vaAnnounceCurrentQuestion(); return; }
+      if (/\bskip\b/.test(t)) { if (typeof skipQ === 'function') skipQ(); vaAnnounceCurrentQuestion(); return; }
+      if (/hands.?free/.test(t)) { toggleHandsFree(); return; }
+      // Otherwise this is treated as the patient's spoken answer to the current question.
+      vaSubmitAnswer(t, true);
+    }
+
+    function vaHandleSummaryIntent(t) {
+      if (/\bread\b|\blisten\b/.test(t)) { if (typeof readSummary === 'function') readSummary(); vaBotSay('Reading your summary aloud now.'); return; }
+      if (/\bsend\b|\bconfirm\b|\bsubmit\b/.test(t)) { if (typeof sendDoctor === 'function') sendDoctor(); vaBotSay('Your summary has been sent to the doctor.'); return; }
+      if (/\bprint\b/.test(t)) { window.print(); return; }
+      if (/\bemergency\b|\bpriority\b/.test(t)) { if (typeof toggleEmergencyFlag === 'function') toggleEmergencyFlag(); vaBotSay('I have flagged this as an emergency case for priority attention.'); return; }
+      vaBotSay('Say "read it" to hear your summary, "send to doctor" to submit it, or "mark as emergency" for priority.');
+    }
+
+    function vaHandleTokenIntent(t) {
+      var numEl = document.getElementById('tok-number'), cdEl = document.getElementById('tok-countdown');
+      var num = numEl ? numEl.textContent : 'not yet generated', mins = cdEl ? cdEl.textContent : 'a few minutes';
+      vaBotSay('Your token is ' + num + '. Time remaining is about ' + mins + '. Please stay seated in the waiting area — I will let you know if anything changes.');
+    }
+
+    function vaHandlePrescriptionIntent(t) {
+      if (/\bread\b|\blisten\b/.test(t)) {
+        var container = document.getElementById('rx-viewer-container');
+        var rxText = container ? container.textContent.replace(/\s+/g, ' ').trim() : '';
+        vaBotSay(rxText ? ('Here is your prescription. ' + rxText.substring(0, 400)) : 'Your prescription is shown on screen. Please review it carefully.');
+        return;
+      }
+      vaBotSay('Say "read my prescription" and I will read your medicines aloud.');
+    }
+
+    // ---------- Hands-free conversational intake ----------
+    function toggleHandsFree() {
+      vaState.autoMode = !vaState.autoMode;
+      updateHfBtn();
+      if (vaState.autoMode) {
+        toast('Hands-free voice assistant enabled');
+        if (!vaState.open) vaToggleWidget();
+        vaAnnounceCurrentQuestion();
+      } else {
+        toast('Hands-free voice assistant turned off');
+        if (window.speechSynthesis) speechSynthesis.cancel();
+        vaStopListening();
+      }
+    }
+    function updateHfBtn() {
+      var b = document.getElementById('hf-toggle-btn'), s = document.getElementById('hf-status');
+      if (b) { b.classList.toggle('on', vaState.autoMode); b.innerHTML = '&#127911; Hands-free Voice Assistant: ' + (vaState.autoMode ? 'ON' : 'OFF'); }
+      if (s) s.classList.toggle('hidden', !vaState.autoMode);
+    }
+
+    function vaAnnounceCurrentQuestion() {
+      if (!vaState.autoMode) return;
+      var q = (window.adaptiveQ || [])[qIdx]; if (!q) return;
+      var text = q.q + (ans[qIdx] ? (' You previously said ' + ans[qIdx] + '. Say a new answer, or say "next" to continue.') : '');
+      vaBotSay(text, true);
+    }
+
+    function vaSubmitAnswer(transcript, fromWidget) {
+      var q = adaptiveQ[qIdx]; if (!q) { vaBotSay("There's no active question right now."); return; }
+      var vtxt = document.getElementById('vtxt'); if (vtxt) vtxt.textContent = transcript;
+      var matched = vaMatchOption(transcript, q);
+      var finalVal = matched || transcript;
+      ans[qIdx] = finalVal;
+      document.querySelectorAll('.mcq-btn').forEach(function (b) { b.classList.toggle('sel', !!matched && b.dataset.enVal === matched); });
+      if (q.phase === 'cc' && qIdx === 0 && typeof insertDocAndComplaintQs === 'function') insertDocAndComplaintQs(finalVal);
+      if (typeof updProg === 'function') updProg();
+      if (typeof chkRF === 'function') chkRF(transcript.toLowerCase());
+
+      if (window.isEmergency) {
+        // A red flag keyword was just detected — chkRF already spoke the emergency
+        // alert. Pause hands-free so staff / the patient can react instead of the
+        // assistant plowing ahead to the next question.
+        vaState.autoMode = false; updateHfBtn();
+        return;
+      }
+
+      var ack = matched ? ('Got it \u2014 ' + matched + '.') : 'Got it, noted.';
+      if (fromWidget) vaBotSay(ack);
+
+      if (vaState.autoMode) {
+        setTimeout(function () {
+          if (qIdx < adaptiveQ.length - 1) { qIdx++; loadQ(); vaAnnounceCurrentQuestion(); }
+          else { vaBotSay('All questions answered. Preparing your integrated summary now.'); setTimeout(goSummary, 1200); }
+        }, 1400);
+      }
+    }
+
+    // Fuzzy-matches free speech onto one of the current question's tap options —
+    // handles yes/no, spoken numbers for severity-style ranges, and general
+    // keyword overlap — so the patient can just talk naturally.
+    function vaMatchOption(transcript, opts) {
+      if (!opts || !opts.length) return null;
+      var t = transcript.toLowerCase();
+
+      if (/\byes\b/.test(t)) { for (var i = 0; i < opts.length; i++) { if (/^yes\b/i.test(opts[i])) return opts[i]; } }
+      if (/\bno\b/.test(t)) { for (var i = 0; i < opts.length; i++) { if (/^no\b/i.test(opts[i]) || /none|not on any/i.test(opts[i])) return opts[i]; } }
+
+      var numWords = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
+      var num = null;
+      var numMatch = t.match(/\b(10|[0-9])\b/);
+      if (numMatch) num = parseInt(numMatch[1], 10);
+      else { for (var w in numWords) { if (t.indexOf(w) >= 0) { num = numWords[w]; break; } } }
+      if (num !== null) {
+        for (var i = 0; i < opts.length; i++) {
+          var rng = opts[i].match(/(\d+)\s*(?:to|-)\s*(\d+)/);
+          if (rng) { var lo = parseInt(rng[1], 10), hi = parseInt(rng[2], 10); if (num >= lo && num <= hi) return opts[i]; }
+        }
+      }
+
+      var stop = ['the', 'a', 'an', 'is', 'my', 'it', 'and', 'of', 'to', 'in', 'on', 'with', 'i', 'am', 'feel', 'feels', 'have', 'has', 'was', 'were', 'be', 'this'];
+      var tWords = t.replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(function (w) { return w && stop.indexOf(w) < 0; });
+      var best = null, bestScore = 0;
+      opts.forEach(function (o) {
+        var oWords = o.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(function (w) { return w && stop.indexOf(w) < 0; });
+        var score = 0;
+        oWords.forEach(function (ow) { if (tWords.indexOf(ow) >= 0) score++; });
+        if (score > bestScore) { bestScore = score; best = o; }
+      });
+      return bestScore > 0 ? best : null;
+    }
+
+    // ---------- Make the assistant proactive: it now OWNS screen narration ----------
+    // The app already calls speakScreen() every time it shows a new screen (and
+    // when the patient taps "Repeat" in the language bar). Replacing it here means
+    // the assistant actively walks the patient through each step by default,
+    // instead of only responding if they think to open the widget themselves.
+    var vaOrigSpeakScreen = (typeof speakScreen === 'function') ? speakScreen : null;
+    speakScreen = vaGuideScreen;
+
+    if (typeof showScr === 'function') {
+      var vaOrigShowScr = showScr;
+      showScr = function (name) {
+        vaOrigShowScr(name);
+        if (vaState.autoMode && name !== 'symptoms') { vaState.autoMode = false; updateHfBtn(); }
+        vaLastScreen = name;
+        // Re-apply translations whenever we switch screen
+        applyLang();
+      };
+    }
+
+    // Initialise translations once the DOM is ready
+    document.addEventListener('DOMContentLoaded', function () {
+      applyLang();
+    });
+    // Also call now in case DOM is already loaded (script at bottom of body)
+    if (document.readyState !== 'loading') { applyLang(); }
+  </script>
+
 </body>
+
 
 </html>
